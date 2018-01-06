@@ -1,0 +1,12 @@
+language: java
+jdk:
+  - oraclejdk8
+env:
+  global:
+    - secure: h0ebrGD0Y2qjBGRVdqD8fC5mKyOZCcn67QnUlW5dieN73qFoh7t1yMKCsOTvaleNL1l2lC+Q32AY0ITuMu2Zu0kkmu6a/A/at5hGirvYkw4FozQz6B5fCgaHDrRuj/xp415mULRQx8ymSslh9FkB/iRlMdgsNzHtVntsBGZKMfa6uYE1BKw6cWZE0doXXJuYQtCYM4gqh9hSqWZ1pZTHzc5DVnb/+ZB/0RJVjBsA2vC7opaUynJ2r6ye0XGPwjk/TVAQZhg/kWLSFrP3nursyvrsy9VfKr/jXwr9tPdxIL4+FshlbOgbjsLBz96H8PoYFATPLD7XIXyIaut3CI9P38w+eFU96mmRnP2fcZPznwHgPrllRj4yTBKRyrYBIesJDhZNaSYq01eM/cQW6ra6TaVirhX7pDtXvGbRgVxVWXt5Hblr1y5m3kjFd91GkIi2bTCf5yMshxRDzqLXL4mtrtzh2SjlwtUHdwd/kadvWO3nHWUA66eYN4qu0nzFL3GqtozmjWxCf15FmCqIfbPvHlNxs4BzdzOtwCNSL+4leEMh3tLx0bG+eDYfJa9aJxCFc3K96KkLOHeFnQSzhIlFIPWsBotbSZ9WYryuJsg/KjFZBsLNZD9qGeVda9U3eTuxvVQHEY5ApyWqgm1rOe/bZrNoitGVIiaS643ZeUDrC5w=
+
+before_script: ./.scripts/prep.sh
+
+script: ./.scripts/javaBuild.sh
+
+after_success: ./.scripts/genDoc.sh
