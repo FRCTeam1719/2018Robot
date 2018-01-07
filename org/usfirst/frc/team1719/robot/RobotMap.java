@@ -24,5 +24,5 @@ public class RobotMap {
 	
 	/* PWM */
 	public static final SpeedController leftDrive = new Spark(0);
-	public static final SpeedController rightDrive = new Spark(3);
+	public static final SpeedController rightDrive = new Spark(1); // People/Electrical are bad
 }
