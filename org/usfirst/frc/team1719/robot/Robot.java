@@ -67,6 +67,10 @@ public class Robot extends IterativeRobot {
 		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
+		    /* Note from Aaron: 
+		     * Consider how this will act when not connected to the FMS, or if the message is somehow garbeled.
+		     * Look at isFMSAttached() and maybe consider getting the data from the dashboard otherwise?
+		     * Also, add some error handling to that string parsing. */
             String data = DriverStation.getInstance().getGameSpecificMessage();
             autonomousCommand.setFieldState(data.charAt(0) == 'R', data.charAt(1) == 'R', data.charAt(2) == 'R');
             autonomousCommand.start();
