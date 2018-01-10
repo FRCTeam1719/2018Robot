@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1719.robot;
 
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedController;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -18,4 +21,8 @@ public class RobotMap {
 	 * public static int rangefinderPort = 1;
 	 * public static int rangefinderModule = 1;
 	 */
+	
+	/* PWM */
+	public static final SpeedController leftDrive = new Spark(0);
+	public static final SpeedController rightDrive = new Spark(1); // People/Electrical are bad
 }

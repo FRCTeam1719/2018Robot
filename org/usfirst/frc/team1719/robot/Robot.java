@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
+import org.usfirst.frc.team1719.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -23,7 +24,9 @@ public class Robot extends IterativeRobot {
 
 	AbstractAutonomous2018 autonomousCommand;
 	SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
-
+	
+	Drive drive;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -33,6 +36,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 	}
 
 	/**

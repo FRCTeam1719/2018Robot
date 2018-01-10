@@ -1,10 +1,31 @@
 package org.usfirst.frc.team1719.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	Joystick driver = new Joystick(0);
+	
+	public double getLeftX() {
+		return driver.getRawAxis(0);
+	}
+	
+	public double getLeftY() {
+		return driver.getRawAxis(1);
+	}
+	
+	public double getRightX() {
+		return driver.getRawAxis(4);
+	}
+	public double getRightY() {
+		return driver.getRawAxis(5);
+	}
+	
+	
+	
 	/* 
 	 *** CREATING BUTTONS ***
 	 * One type of button is a joystick button which is any button on a
