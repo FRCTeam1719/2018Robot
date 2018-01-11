@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1719.robot;
 
+import org.usfirst.frc.team1719.robot.sensors.E4TOpticalEncoder;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -31,4 +33,8 @@ public class RobotMap {
 	
 	/* MXP */
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
+
+	/* DIO */
+    public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(6, 7, true);
+    public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
 }
