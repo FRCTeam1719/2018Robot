@@ -65,4 +65,20 @@ public class Position extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new UsePosition(this));
 	}
+	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
+	public double getHeading() {
+		return heading;
+	}
+	
+	public boolean getTrustworthy() {
+		return isTrustworthy;
+	}
 }
