@@ -3,6 +3,7 @@ package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
+import org.usfirst.frc.team1719.robot.subsystems.Position;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
 	
 	Drive drive;
+	Position position;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -37,7 +39,9 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		
+		// Initialize Subsystems
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
+		//position = new Position(RobotMap.navx, RobotMap.);
 	}
 
 	/**

@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1719.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 
@@ -25,4 +28,7 @@ public class RobotMap {
 	/* PWM */
 	public static final SpeedController leftDrive = new Spark(0);
 	public static final SpeedController rightDrive = new Spark(1); // People/Electrical are bad
+	
+	/* MXP */
+	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
 }
