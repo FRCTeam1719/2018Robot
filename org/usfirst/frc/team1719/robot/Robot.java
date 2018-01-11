@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 		
 		// Initialize Subsystems
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
-		//position = new Position(RobotMap.navx, RobotMap.);
+		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 	}
 
 	/**
