@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1719.robot.subsystems;
 
 import org.usfirst.frc.team1719.robot.commands.UseDrive;
+import org.usfirst.frc.team1719.robot.interfaces.IEncoder;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -12,27 +13,38 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Gus (@gusg21) and Quintin (@a-bad-programmer)
  */
 public class Drive extends Subsystem {
-
-    Encoder leftEncoder;
-    Encoder rightEncoder;
+    
+    IEncoder leftEncoder;
+    IEncoder rightEncoder;
     private SpeedController leftController;
     private SpeedController rightController;
     
+    private static double WHEEL_DIAMETER = 4.1721D;
     /**
-     * Drive controller. Two SpeedController arguments, one for left and one for right.
+     * Drive controller. Two SpeedController arguments, one for left and one for
+     * right.
      * 
      * @param leftController
      * @param rightController
+     * @param leftEncoder
+     * @param rightEncoder
      */
-    public Drive(SpeedController _leftController, SpeedController _rightController) {
-    	leftController = _leftController; // Not left drive
-    	rightController = _rightController;
-    	rightController.setInverted(true); // Invert right drive
+    public Drive(SpeedController _leftController, SpeedController _rightController, IEncoder _leftEncoder,
+            IEncoder _rightEncoder) {
+        leftController = _leftController; // Not left drive
+        rightController = _rightController;
+        leftEncoder = _leftEncoder;
+        rightEncoder = _rightEncoder;
+        rightController.setInverted(true); // Invert right drive
+        leftEncoder.config(Math.PI * WHEEL_DIAMETER * 4);
+        rightEncoder.config(Math.PI * WHEEL_DIAMETER * 4);
+        leftEncoder.setReverseDirection(true);
+        rightEncoder.setReverseDirection(false);
     }
     
     @Override
     public void initDefaultCommand() {
-    	setDefaultCommand(new UseDrive(this));
+        setDefaultCommand(new UseDrive(this));
     }
     
     /**
@@ -42,8 +54,22 @@ public class Drive extends Subsystem {
      * @param right
      */
     public void tankDrive(double left, double right) {
-    	leftController.set(left);
-    	rightController.set(right); // Right is inverted :P
+        leftController.set(left);
+        rightController.set(right); // Right is inverted :P
     }
- 
+    
+    /**
+     * Gets the values of the right encoder.
+     * 
+     */
+    public IEncoder getEncoderR() {
+        return leftEncoder;
+    }
+    
+    /**
+     * Gets the values of the left encoder.
+     */
+    public IEncoder getEncoderL () {
+        return rightEncoder;
+    }
 }

@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		
-		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
+		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 	}
 
 	/**
