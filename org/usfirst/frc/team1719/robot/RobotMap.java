@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1719.robot;
 
+import org.usfirst.frc.team1719.robot.sensors.E4TOpticalEncoder;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 
@@ -25,4 +27,8 @@ public class RobotMap {
 	/* PWM */
 	public static final SpeedController leftDrive = new Spark(0);
 	public static final SpeedController rightDrive = new Spark(1); // People/Electrical are bad
+	
+	/* DIO */
+    public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(6, 7, true);
+    public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
 }
