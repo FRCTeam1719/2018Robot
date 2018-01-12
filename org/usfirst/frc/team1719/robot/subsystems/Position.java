@@ -30,12 +30,19 @@ public class Position extends Subsystem {
     private volatile double y;
     private volatile double heading;
 
+    /**
+     * Subsystem for current Cartesian coordinates via Nav-X
+     * 
+     * @param _navX AHRS Nav-X instance
+     * @param _left Left Encoder
+     * @param _right Right Encoder
+     */
 	public Position(AHRS _navX, Encoder _left, Encoder _right) {
 		navX = _navX;
 		left = _left;
 		right = _right;
 	}
-
+	
 	private boolean checkForCollision() {
 		double currentAccelX = navX.getWorldLinearAccelX();
 		double currentJerkX = currentAccelX - lastAccelX;
@@ -51,6 +58,9 @@ public class Position extends Subsystem {
 
 	}
 
+	/**
+	 * Update the position, converting polar coordinates
+	 */
 	public void update() {
 		isTrustworthy = checkForCollision();
 		heading = navX.getYaw();
@@ -66,18 +76,37 @@ public class Position extends Subsystem {
 		setDefaultCommand(new UsePosition(this));
 	}
 	
+	/**
+	 * Get X value
+	 * 
+	 * @return
+	 */
 	public double getX() {
 		return x;
 	}
 	
+	/**
+	 * Get Y value
+	 * 
+	 * @return
+	 */
 	public double getY() {
 		return y;
 	}
 	
+	/**
+	 * Get current yaw heading
+	 * @return
+	 */
 	public double getHeading() {
 		return heading;
 	}
 	
+	/**
+	 * Get whether our current data is reliable
+	 * 
+	 * @return
+	 */
 	public boolean getTrustworthy() {
 		return isTrustworthy;
 	}
