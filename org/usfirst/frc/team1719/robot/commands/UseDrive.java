@@ -34,8 +34,8 @@ public class UseDrive extends Command {
 
     protected void execute() {
     	// Raw Datas
-    	double left = Robot.oi.getLeftY();
-    	double right = Robot.oi.getRightY();
+    	double left = -Robot.oi.getLeftY();
+    	double right = -Robot.oi.getRightY();
     	
     	// Smooth curving
     	left = left * Math.abs(left);
