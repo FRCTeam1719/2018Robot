@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drive Command
@@ -38,7 +39,8 @@ public class UseDrive extends Command {
     
     double rightkP = 0;
     double rightkF = 1 / maxSpeed;
-    double righkD = 0;
+    double rightkD = 0;
+    double rightkI = 0;
     
     // PID Objects, these are used to get the current motor stuffs to those PIDs.
     private class leftDrivePIDOutput implements PIDOutput {
@@ -135,4 +137,20 @@ public class UseDrive extends Command {
     protected void end() {}
     
     protected void interrupted() {}
+    
+    /**
+     * Get all of the PID Constants for nice tuning.
+     */
+    public void setPIDConstantsFromDashboard() {
+        leftkP = SmartDashboard.getNumber("LEFT_DRIVE_KP", 0);
+        leftkF = SmartDashboard.getNumber("LEFT_DRIVE_KF", 0);
+        leftkI = SmartDashboard.getNumber("LEFT_DRIVE_KI", 0);
+        leftkD = SmartDashboard.getNumber("LEFT_DRIVE_KI", 0);
+        
+        rightkP = SmartDashboard.getNumber("RIGHT_DRIVE_KP", 0);
+        rightkF = SmartDashboard.getNumber("RIGHT_DRIVE_KF", 0);
+        rightkI = SmartDashboard.getNumber("RIGHT_DRIVE_KI", 0);
+        rightkD = SmartDashboard.getNumber("LEFT_DRIVE_KD", 0);
+    }
+    
 }
