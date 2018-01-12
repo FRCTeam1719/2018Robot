@@ -3,6 +3,7 @@ package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
+import org.usfirst.frc.team1719.robot.subsystems.Position;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
 	
 	Drive drive;
+	Position position;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -36,8 +38,9 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		
+		// Initialize Subsystems
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
+		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 	}
 
 	/**
@@ -72,6 +75,10 @@ public class Robot extends IterativeRobot {
 		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
+		    /* Note from Aaron: 
+		     * Consider how this will act when not connected to the FMS, or if the message is somehow garbeled.
+		     * Look at isFMSAttached() and maybe consider getting the data from the dashboard otherwise?
+		     * Also, add some error handling to that string parsing. */
             String data = DriverStation.getInstance().getGameSpecificMessage();
             autonomousCommand.setFieldState(data.charAt(0) == 'R', data.charAt(1) == 'R', data.charAt(2) == 'R');
             autonomousCommand.start();
@@ -103,6 +110,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		System.out.println(
+			"X: " + position.getX() + 
+			"\nY: " + position.getY() + 
+			"\nHeading: " + position.getHeading() + 
+			"\nTrustworthy: " + position.getTrustworthy()
+		);
 	}
 
 	/**

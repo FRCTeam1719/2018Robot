@@ -70,7 +70,8 @@ public class UseDrive extends Command {
         
         requires(driveSystem);
     }
-    //Not deprecated for bad reason.
+    
+    // Not deprecated for bad reason.
     @SuppressWarnings("deprecation")
     protected void initialize() {
         driveSystem.getEncoderL().setPIDSourceType(PIDSourceType.kRate);
@@ -92,8 +93,8 @@ public class UseDrive extends Command {
     
     protected void execute() {
         // Raw Datas
-        double left = Robot.oi.getLeftY();
-        double right = Robot.oi.getRightY();
+        double left = -Robot.oi.getLeftY();
+        double right = -Robot.oi.getRightY();
         
         // Smooth curving
         left = left * Math.abs(left);
