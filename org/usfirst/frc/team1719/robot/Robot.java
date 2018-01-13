@@ -1,8 +1,11 @@
 
 package org.usfirst.frc.team1719.robot;
 
+import javax.print.attribute.standard.PrinterLocation;
+
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
+import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -29,6 +32,7 @@ public class Robot extends IterativeRobot {
 	
 	Drive drive;
 	Position position;
+	Elevator elevator;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -46,6 +50,8 @@ public class Robot extends IterativeRobot {
 		// Initialize Subsystems
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
+		elevator = new Elevator(RobotMap.elevatorEnc,RobotMap.topSwitch,RobotMap.bottomSwitch,RobotMap.elevatorSpeed);
+		
 	}
 
 	/**

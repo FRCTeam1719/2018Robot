@@ -8,20 +8,29 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	Joystick driver = new Joystick(0);
+	Joystick operator = new Joystick(1);
 	
-	public double getLeftX() {
+	public double driverGetLeftX() {
 		return driver.getRawAxis(0);
 	}
 	
-	public double getLeftY() {
+	public double driverGetLeftY() {
 		return driver.getRawAxis(1);
 	}
 	
-	public double getRightX() {
+	public double driverGetRightX() {
 		return driver.getRawAxis(4);
 	}
-	public double getRightY() {
+	public double driverGetRightY() {
 		return driver.getRawAxis(5);
+	}
+	
+	public double operatorGetY() {
+		return operator.getRawAxis(1);
+	}
+	
+	public double operatorGetX() {
+		return operator.getRawAxis(0);
 	}
 	
 	

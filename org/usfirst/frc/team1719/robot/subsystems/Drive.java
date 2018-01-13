@@ -25,14 +25,14 @@ public class Drive extends Subsystem {
      * @param rightController
      */
     public Drive(SpeedController _leftController, SpeedController _rightController) {
-    	leftController = _leftController; // Not left drive
-    	rightController = _rightController;
-    	rightController.setInverted(true); // Invert right drive
+    		leftController = _leftController; // Not left drive
+    		rightController = _rightController;
+    		rightController.setInverted(true); // Invert right drive
     }
     
     @Override
     public void initDefaultCommand() {
-    	setDefaultCommand(new UseDrive(this));
+    		setDefaultCommand(new UseDrive(this));
     }
     
     /**
@@ -42,8 +42,8 @@ public class Drive extends Subsystem {
      * @param right
      */
     public void tankDrive(double left, double right) {
-    	leftController.set(left);
-    	rightController.set(right); // Right is inverted :P
+    		leftController.set(left);
+    		rightController.set(right); // Right is inverted :P
     }
  
 }
