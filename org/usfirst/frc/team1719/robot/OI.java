@@ -1,6 +1,11 @@
 package org.usfirst.frc.team1719.robot;
 
+import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -8,6 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	Joystick driver = new Joystick(0);
+	XboxController operator = new XboxController(1);
 	
 	public double getLeftX() {
 		return driver.getRawAxis(0);
@@ -22,6 +28,11 @@ public class OI {
 	}
 	public double getRightY() {
 		return driver.getRawAxis(5);
+	}
+	
+	public void init(Robot robot) {
+		Button clawButton = new JoystickButton(operator, 1);
+		clawButton.whenPressed(new ToggleClaw(robot.claw));
 	}
 	
 	
