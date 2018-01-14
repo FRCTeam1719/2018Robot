@@ -2,8 +2,10 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
+import org.usfirst.frc.team1719.robot.commands.UseIntake;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
+import org.usfirst.frc.team1719.robot.subsystems.RollerIntake;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -28,6 +30,7 @@ public class Robot extends IterativeRobot {
 	
 	Drive drive;
 	Position position;
+	RollerIntake intake;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -41,6 +44,7 @@ public class Robot extends IterativeRobot {
 		// Initialize Subsystems
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
+		intake = new RollerIntake(RobotMap.leftIntake, RobotMap.rightIntake);
 	}
 
 	/**

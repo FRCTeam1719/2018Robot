@@ -29,7 +29,9 @@ public class RobotMap {
 	
 	/* PWM */
 	public static final SpeedController leftDrive = new Spark(0);
-	public static final SpeedController rightDrive = new Spark(1); // People/Electrical are bad
+	public static final SpeedController rightDrive = new Spark(1); // Electrical "People" are bad
+	public static final SpeedController leftIntake = new Spark(2);
+	public static final SpeedController rightIntake = new Spark(3); //Temparary intake PWMs
 	
 	/* MXP */
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
