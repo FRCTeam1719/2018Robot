@@ -20,6 +20,7 @@ public class Drive extends Subsystem {
     private SpeedController rightController;
     
     private static double WHEEL_DIAMETER = 4.1721D;
+    
     /**
      * Drive controller. Two SpeedController arguments, one for left and one for
      * right.
@@ -65,9 +66,8 @@ public class Drive extends Subsystem {
      * @param rotation
      */
     public void arcadeDrive(double speed, double rotation) {
-    	tankDrive(
-    		speed - rotation, speed + rotation	
-    	);
+        tankDrive(
+                speed - rotation, speed + rotation);
     }
     
     /**
@@ -81,7 +81,7 @@ public class Drive extends Subsystem {
     /**
      * Gets the values of the left encoder.
      */
-    public IEncoder getEncoderL () {
+    public IEncoder getEncoderL() {
         return rightEncoder;
     }
 }

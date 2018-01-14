@@ -56,11 +56,15 @@ public class OI {
      * until it is finished as determined by it's isFinished method.
      * button.whenReleased(new ExampleCommand());
      */
-    
+    /**
+     * Set the button commands
+     * 
+     * @param robot
+     */
     public void init(Robot robot) {
         Button intakeButton = new JoystickButton(operator, 3);
-        intakeButton.whenPressed(new UseIntake(robot.intake, 1));
-        outtakeButton.whenPressed(new UseIntake(robot.intake, -1));
-
-}
+        intakeButton.whileHeld(new UseIntake(robot.intake, 1));
+        outtakeButton.whileHeld(new UseIntake(robot.intake, -1));
+        
+    }
 }
