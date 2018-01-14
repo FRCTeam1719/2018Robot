@@ -59,6 +59,18 @@ public class Drive extends Subsystem {
     }
     
     /**
+     * A wrapper providing arcade controls (:P)
+     * 
+     * @param speed
+     * @param rotation
+     */
+    public void arcadeDrive(double speed, double rotation) {
+    	tankDrive(
+    		speed - rotation, speed + rotation	
+    	);
+    }
+    
+    /**
      * Gets the values of the right encoder.
      * 
      */

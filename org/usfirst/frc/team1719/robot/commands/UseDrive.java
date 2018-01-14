@@ -21,7 +21,7 @@ public class UseDrive extends Command {
     
     private final double SYNC_AMOUNT = 0.15;
     private final double DEADZONE = 0.1;
-    PIDController leftController;
+    static PIDController leftController;
     PIDController rightController;
     
     private double highMaxSpeed = 250D;
@@ -69,6 +69,9 @@ public class UseDrive extends Command {
         driveSystem = _driveSystem;
         
         requires(driveSystem);
+        
+        leftController = new PIDController(leftkP, 0, leftkF, driveSystem.getEncoderL(), new leftDrivePIDOutput());
+        rightController = new PIDController(rightkP, 0, rightkF, driveSystem.getEncoderL(), new leftDrivePIDOutput());
     }
     
     // Not deprecated for bad reason.
