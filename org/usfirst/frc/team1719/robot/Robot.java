@@ -1,8 +1,6 @@
 
 package org.usfirst.frc.team1719.robot;
 
-import javax.print.attribute.standard.PrinterLocation;
-
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
