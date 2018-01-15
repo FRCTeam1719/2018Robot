@@ -39,11 +39,10 @@ public class OI {
 		Button pickupButton = new JoystickButton(operator, 4);
 		Button fireButton = new JoystickButton(operator, 2);
 		
-		toggleButton.whenReleased(new ToggleClaw(robot.claw));
-		
-//		dropButton.whenPressed(new OpenClaw(robot.claw));
-//		pickupButton.whenPressed(new CloseClaw(robot.claw));
-//		fireButton.whenPressed(new PushCube(robot.claw));
+		toggleButton.whenReleased(new ToggleClaw(robot.claw));		
+		dropButton.whenPressed(new OpenClaw(robot.claw));
+		pickupButton.whenPressed(new CloseClaw(robot.claw));
+		fireButton.whenPressed(new PushCube(robot.claw));
 	}
 
 	/*

@@ -31,7 +31,6 @@ public class ToggleClaw extends Command {
 
 	@Override
 	protected void execute() {
-		System.out.println("Toggle Command State: " + curState);
 		switch (curState) {
 		case START:
 			if (claw.isOpen()) {
@@ -41,8 +40,7 @@ public class ToggleClaw extends Command {
 
 			} else {
 				claw.open();
-//				claw.push();
-				done = true;
+				claw.push();
 				timer.start();
 				curState = states.WAIT_FOR_TIMER;
 

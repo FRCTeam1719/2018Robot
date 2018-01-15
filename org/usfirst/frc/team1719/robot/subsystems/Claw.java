@@ -13,16 +13,16 @@ public class Claw extends Subsystem {
 	}
 
 	public void open() {
-		claw.set(true);
+		claw.set(false);
 	}
 
 	public void close() {
-		claw.set(false);
+		claw.set(true);
 	}
 
 	// Return whether or not the claw is open
 	public boolean isOpen() {
-		return claw.get();
+		return !claw.get();
 	}
 
 	public void push() {
