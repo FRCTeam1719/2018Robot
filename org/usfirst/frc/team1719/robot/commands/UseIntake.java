@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Using the intake spinning either direction
+ * 
+ * @author Quintin
  */
 public class UseIntake extends Command {
     

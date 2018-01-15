@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
+ *The subsystem that runs the rolling intake/outtake.
  *
+ *@author Quintin
  */
 public class RollerIntake extends Subsystem {
     
