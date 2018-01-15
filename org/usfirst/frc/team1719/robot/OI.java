@@ -7,19 +7,32 @@ import edu.wpi.first.wpilibj.Joystick;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	Joystick driver = new Joystick(0);
+	private Joystick driver = new Joystick(0);
 	
+	/**
+	 * @return the horizontal position of the left thumb-joystick
+	 */
 	public double getLeftX() {
 		return driver.getRawAxis(0);
 	}
 	
+	/**
+     * @return the vertical position of the left thumb-joystick
+     */
 	public double getLeftY() {
 		return driver.getRawAxis(1);
 	}
 	
+	/**
+     * @return the horizontal position of the right thumb-joystick
+     */
 	public double getRightX() {
 		return driver.getRawAxis(4);
 	}
+	
+	/**
+     * @return the vertical position of the right thumb-joystick
+     */
 	public double getRightY() {
 		return driver.getRawAxis(5);
 	}

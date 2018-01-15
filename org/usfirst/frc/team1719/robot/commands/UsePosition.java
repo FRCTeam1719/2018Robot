@@ -8,39 +8,43 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * Simple Position Command
  * 
- * @author Duncan and Gus
+ * @author Duncan
+ * @author Gus
  *
  */
 public class UsePosition extends Command {
-	
-	private Position parent;
-
+    
+    private Position parent;
+    
+    /**
+     * Simple constructor
+     * 
+     * @param _parent
+     *            the Position subsystem this command updates.
+     */
     public UsePosition(Position _parent) {
-    	parent = _parent;
-    	
+        parent = _parent;
+        
         requires(parent);
     }
-
+    
     // Called just before this Command runs the first time
-    protected void initialize() {
-    }
-
+    protected void initialize() {}
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	parent.update();
+        parent.update();
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
     }
-
+    
     // Called once after isFinished returns true
-    protected void end() {
-    }
-
+    protected void end() {}
+    
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+    protected void interrupted() {}
 }
