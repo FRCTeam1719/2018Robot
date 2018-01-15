@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Quintin (@a-bad-programmer)
  */
 public class Drive extends Subsystem {
-
     private Encoder leftEncoder;
     private Encoder rightEncoder;
     private SpeedController leftController;
@@ -46,5 +45,4 @@ public class Drive extends Subsystem {
     	leftController.set(left);
     	rightController.set(right); // Right is inverted :P
     }
- 
 }
