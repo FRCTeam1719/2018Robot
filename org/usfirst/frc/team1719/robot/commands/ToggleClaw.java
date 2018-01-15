@@ -19,6 +19,7 @@ public class ToggleClaw extends Command {
 
 	public ToggleClaw(Claw claw) {
 		this.claw = claw;
+		requires(claw);
 	}
 
 	@Override
@@ -30,19 +31,23 @@ public class ToggleClaw extends Command {
 
 	@Override
 	protected void execute() {
+		System.out.println("Toggle Command State: " + curState);
 		switch (curState) {
 		case START:
 			if (claw.isOpen()) {
 				claw.close();
 				done = true;
+				curState = states.CLEANUP;
 
 			} else {
 				claw.open();
-				claw.push();
+//				claw.push();
+				done = true;
 				timer.start();
 				curState = states.WAIT_FOR_TIMER;
 
 			}
+			
 			break;
 
 		case WAIT_FOR_TIMER:

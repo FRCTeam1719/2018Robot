@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1719.robot;
 
+import org.usfirst.frc.team1719.robot.commands.CloseClaw;
+import org.usfirst.frc.team1719.robot.commands.OpenClaw;
+import org.usfirst.frc.team1719.robot.commands.PushCube;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -31,8 +34,16 @@ public class OI {
 	}
 
 	public void init(Robot robot) {
-		Button clawButton = new JoystickButton(operator, 3);
-		clawButton.whenPressed(new ToggleClaw(robot.claw));
+		Button toggleButton = new JoystickButton(operator, 3);
+		Button dropButton = new JoystickButton(operator, 5);
+		Button pickupButton = new JoystickButton(operator, 4);
+		Button fireButton = new JoystickButton(operator, 2);
+		
+		toggleButton.whenReleased(new ToggleClaw(robot.claw));
+		
+//		dropButton.whenPressed(new OpenClaw(robot.claw));
+//		pickupButton.whenPressed(new CloseClaw(robot.claw));
+//		fireButton.whenPressed(new PushCube(robot.claw));
 	}
 
 	/*
