@@ -5,12 +5,23 @@ import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * 
+ * A command for ejecting the cube
+ * 
+ * @author gusg21
  *
  */
 public class PushCube extends Command {
 
 	Claw claw;
 	
+	/**
+	 * 
+	 * Requires a claw subsystem
+	 * 
+	 * @param _claw
+	 * 
+	 */
     public PushCube(Claw _claw) {
         claw = _claw;
     }
