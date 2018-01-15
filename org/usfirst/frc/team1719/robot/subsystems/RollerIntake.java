@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *The subsystem that runs the rolling intake/outtake.
+ * The subsystem that runs the rolling intake/outtake.
  *
- *@author Quintin
+ * @author Quintin
  */
 public class RollerIntake extends Subsystem {
     
@@ -19,14 +19,19 @@ public class RollerIntake extends Subsystem {
     /**
      * Receive the controllers that control the intakes.
      * 
-     * @param _leftIntake
-     * @param _rightIntake
+     * @param _leftIntake - Speed controller for left intake
+     * @param _rightIntake - Speed controller for right intake
      */
     public RollerIntake(SpeedController _leftIntake, SpeedController _rightIntake) {
         leftIntake = _leftIntake;
         rightIntake = _rightIntake;
     }
     
+    /**
+     * Set the speed of the intake for the roller intake
+     * 
+     * @param speed - speed to spin the intake
+     */
     public void set(double speed) {
         leftIntake.set(speed);
         rightIntake.set(speed);

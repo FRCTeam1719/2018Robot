@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Drive Controller class.
  * 
- * @author Gus (@gusg21) and Quintin (@a-bad-programmer)
+ * @author Gus (@gusg21)
+ * @author Quintin (@a-bad-programmer)
  */
 public class Drive extends Subsystem {
-    
-    IEncoder leftEncoder;
-    IEncoder rightEncoder;
+    private IEncoder leftEncoder;
+    private IEncoder rightEncoder;
     private SpeedController leftController;
     private SpeedController rightController;
     

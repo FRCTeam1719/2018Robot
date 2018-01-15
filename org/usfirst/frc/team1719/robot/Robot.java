@@ -7,6 +7,7 @@ import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
 import org.usfirst.frc.team1719.robot.subsystems.RollerIntake;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -22,11 +23,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-    
+    /**
+     * An object to contain all joysticks used.
+     */
     public static OI oi;
     
-    AbstractAutonomous2018 autonomousCommand;
-    SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
+    private Compressor compressor;
+    private AbstractAutonomous2018 autonomousCommand;
+    private SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
     
     Drive drive;
     Position position;
@@ -39,10 +43,14 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         oi = new OI();
+        compressor = new Compressor(0);
+        compressor.setClosedLoopControl(true);
+        compressor.start();
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-        // Initialize Subsystems
-        drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
+        
+        /* Initialize Subsystems */
+        drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.leftDriveEnc);
         position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
         intake = new RollerIntake(RobotMap.leftIntake, RobotMap.rightIntake);
     }
@@ -86,7 +94,9 @@ public class Robot extends IterativeRobot {
              * handling to that string parsing.
              */
             String data = DriverStation.getInstance().getGameSpecificMessage();
-            autonomousCommand.setFieldState(data.charAt(0) == 'R', data.charAt(1) == 'R', data.charAt(2) == 'R');
+            if (data.length() > 2) {
+                autonomousCommand.setFieldState(data.charAt(0) == 'R', data.charAt(1) == 'R', data.charAt(2) == 'R');
+            }
             autonomousCommand.start();
         }
     }
@@ -129,6 +139,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during test mode
      */
     @SuppressWarnings("deprecation")
+    
     @Override
     public void testPeriodic() {
         LiveWindow.run();

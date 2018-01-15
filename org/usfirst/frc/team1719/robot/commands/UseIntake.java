@@ -17,8 +17,8 @@ public class UseIntake extends Command {
     /**
      * spin the intake at a certain speed.
      * 
-     * @param _intake
-     * @param _intakeSpeed
+     * @param _intake - Roller intake to use
+     * @param _intakeSpeed - Speed to spin the intake at.
      */
     public UseIntake(RollerIntake _intake, double _intakeSpeed) {
         // Use requires() here to declare subsystem dependencies
@@ -46,9 +46,11 @@ public class UseIntake extends Command {
     }
     
     // Called once after isFinished returns true
+    @Override
     protected void end() {}
     
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
+    @Override
     protected void interrupted() {}
 }
