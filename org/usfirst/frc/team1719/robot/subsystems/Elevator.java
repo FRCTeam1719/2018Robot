@@ -13,20 +13,20 @@ public class Elevator extends Subsystem {
 	private Encoder positionEncoder;
 	private DigitalInput topSwitch;
 	private DigitalInput bottomSwitch;
-	private SpeedController speedController;
+	private SpeedController elevatorController;
 	
 	/**
 	 * Takes in an Encoder for the position, a motor to control it, and two switches for when it reaches the top and bottom of the elevator
-	 * @param position
-	 * @param top
-	 * @param bottom
-	 * @param speedController
+	 * @param position - Encoder for current position of the elevator
+	 * @param top - top limit switch
+	 * @param bottom - bottom limit switch
+	 * @param speedController - elevator speed controller
 	 */
-	public Elevator(Encoder position,DigitalInput top, DigitalInput bottom, SpeedController _speedController) {
+	public Elevator(Encoder position,DigitalInput top, DigitalInput bottom, SpeedController _elevatorController) {
 		positionEncoder = position;
 		topSwitch = top;
 		bottomSwitch = bottom;
-		speedController = _speedController;
+		elevatorController = _elevatorController;
 		
 	}
 
@@ -38,7 +38,7 @@ public class Elevator extends Subsystem {
 
 	/**
 	 * takes a speed and sets the motor to it 
-	 * @param speed
+	 * @param speed - speed to set motor at
 	 */
 	public void moveElevator(double speed) {
 		if(speed < -1) {
@@ -49,15 +49,15 @@ public class Elevator extends Subsystem {
 		}
 
 		if(topSwitch.get() && speed > 0) {
-			speedController.set(0);
+			elevatorController.set(0);
 		}
 		
 		else if(bottomSwitch.get() && speed < 0) {
-			speedController.set(0);
+			elevatorController.set(0);
 		}
 		
 		else {
-			speedController.set(speed);
+		    elevatorController.set(speed);
 		}
 		
 		
@@ -69,7 +69,7 @@ public class Elevator extends Subsystem {
 	 * stops the elevator from moving
 	 */
 	public void stop() {
-		speedController.set(0);
+		elevatorController.set(0);
 	}
 	
 	

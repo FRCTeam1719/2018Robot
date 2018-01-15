@@ -18,10 +18,10 @@ public class UseElevator extends Command {
 		elevator = _elevator;
 		requires(elevator);
 	}
-	
+	@Override
 	protected void initialize() {
     }
-
+	@Override
     protected void execute() {
     		double controllerY = -Robot.oi.operatorGetY();
     		
@@ -37,10 +37,10 @@ public class UseElevator extends Command {
 	protected boolean isFinished() {
 		return false;
 	}
-	
+	@Override
 	protected void end() {
     }
-
+	@Override
     protected void interrupted() {
     }
 
