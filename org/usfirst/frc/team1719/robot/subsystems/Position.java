@@ -11,14 +11,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * 
  * Position and NAV-X
  * 
+ * @author Duncan
  * @author gusg21
  *
  */
 public class Position extends Subsystem {
 
-	AHRS navX;
-	Encoder left;
-	Encoder right;
+	private final AHRS navX;
+	private final Encoder left;
+	private final Encoder right;
 	
     private final double collisionThreshold = 0.5f;
     private boolean isTrustworthy;
@@ -72,6 +73,7 @@ public class Position extends Subsystem {
 		y += Math.cos(Math.toRadians(heading)) * (dl + dr) / 2.0D;
 	}
 
+	@Override
 	public void initDefaultCommand() {
 		setDefaultCommand(new UsePosition(this));
 	}
