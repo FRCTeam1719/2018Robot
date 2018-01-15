@@ -17,10 +17,11 @@ public class CloseClaw extends Command {
 	/**
 	 * Requires an instance of the Claw subsystem
 	 * 
-	 * @param c
+	 * @param claw
 	 */
-	public CloseClaw(Claw c) {
-		claw = c;
+	public CloseClaw(Claw _claw) {
+		claw = _claw;
+		requires(claw);
 	}
 
 	@Override

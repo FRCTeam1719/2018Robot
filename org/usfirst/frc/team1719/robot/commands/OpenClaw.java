@@ -18,10 +18,11 @@ public class OpenClaw extends Command {
 	 * 
 	 * An instance of the claw subsystem
 	 * 
-	 * @param claw
+	 * @param _claw
 	 */
-	public OpenClaw(Claw claw) {
-		this.claw = claw;
+	public OpenClaw(Claw _claw) {
+		claw = _claw;
+		requires(claw);
 	}
 
 	@Override

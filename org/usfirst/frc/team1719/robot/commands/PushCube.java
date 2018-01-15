@@ -24,6 +24,7 @@ public class PushCube extends Command {
 	 */
     public PushCube(Claw _claw) {
         claw = _claw;
+        requires(claw);
     }
 
     // Called repeatedly when this Command is scheduled to run
