@@ -36,7 +36,7 @@ public class RobotMap {
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
 
 	/* DIO */
-    public static final E4TOpticalEncoder elevatorEnc = new E4TOpticalEncoder(4,5, false);
+    public static final E4TOpticalEncoder elevatorEnc = new E4TOpticalEncoder(8, 9, false);
     
     public static final DigitalInput topSwitch = new DigitalInput(4);//temp port 
 	public static final DigitalInput bottomSwitch = new DigitalInput(5);//temp port
