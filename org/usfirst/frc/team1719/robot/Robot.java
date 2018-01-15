@@ -23,15 +23,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-    /**
-     * An object to contain all joysticks used.
-     */
+	/**
+	 * An object to contain all joysticks used.
+	 */
 	public static OI oi;
 	private Compressor compressor;
 	private AbstractAutonomous2018 autonomousCommand;
 	private SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
-	
-    Drive drive;
+
+	Drive drive;
 	Position position;
 	Claw claw;
 
@@ -47,7 +47,7 @@ public class Robot extends IterativeRobot {
 		compressor.start();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		
+
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
@@ -88,16 +88,18 @@ public class Robot extends IterativeRobot {
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
-		    /* Note from Aaron: 
-		     * Consider how this will act when not connected to the FMS, or if the message is somehow garbeled.
-		     * Look at isFMSAttached() and maybe consider getting the data from the dashboard otherwise?
-		     * Also, add some error handling to that string parsing. */
-            String data = DriverStation.getInstance().getGameSpecificMessage();
-            if(data.length() > 2) {
-                autonomousCommand.setFieldState(data.charAt(0) == 'R', data.charAt(1) == 'R', data.charAt(2) == 'R');
-            }
-            autonomousCommand.start();
-        }
+			/*
+			 * Note from Aaron: Consider how this will act when not connected to the FMS, or
+			 * if the message is somehow garbeled. Look at isFMSAttached() and maybe
+			 * consider getting the data from the dashboard otherwise? Also, add some error
+			 * handling to that string parsing.
+			 */
+			String data = DriverStation.getInstance().getGameSpecificMessage();
+			if (data.length() > 2) {
+				autonomousCommand.setFieldState(data.charAt(0) == 'R', data.charAt(1) == 'R', data.charAt(2) == 'R');
+			}
+			autonomousCommand.start();
+		}
 	}
 
 	/**
@@ -127,13 +129,14 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-//		System.out.println("X: " + position.getX() + "\nY: " + position.getY() + "\nHeading: " + position.getHeading()
-//				+ "\nTrustworthy: " + position.getTrustworthy());
+		// System.out.println("X: " + position.getX() + "\nY: " + position.getY() +
+		// "\nHeading: " + position.getHeading()
+		// + "\nTrustworthy: " + position.getTrustworthy());
 	}
 
 	/**
-	 * This function is called periodically during test mode. Calls a deprecated method,
-	 * but we never use it anyway
+	 * This function is called periodically during test mode. Calls a deprecated
+	 * method, but we never use it anyway
 	 */
 	@SuppressWarnings("deprecation")
 	@Override

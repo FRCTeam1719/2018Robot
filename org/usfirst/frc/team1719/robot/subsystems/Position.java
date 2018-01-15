@@ -20,30 +20,33 @@ public class Position extends Subsystem {
 	private final AHRS navX;
 	private final Encoder left;
 	private final Encoder right;
-	
-    private final double collisionThreshold = 0.5f;
-    private boolean isTrustworthy;
-    private double lastAccelX;
-    private double lastAccelY;
-    private double lDist;
-    private double rDist;
-    private volatile double x;
-    private volatile double y;
-    private volatile double heading;
 
-    /**
-     * Subsystem for current Cartesian coordinates via Nav-X
-     * 
-     * @param _navX AHRS Nav-X instance
-     * @param _left Left Encoder
-     * @param _right Right Encoder
-     */
+	private final double collisionThreshold = 0.5f;
+	private boolean isTrustworthy;
+	private double lastAccelX;
+	private double lastAccelY;
+	private double lDist;
+	private double rDist;
+	private volatile double x;
+	private volatile double y;
+	private volatile double heading;
+
+	/**
+	 * Subsystem for current Cartesian coordinates via Nav-X
+	 * 
+	 * @param _navX
+	 *            AHRS Nav-X instance
+	 * @param _left
+	 *            Left Encoder
+	 * @param _right
+	 *            Right Encoder
+	 */
 	public Position(AHRS _navX, Encoder _left, Encoder _right) {
 		navX = _navX;
 		left = _left;
 		right = _right;
 	}
-	
+
 	private boolean checkForCollision() {
 		double currentAccelX = navX.getWorldLinearAccelX();
 		double currentJerkX = currentAccelX - lastAccelX;
@@ -77,7 +80,7 @@ public class Position extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new UsePosition(this));
 	}
-	
+
 	/**
 	 * Get X value
 	 * 
@@ -86,7 +89,7 @@ public class Position extends Subsystem {
 	public double getX() {
 		return x;
 	}
-	
+
 	/**
 	 * Get Y value
 	 * 
@@ -95,15 +98,16 @@ public class Position extends Subsystem {
 	public double getY() {
 		return y;
 	}
-	
+
 	/**
 	 * Get current yaw heading
+	 * 
 	 * @return
 	 */
 	public double getHeading() {
 		return heading;
 	}
-	
+
 	/**
 	 * Get whether our current data is reliable
 	 * 

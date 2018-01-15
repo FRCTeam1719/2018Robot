@@ -32,34 +32,38 @@ public class ToggleClaw extends Command {
 	@Override
 	protected void execute() {
 		switch (curState) {
+
 		case START:
+			
 			if (claw.isOpen()) {
 				claw.close();
 				done = true;
 				curState = states.CLEANUP;
-
 			} else {
 				claw.open();
 				claw.push();
 				timer.start();
 				curState = states.WAIT_FOR_TIMER;
-
 			}
-			
+
 			break;
 
 		case WAIT_FOR_TIMER:
+
 			timer.get();
+
 			if (timer.get() > WAIT_TIME) {
 				curState = states.CLEANUP;
-
 			}
 
 			break;
+
 		case CLEANUP:
+
 			timer.stop();
 			claw.retract();
 			done = true;
+
 		}
 
 	}

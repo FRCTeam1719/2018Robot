@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CloseClaw extends Command {
 	private Claw claw;
-	
+
 	/**
 	 * Requires an instance of the Claw subsystem
 	 * 
