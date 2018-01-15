@@ -45,6 +45,11 @@ public class OI {
 		return driver.getRawAxis(5);
 	}
 
+	/**
+	 * Setup the buttons. Requires the instance of the Robot
+	 * 
+	 * @param robot - Instance of the Robot
+	 */
 	public void init(Robot robot) {
 		Button toggleButton = new JoystickButton(operator, 3);
 		Button dropButton = new JoystickButton(operator, 5);
