@@ -58,13 +58,14 @@ public class UseDrive extends Command {
             rightMotorOutput = output;
         }
     }
+
     
     /**
      * The command for simple tank drive.
      * 
      * @param driveSystem
      */
-    
+
     public UseDrive(Drive _driveSystem) {
         driveSystem = _driveSystem;
         
@@ -76,6 +77,7 @@ public class UseDrive extends Command {
     
     // Not deprecated for bad reason.
     @SuppressWarnings("deprecation")
+    @Override
     protected void initialize() {
         driveSystem.getEncoderL().setPIDSourceType(PIDSourceType.kRate);
         driveSystem.getEncoderR().setPIDSourceType(PIDSourceType.kRate);
@@ -94,6 +96,7 @@ public class UseDrive extends Command {
         
     }
     
+    @Override
     protected void execute() {
         // Raw Datas
         double left = -Robot.oi.getLeftY();
@@ -112,7 +115,7 @@ public class UseDrive extends Command {
         if (Math.abs(left) < DEADZONE) {
             left = 0;
         }
-        if (Math.abs(right) < DEADZONE) {
+        if(Math.abs(right) < DEADZONE) {
             right = 0;
         }
         
@@ -134,12 +137,15 @@ public class UseDrive extends Command {
         
     }
     
+    
+    @Override
     protected boolean isFinished() {
         return false;
     }
     
+    @Override
     protected void end() {}
-    
+    @Override
     protected void interrupted() {}
     
     /**
