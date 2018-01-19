@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1719.robot.subsystems;
 
-import org.usfirst.frc.team1719.robot.commands.LimitTest;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -42,7 +41,6 @@ public class Elevator extends Subsystem {
     
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new LimitTest(this));
     }
     
     /**
@@ -59,17 +57,7 @@ public class Elevator extends Subsystem {
             speed = 1;
         }
         
-        if (topSwitch.get() && speed > 0) {
-            elevatorController.set(0);
-        }
-        
-        else if (bottomSwitch.get() && speed < 0) {
-            elevatorController.set(0);
-        }
-        
-        else {
             elevatorController.set(speed);
-        }
         
     }
     
