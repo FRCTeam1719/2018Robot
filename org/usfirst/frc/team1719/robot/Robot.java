@@ -4,6 +4,7 @@ package org.usfirst.frc.team1719.robot;
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
+import org.usfirst.frc.team1719.robot.subsystems.Mydrive;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -28,7 +29,7 @@ public class Robot extends IterativeRobot {
 	AbstractAutonomous2018 autonomousCommand;
 	SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
 	
-	Drive drive;
+	Mydrive drive;
 	Position position;
 	Claw claw;
 	
@@ -46,7 +47,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		// Initialize Subsystems
-		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
+		drive = new Mydrive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
 		

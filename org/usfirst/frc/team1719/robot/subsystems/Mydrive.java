@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1719.robot.subsystems;
 
+import org.usfirst.frc.team1719.robot.commands.Drivecommand;
+
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -11,6 +13,7 @@ public class Mydrive extends Subsystem {
 	public Mydrive(SpeedController left, SpeedController right ) {
 		this.left = left;
 		this.right= right;
+		left.setInverted(true);
 				
 	}
 	public void setLeft(double speed) {
@@ -32,7 +35,7 @@ public class Mydrive extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		
+		setDefaultCommand(new Drivecommand(this));
 	} 
 
 }
