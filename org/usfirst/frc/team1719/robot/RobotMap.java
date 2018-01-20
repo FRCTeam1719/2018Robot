@@ -4,6 +4,7 @@ import org.usfirst.frc.team1719.robot.sensors.E4TOpticalEncoder;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -28,12 +29,15 @@ public class RobotMap {
 
 	/* PWM */
 	public static final SpeedController leftDrive = new Spark(0);
-	public static final SpeedController rightDrive = new Spark(1); // People/Electrical are bad
+	public static final SpeedController rightDrive = new Spark(1); 
+	public static final SpeedController elevator = new Spark(2); //Not sure if this is Permanent Spark
 
 	/* MXP */
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
 
 	/* DIO */
+    public static final E4TOpticalEncoder elevatorEnc = new E4TOpticalEncoder(8, 9, false);
+    
 	public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(6, 7, true);
 	public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
 

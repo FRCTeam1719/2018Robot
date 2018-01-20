@@ -4,6 +4,7 @@ package org.usfirst.frc.team1719.robot;
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
+import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 	
     Drive drive;
 	Position position;
+	Elevator elevator;
 	Claw claw;
 
 	/**
@@ -45,12 +47,14 @@ public class Robot extends IterativeRobot {
 		compressor = new Compressor(0);
 		compressor.setClosedLoopControl(true);
 		compressor.start();
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
+		elevator = new Elevator(RobotMap.elevatorEnc ,RobotMap.elevator);
+		
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
 
 		oi.init(this);
