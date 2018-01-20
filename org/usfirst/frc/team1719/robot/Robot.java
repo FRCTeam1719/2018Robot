@@ -47,13 +47,13 @@ public class Robot extends IterativeRobot {
 		compressor = new Compressor(0);
 		compressor.setClosedLoopControl(true);
 		compressor.start();
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
-		elevator = new Elevator(RobotMap.elevatorEnc,RobotMap.topSwitch,RobotMap.bottomSwitch,RobotMap.elevator);
+		elevator = new Elevator(RobotMap.elevatorEnc ,RobotMap.elevator);
 		
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
 

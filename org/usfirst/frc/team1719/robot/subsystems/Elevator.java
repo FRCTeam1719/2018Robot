@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1719.robot.subsystems;
 
+import org.usfirst.frc.team1719.robot.commands.UseElevator;
+import org.usfirst.frc.team1719.robot.interfaces.IEncoder;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,9 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Elevator extends Subsystem {
-    private Encoder positionEncoder;
-    private DigitalInput topSwitch;
-    private DigitalInput bottomSwitch;
+    private IEncoder positionEncoder;
     private SpeedController elevatorController;
     
     /**
@@ -31,16 +29,15 @@ public class Elevator extends Subsystem {
      * @param speedController
      *            - elevator speed controller
      */
-    public Elevator(Encoder position, DigitalInput top, DigitalInput bottom, SpeedController _elevatorController) {
+    public Elevator(IEncoder position, SpeedController _elevatorController) {
         positionEncoder = position;
-        topSwitch = top;
-        bottomSwitch = bottom;
         elevatorController = _elevatorController;
         
     }
     
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new UseElevator(this));
     }
     
     /**
@@ -57,19 +54,16 @@ public class Elevator extends Subsystem {
             speed = 1;
         }
         
-            elevatorController.set(speed);
+        elevatorController.set(speed / 2);
+        /* System.out.println(speed / 2); */
         
     }
     
-    public boolean getBottomSwitch() {
-        return bottomSwitch.get();
+    /**
+     * stops the elevator from moving
+     */
+    public void stop() {
+        elevatorController.set(0);
     }
-	
-	/**
-	 * stops the elevator from moving
-	 */
-	public void stop() {
-		elevatorController.set(0);
-	}
     
 }

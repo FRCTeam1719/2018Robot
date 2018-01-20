@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class UseElevator extends Command {
 
 	private Elevator elevator;
-	private final double DEADZONE = 0.1;
+	private final double DEADZONE = 0.5;
 	
 	/**
 	 * constructor that takes in an Elevator
@@ -23,8 +23,9 @@ public class UseElevator extends Command {
     }
 	@Override
     protected void execute() {
+	   
     		double controllerY = -Robot.oi.operatorGetY();
-    		
+    		//System.out.println("In: " + controllerY);
     		if(Math.abs(controllerY)<DEADZONE) {
     			controllerY = 0;
     		}

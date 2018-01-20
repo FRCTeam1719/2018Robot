@@ -38,8 +38,6 @@ public class RobotMap {
 	/* DIO */
     public static final E4TOpticalEncoder elevatorEnc = new E4TOpticalEncoder(4,5, false);
     
-    public static final DigitalInput topSwitch = new DigitalInput(4);//temp port 
-	public static final DigitalInput bottomSwitch = new DigitalInput(5);//temp port
 	public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(6, 7, true);
 	public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
 
