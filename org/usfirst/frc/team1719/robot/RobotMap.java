@@ -29,7 +29,8 @@ public class RobotMap {
 	/* PWM */
 	public static final SpeedController leftDrive = new Spark(0);
 	public static final SpeedController rightDrive = new Spark(1); // People/Electrical are bad
-
+	public static final SpeedController climberMotor = new Spark(2);
+	
 	/* MXP */
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
 

@@ -4,6 +4,7 @@ import org.usfirst.frc.team1719.robot.commands.CloseClaw;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.PushCube;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
+import org.usfirst.frc.team1719.robot.commands.UseClimber;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -55,11 +56,13 @@ public class OI {
 		Button dropButton = new JoystickButton(operator, 5);
 		Button pickupButton = new JoystickButton(operator, 4);
 		Button fireButton = new JoystickButton(operator, 2);
+		Button climber = new JoystickButton(operator, 1);
 		
 		toggleButton.whenReleased(new ToggleClaw(robot.claw));		
 		dropButton.whenPressed(new OpenClaw(robot.claw));
 		pickupButton.whenPressed(new CloseClaw(robot.claw));
 		fireButton.whenPressed(new PushCube(robot.claw));
+		climber.whileHeld(new UseClimber(robot.climber));
 	}
 
 	/*

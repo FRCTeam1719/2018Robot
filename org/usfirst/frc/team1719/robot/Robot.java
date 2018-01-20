@@ -3,6 +3,7 @@ package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
+import org.usfirst.frc.team1719.robot.subsystems.Climber;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
 
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
     Drive drive;
 	Position position;
 	Claw claw;
+	Climber climber;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -52,7 +54,8 @@ public class Robot extends IterativeRobot {
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
-
+		climber = new Climber(RobotMap.climberMotor); 
+		
 		oi.init(this);
 	}
 
