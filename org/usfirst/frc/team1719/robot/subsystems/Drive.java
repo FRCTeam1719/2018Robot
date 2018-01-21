@@ -76,13 +76,13 @@ public class Drive extends Subsystem {
      * 
      */
     public IEncoder getEncoderR() {
-        return leftEncoder;
+        return rightEncoder;
     }
     
     /**
      * Gets the values of the left encoder.
      */
     public IEncoder getEncoderL () {
-        return rightEncoder;
+        return leftEncoder;
     }
 }
