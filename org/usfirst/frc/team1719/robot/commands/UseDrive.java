@@ -1,11 +1,13 @@
 package org.usfirst.frc.team1719.robot.commands;
 
 import org.usfirst.frc.team1719.robot.Robot;
+import org.usfirst.frc.team1719.robot.interfaces.IEncoder;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,10 +23,10 @@ public class UseDrive extends Command {
     
     private final double SYNC_AMOUNT = 0.15;
     private final double DEADZONE = 0.1;
-    static PIDController leftController;
+    PIDController leftController;
     PIDController rightController;
     
-    private double highMaxSpeed = 250D;
+    private double highMaxSpeed = 100D;
     private double lowMaxSpeed = 50D;
     private double maxSpeed = highMaxSpeed;
     private double MAX_SPEED_SCALING_FACTOR = 1.2;
@@ -32,15 +34,15 @@ public class UseDrive extends Command {
     volatile double leftMotorOutput = 0;
     volatile double rightMotorOutput = 0;
     
-    double leftkP = 0;
+    double leftkP = 10;
     double leftkF = 1 / maxSpeed;
-    double leftkD = 0;
-    double leftkI = 0;
+    double leftkD = 0.01;
+    double leftkI = 0.1;
     
-    double rightkP = 0;
+    double rightkP = 10;
     double rightkF = 1 / maxSpeed;
-    double rightkD = 0;
-    double rightkI = 0;
+    double rightkD = 0.01;
+    double rightkI = 0.1;
     
     // PID Objects, these are used to get the current motor stuffs to those PIDs.
     private class leftDrivePIDOutput implements PIDOutput {
@@ -58,21 +60,24 @@ public class UseDrive extends Command {
             rightMotorOutput = output;
         }
     }
-
     
     /**
      * The command for simple tank drive.
      * 
      * @param driveSystem
      */
-
+    
     public UseDrive(Drive _driveSystem) {
         driveSystem = _driveSystem;
         
         requires(driveSystem);
         
+        driveSystem.getEncoderL().setPIDSourceType(PIDSourceType.kRate);
+        driveSystem.getEncoderR().setPIDSourceType(PIDSourceType.kRate);
+        
         leftController = new PIDController(leftkP, 0, leftkF, driveSystem.getEncoderL(), new leftDrivePIDOutput());
         rightController = new PIDController(rightkP, 0, rightkF, driveSystem.getEncoderL(), new leftDrivePIDOutput());
+        
     }
     
     // Not deprecated for bad reason.
@@ -94,6 +99,14 @@ public class UseDrive extends Command {
         leftController.setPercentTolerance(5);
         rightController.setPercentTolerance(5);
         
+        SmartDashboard.setDefaultString("test", "this is a test");
+        SmartDashboard.putData("LEFT_PID", leftController);
+        SmartDashboard.putData("RIGHT_PID", rightController);
+        SmartDashboard.putNumber("Right_rate", driveSystem.getEncoderR().getRate());
+        SmartDashboard.putNumber("Left_rate", driveSystem.getEncoderL().getRate());
+        
+        leftController.enable();
+        rightController.enable();
     }
     
     @Override
@@ -111,22 +124,52 @@ public class UseDrive extends Command {
             left = right = (left + right) / 2;
         }
         
+        double desiredLeftRate = left * maxSpeed;
+        double desiredRightRate = right * maxSpeed;
+        
         // Deadzoning
         if (Math.abs(left) < DEADZONE) {
             left = 0;
+            leftController.setSetpoint(0);
+            leftController.reset();
+            desiredLeftRate = 0;
+        } else {
+            leftController.enable();
+            leftController.setSetpoint(desiredLeftRate);
         }
-        if(Math.abs(right) < DEADZONE) {
+        if (Math.abs(right) < DEADZONE) {
             right = 0;
+            rightController.setSetpoint(0);
+            rightController.reset();
+            desiredRightRate = 0;
+        } else {
+            rightController.enable();
+            rightController.setSetpoint(desiredRightRate);
         }
         
         // Apply
         driveSystem.tankDrive(left, right);
+        
+        SmartDashboard.putNumber("Left Drive", left);
+        SmartDashboard.putNumber("Right Drive", right);
+        // System.out.println(SmartDashboard.getString("test", "Oh NO!"));
+        //leftController = (PIDController) SmartDashboard.getData("LEFT_PID");
+        //rightController = (PIDController) SmartDashboard.getData("RIGHT_PID");
+        
+        System.out.println("kP: " + rightController.getP());
+        System.out.println("kI: " + rightController.getI());
+        System.out.println("kD: " + rightController.getD());
+        
+        
+        //System.out.println(`.getF());
         
         leftController.setInputRange(-(maxSpeed * MAX_SPEED_SCALING_FACTOR), maxSpeed * MAX_SPEED_SCALING_FACTOR);
         leftController.setPID(leftController.getP(), leftController.getI(), leftController.getD(), (1 / maxSpeed));
         
         rightController.setInputRange(-(maxSpeed * MAX_SPEED_SCALING_FACTOR), maxSpeed * MAX_SPEED_SCALING_FACTOR);
         rightController.setPID(rightController.getP(), rightController.getI(), rightController.getD(), (1 / maxSpeed));
+        
+        // System.out.println(SmartDashboard.getData("LEFT_PID"));
         
         // System.out.println(
         // Robot.oi.getLeftY()
@@ -137,7 +180,6 @@ public class UseDrive extends Command {
         
     }
     
-    
     @Override
     protected boolean isFinished() {
         return false;
@@ -145,22 +187,11 @@ public class UseDrive extends Command {
     
     @Override
     protected void end() {}
+    
     @Override
     protected void interrupted() {}
     
     /**
      * Get all of the PID Constants for nice tuning.
      */
-    public void setPIDConstantsFromDashboard() {
-        leftkP = SmartDashboard.getNumber("LEFT_DRIVE_KP", 0);
-        leftkF = SmartDashboard.getNumber("LEFT_DRIVE_KF", 0);
-        leftkI = SmartDashboard.getNumber("LEFT_DRIVE_KI", 0);
-        leftkD = SmartDashboard.getNumber("LEFT_DRIVE_KI", 0);
-        
-        rightkP = SmartDashboard.getNumber("RIGHT_DRIVE_KP", 0);
-        rightkF = SmartDashboard.getNumber("RIGHT_DRIVE_KF", 0);
-        rightkI = SmartDashboard.getNumber("RIGHT_DRIVE_KI", 0);
-        rightkD = SmartDashboard.getNumber("LEFT_DRIVE_KD", 0);
-    }
-    
 }
