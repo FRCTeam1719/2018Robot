@@ -191,7 +191,6 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
 			pathAngle = atanXY;
 
 			rotSpd = rotateControllerStill.get();
-
 			System.out.println("Turning to heading " + pathAngle + "; power " + rotSpd + " ctrl "
 					+ rotateControllerStill.get() + "FROM" + rotateControllerStill.getError() + "K[P]="
 					+ rotateControllerStill.getP() + "enabled=" + rotateControllerStill.isEnabled());
@@ -211,11 +210,12 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
 		SmartDashboard.putNumber("MTP e\u27c2", distOffPath);
 		SmartDashboard.putNumber("MTP Desired angle", pidhelper.val);
 		SmartDashboard.putNumber("MTP current angle", position.getHeading() - pathAngle);
+		System.out.println("MTP current angle: " + position.getHeading());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return (Math.abs(errX) <= 0.5 && Math.abs(errY) <= 0.5);
 	}
 
 	// Called once after isFinished returns true

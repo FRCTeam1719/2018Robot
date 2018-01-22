@@ -71,6 +71,9 @@ public class Position extends Subsystem {
 		rDist += dr;
 		x += Math.sin(Math.toRadians(heading)) * (dl + dr) / 2.0D;
 		y += Math.cos(Math.toRadians(heading)) * (dl + dr) / 2.0D;
+		System.out.println("x: " + x);
+		System.out.println("y: " + y);
+		
 	}
 
 	@Override

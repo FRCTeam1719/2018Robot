@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1719.robot;
 
+import org.usfirst.frc.team1719.robot.auton.MTPTest;
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
@@ -45,13 +46,13 @@ public class Robot extends IterativeRobot {
 		compressor = new Compressor(0);
 		compressor.setClosedLoopControl(true);
 		compressor.start();
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
-
+		chooser.addObject("My Auto", new MTPTest(this, drive, position));
+		SmartDashboard.putData("Auto mode", chooser);
 		oi.init(this);
 	}
 

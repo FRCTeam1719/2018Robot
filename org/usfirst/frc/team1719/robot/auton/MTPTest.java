@@ -11,14 +11,23 @@ import org.usfirst.frc.team1719.robot.subsystems.Position;
  */
 public class MTPTest extends AbstractAutonomous2018 {
 
-    public MTPTest() {
+    /**
+     * Move to Position Test
+     * 
+     * @param robot - Our robot
+     * @param drive - drive subsystem
+     * @param position - navX positioning.
+     */
+    public MTPTest(Robot robot, Drive drive, Position position) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        addSequential(new MoveToPosition(0.0D, 0.0D, position, drive, true, false));
+        
     }
 
     // Called just before this Command runs the first time
-    protected void initialize(Robot robot, Drive drive, Position position) {
-        addSequential(new MoveToPosition(0.0D, 120.0D, position, drive, true, false));
+    protected void initialize() {
+        
     }
 
     // Called repeatedly when this Command is scheduled to run
