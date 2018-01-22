@@ -203,8 +203,8 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
 			distOffPath = Math.sin(offPathAngle) * Math.sqrt(errX * errX + errY * errY);
 
 			System.out.println("Following path : power " + rotSpd + "Rotator " + rotateController.get());
-
-			drive.arcadeDrive(SPD, rotSpd);
+			
+			drive.arcadeDrive(SPD, -rotSpd);
 		}
 
 		SmartDashboard.putNumber("MTP e\u27c2", distOffPath);

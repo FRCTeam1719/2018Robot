@@ -73,6 +73,9 @@ public class Position extends Subsystem {
 		y += Math.cos(Math.toRadians(heading)) * (dl + dr) / 2.0D;
 		System.out.println("x: " + x);
 		System.out.println("y: " + y);
+		System.out.println("Yaw: " + navX.getYaw());
+		System.out.println("Pitch: " + navX.getPitch());
+		System.out.println("Roll: " + navX.getRoll());
 		
 	}
 

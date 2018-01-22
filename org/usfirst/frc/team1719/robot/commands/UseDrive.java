@@ -156,9 +156,6 @@ public class UseDrive extends Command {
         //leftController = (PIDController) SmartDashboard.getData("LEFT_PID");
         //rightController = (PIDController) SmartDashboard.getData("RIGHT_PID");
         
-        System.out.println("kP: " + rightController.getP());
-        System.out.println("kI: " + rightController.getI());
-        System.out.println("kD: " + rightController.getD());
         
         
         //System.out.println(`.getF());
