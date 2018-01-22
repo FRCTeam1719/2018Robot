@@ -69,6 +69,7 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
 	private final double parY;
 	private double errX = 0;
 	private double errY = 0;
+	private final double MINIMUM_FINISH_ERR = 0.5;
 	private double pathAngle = 0;
 	private double distOffPath = 0;
 	private double rotSpd = 0;
@@ -215,7 +216,7 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return (Math.abs(errX) <= 0.5 && Math.abs(errY) <= 0.5);
+		return (Math.abs(errX) <= MINIMUM_FINISH_ERR && Math.abs(errY) <= MINIMUM_FINISH_ERR);
 	}
 
 	// Called once after isFinished returns true
