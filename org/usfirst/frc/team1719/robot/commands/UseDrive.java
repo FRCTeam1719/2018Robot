@@ -99,9 +99,6 @@ public class UseDrive extends Command {
         leftController.setPercentTolerance(5);
         rightController.setPercentTolerance(5);
         
-        SmartDashboard.setDefaultString("test", "this is a test");
-        SmartDashboard.putData("LEFT_PID", leftController);
-        SmartDashboard.putData("RIGHT_PID", rightController);
         SmartDashboard.putNumber("Right_rate", driveSystem.getEncoderR().getRate());
         SmartDashboard.putNumber("Left_rate", driveSystem.getEncoderL().getRate());
         
