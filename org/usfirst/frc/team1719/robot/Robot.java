@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team1719.robot;
 
+import org.usfirst.frc.team1719.robot.auton.MPTTuneInner;
+import org.usfirst.frc.team1719.robot.auton.MPTTuneOuter;
 import org.usfirst.frc.team1719.robot.auton.MTPTest;
 import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
@@ -51,7 +53,9 @@ public class Robot extends IterativeRobot {
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
-		chooser.addObject("My Auto", new MTPTest(this, drive, position));
+		chooser.addObject("Goto 0,0", new MTPTest(this, drive, position));
+		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
+		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 10D, 10D));
 		SmartDashboard.putData("Auto mode", chooser);
 		oi.init(this);
 	}
