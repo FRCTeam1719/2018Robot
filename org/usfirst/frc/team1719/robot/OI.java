@@ -43,7 +43,12 @@ public class OI {
 		return driver.getRawAxis(5);
 	}
 	
-	
+	public void init(Robot robot) {
+	    Button rollerIn = new JoystickButton(operator, 2);
+	    Button rollerOut = new JoystickButton(operator, 3);
+	    rollerIn.whileHeld(new UseIntake(Robot.intake,1.00));
+	    rollerOut.whileHeld(new UseIntake(Robot.intake,-1.00));
+	}
 	
 	/* 
 	 *** CREATING BUTTONS ***

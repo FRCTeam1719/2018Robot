@@ -32,9 +32,9 @@ public class Robot extends IterativeRobot {
     private AbstractAutonomous2018 autonomousCommand;
     private SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
     
-    Drive drive;
-    Position position;
-    RollerIntake intake;
+    public static Drive drive;
+    public static Position position;
+    public static RollerIntake intake;
     
     /**
      * This function is run when the robot is first started up and should be used
