@@ -28,8 +28,8 @@ public class RobotMap {
 	 */
 	
 	/* PWM */
-	public static final SpeedController leftDrive = new Spark(0);
-	public static final SpeedController rightDrive = new Spark(1); // Electrical "People" are bad
+	public static final SpeedController leftDrive = new Spark(3);
+	public static final SpeedController rightDrive = new Spark(4); // Electrical "People" are bad
 	public static final SpeedController leftIntake = new Spark(0);
 	public static final SpeedController rightIntake = new Spark(1); //Temparary intake PWMs
 	
