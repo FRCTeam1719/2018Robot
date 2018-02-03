@@ -2,6 +2,7 @@ package org.usfirst.frc.team1719.robot.subsystems;
 
 import org.usfirst.frc.team1719.robot.commands.UseElevator;
 import org.usfirst.frc.team1719.robot.interfaces.IEncoder;
+import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Elevator extends Subsystem {
     private IEncoder positionEncoder;
     private SpeedController elevatorController;
+    private RangeFinder45LMS rangeFinder;
     
     /**
      * Takes in an Encoder for the position, a motor to control it, and two switches
@@ -29,9 +31,10 @@ public class Elevator extends Subsystem {
      * @param speedController
      *            - elevator speed controller
      */
-    public Elevator(IEncoder position, SpeedController _elevatorController) {
+    public Elevator(IEncoder position, SpeedController _elevatorController, RangeFinder45LMS _rangeFinder) {
         positionEncoder = position;
         elevatorController = _elevatorController;
+        rangeFinder = _rangeFinder;
         
     }
     
@@ -46,6 +49,15 @@ public class Elevator extends Subsystem {
      * @param speed
      *            - speed to set motor at
      */
+    
+    public double getDistance(){
+        return rangeFinder.distance();
+    }
+    
+    public RangeFinder45LMS getRangeFinder() {
+        return rangeFinder;
+    }
+    
     public void moveElevator(double speed) {
         if (speed < -1) {
             speed = -1;
@@ -65,5 +77,6 @@ public class Elevator extends Subsystem {
     public void stop() {
         elevatorController.set(0);
     }
+    
     
 }

@@ -60,6 +60,9 @@ public class OI {
     public double operatorGetX() {
         return operator.getRawAxis(0);
     }
+    public double operatorGetZ() {
+        return operator.getRawAxis(2);
+    }
     
     /**
      * Setup the buttons. Requires the instance of the Robot

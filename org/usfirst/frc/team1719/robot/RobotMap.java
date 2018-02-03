@@ -1,10 +1,10 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.sensors.E4TOpticalEncoder;
+import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -37,11 +37,14 @@ public class RobotMap {
 
 	/* DIO */
     public static final E4TOpticalEncoder elevatorEnc = new E4TOpticalEncoder(8, 9, false);
-    
 	public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(6, 7, true);
 	public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
 
 	/* Pneumatics */
 	public static final Solenoid clawSolenoid = new Solenoid(0);
 	public static final Solenoid pusherSolenoid = new Solenoid(1);
+	
+	/* Analog */
+	public static final RangeFinder45LMS rangeFinder = new RangeFinder45LMS(0);
+	
 }
