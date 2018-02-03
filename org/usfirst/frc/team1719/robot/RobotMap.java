@@ -40,4 +40,5 @@ public class RobotMap {
 	/* Pneumatics */
 	public static final Solenoid clawSolenoid = new Solenoid(0);
 	public static final Solenoid pusherSolenoid = new Solenoid(1);
+	public static final Solenoid wristSolenoid = new Solenoid(2);
 }
