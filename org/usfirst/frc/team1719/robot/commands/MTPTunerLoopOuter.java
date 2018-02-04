@@ -87,8 +87,8 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
     // Called just before this Command runs the first time
     protected void initialize() {
         pathAngle = Math.toDegrees(Math.atan2(desiredX, desiredY));
-        rotateController = (PIDController) SmartDashboard.getData("Rotation");
-        desiredHeadingController = (PIDController) SmartDashboard.getData("Desired Heading");
+        SmartDashboard.putData("Rotation", rotateController);
+        SmartDashboard.putData("Desired Heading", desiredHeadingController);
         desiredHeadingController.setSetpoint(0);
         desiredHeadingController.setOutputRange(-90.0D, 90.0D);
         rotateController.setSetpoint(0);
@@ -118,10 +118,9 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
         distOffPath = Math.sin(offPathAngle) * Math.sqrt(errX * errX + errY * errY);
         //System.out.println("Following path : power " + rotSpd + "Rotator " + rotateController.get());
         drive.arcadeDrive(SPD, -rotSpd);
-        double displayNoiseHack = Math.random() * 0.01D;
-        SmartDashboard.putNumber("MTP Desired angle", pidhelper.val + displayNoiseHack);
-        SmartDashboard.putNumber("MTP e\u27c2", distOffPath + displayNoiseHack);
-        SmartDashboard.putNumber("MTP current angle", posTracker.getHeading() - pathAngle + displayNoiseHack);
+        SmartDashboard.putNumber("MTP Desired angle", pidhelper.val);
+        SmartDashboard.putNumber("MTP e\u27c2", distOffPath);
+        SmartDashboard.putNumber("MTP current angle", posTracker.getHeading() - pathAngle);
         
     }
 

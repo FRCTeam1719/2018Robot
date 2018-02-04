@@ -53,10 +53,11 @@ public class Robot extends IterativeRobot {
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
-		chooser.addObject("Goto 0,0", new MTPTest(this, drive, position));
+		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
 		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
 		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 10D, 10D));
 		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putBoolean("\u262D", false);
 		oi.init(this);
 	}
 
