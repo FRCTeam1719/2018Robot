@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1719.robot.commands;
 
 import org.usfirst.frc.team1719.robot.Robot;
+import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -22,6 +23,8 @@ public class UseElevator extends Command {
 	private double kF = 0;
 	
 	volatile double elevatorOutput = 0;
+	
+	volatile double actualDistance = 0;
 	
 	private class elevatorPIDOut implements PIDOutput{
 	    
@@ -67,11 +70,19 @@ public class UseElevator extends Command {
     }
 	@Override
     protected void execute() {
+	    
+	        actualDistance = elevator.getDistanceVoltage();
 	   
-    		double controllerY = -Robot.oi.operatorGetZ();
+    		double controllerZ = -Robot.oi.operatorGetZ();
     		//System.out.println("In: " + controllerY);
     		
-    		elevator.moveElevator(controllerY);
+    		System.out.println("Elevator Distance: " + elevator.getDistance());
+    		
+    		// 1 - 5 to 0 - 1
+    		
+    		double targetElevatorZ = (controllerZ * 4) + 1; 
+    		
+    		// setElevator(targetElevatorZ)
     		
     } 
     

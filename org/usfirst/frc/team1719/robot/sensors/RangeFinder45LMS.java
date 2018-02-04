@@ -14,4 +14,5 @@ public class RangeFinder45LMS extends edu.wpi.first.wpilibj.AnalogInput {
         return (10+((this.getVoltage()-1)*18)); //Minimum value of the range finder is 10.
     }
     
+    
 }

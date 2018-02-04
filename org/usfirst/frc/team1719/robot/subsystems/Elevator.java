@@ -54,6 +54,10 @@ public class Elevator extends Subsystem {
         return rangeFinder.distance();
     }
     
+    public double getDistanceVoltage(){
+        return rangeFinder.getVoltage();
+    }
+    
     public RangeFinder45LMS getRangeFinder() {
         return rangeFinder;
     }
