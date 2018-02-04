@@ -39,10 +39,6 @@ public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
         oi = robot.oi;
         requires((Subsystem) drive);
         SmartDashboard.putNumber("MTPLT1 target angle", targetAngle = 0.0D);
-    }
-    
-    // Called just before this Command runs the first time
-    protected void initialize() {
         rotateController = new PIDController(0, 0, 0, this, this);
         rotateController.setSetpoint(0);
         rotateController.setInputRange(-180.0D, 180.0D);
@@ -52,16 +48,18 @@ public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
         SmartDashboard.putData("ROTATION_PID", rotateController);
     }
     
+    // Called just before this Command runs the first time
+    protected void initialize() {
+        
+    }
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         rotateController.enable();
-        if (SmartDashboard.containsKey("ROTATION_PID")) {
-            rotateController = (PIDController) SmartDashboard.getData("ROTATION_PID");
-            System.out.println("ITS WORKING!!");
-        } else { 
-
-            System.out.println("ITS NOT!!");
-        }
+        rotateController = (PIDController) SmartDashboard.getData("ROTATION_PID");
+        System.out.println("ITS WORKING!!");
+        
+        System.out.println(rotateController.getP());
         targetAngle = SmartDashboard.getNumber("MTPLT1 target angle", targetAngle);
         drive.arcadeDrive(SPD, -rotSpd);
         SmartDashboard.putNumber("MTP Desired angle", targetAngle);
