@@ -101,6 +101,8 @@ public class UseDrive extends Command {
         
         SmartDashboard.putNumber("Right_rate", driveSystem.getEncoderR().getRate());
         SmartDashboard.putNumber("Left_rate", driveSystem.getEncoderL().getRate());
+        SmartDashboard.putData("LEFT_PID", leftController);
+        SmartDashboard.putData("RIGHT_PID", rightController);
         
         leftController.enable();
         rightController.enable();
@@ -149,13 +151,12 @@ public class UseDrive extends Command {
         
         SmartDashboard.putNumber("Left Drive", left);
         SmartDashboard.putNumber("Right Drive", right);
+        System.out.println(SmartDashboard.getNumber("Test", 0.0));
         // System.out.println(SmartDashboard.getString("test", "Oh NO!"));
         //leftController = (PIDController) SmartDashboard.getData("LEFT_PID");
         //rightController = (PIDController) SmartDashboard.getData("RIGHT_PID");
         
-        
-        
-        //System.out.println(`.getF());
+        // System.out.println(`.getF());
         
         leftController.setInputRange(-(maxSpeed * MAX_SPEED_SCALING_FACTOR), maxSpeed * MAX_SPEED_SCALING_FACTOR);
         leftController.setPID(leftController.getP(), leftController.getI(), leftController.getD(), (1 / maxSpeed));

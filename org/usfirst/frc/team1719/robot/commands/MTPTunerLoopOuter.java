@@ -40,7 +40,6 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
         @Override
         public PIDSourceType getPIDSourceType() {return PIDSourceType.kDisplacement;}
 
-        @Override
         public double pidGet() {
             return posTracker.getHeading() - pathAngle - val;
         }
