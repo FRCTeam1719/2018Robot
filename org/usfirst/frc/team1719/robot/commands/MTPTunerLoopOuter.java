@@ -80,7 +80,7 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
         }
         pidhelper = new PIDHelper();
         desiredHeadingController = new PIDController(0, 0, 0, this, pidhelper);
-        rotateController = new PIDController(0, 0, 0, pidhelper, this);
+        rotateController = new PIDController(0.008, 0.0002, 0.001, pidhelper, this);
         desiredHeadingController.setSetpoint(0);
         desiredHeadingController.setOutputRange(-90.0D, 90.0D);
         rotateController.setSetpoint(0);

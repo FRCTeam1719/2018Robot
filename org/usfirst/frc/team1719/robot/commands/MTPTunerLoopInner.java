@@ -39,7 +39,7 @@ public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
         oi = robot.oi;
         requires((Subsystem) drive);
         SmartDashboard.putNumber("MTPLT1 target angle", targetAngle = 0.0D);
-        rotateController = new PIDController(0.008, 0.0003, 0.001, this, this);
+        rotateController = new PIDController(0.008, 0.0002, 0.001, this, this);
         rotateController.setSetpoint(0);
         rotateController.setInputRange(-180.0D, 180.0D);
         rotateController.setContinuous();
