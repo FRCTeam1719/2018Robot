@@ -37,6 +37,13 @@ public class RollerIntake extends Subsystem {
         rightIntake.set(speed);
         
     }
+    /**
+     * Reset the intake speed to 0
+     */
+    public void reset() {
+        leftIntake.set(0);
+        rightIntake.set(0);
+    }
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
