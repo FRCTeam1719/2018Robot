@@ -81,13 +81,6 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
         pidhelper = new PIDHelper();
         desiredHeadingController = new PIDController(0, 0, 0, this, pidhelper);
         rotateController = new PIDController(0, 0, 0, pidhelper, this);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-        pathAngle = Math.toDegrees(Math.atan2(desiredX, desiredY));
-        SmartDashboard.putData("Rotation", rotateController);
-        SmartDashboard.putData("Desired Heading", desiredHeadingController);
         desiredHeadingController.setSetpoint(0);
         desiredHeadingController.setOutputRange(-90.0D, 90.0D);
         rotateController.setSetpoint(0);
@@ -96,6 +89,15 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
         rotateController.setOutputRange(-1.0D, 1.0D);
         desiredHeadingController.enable();
         rotateController.enable();
+        SmartDashboard.putData("Rotation", rotateController);
+        SmartDashboard.putData("Desired Heading", desiredHeadingController);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+        pathAngle = Math.toDegrees(Math.atan2(desiredX, desiredY));
+
+
     }
 
     // Called repeatedly when this Command is scheduled to run
