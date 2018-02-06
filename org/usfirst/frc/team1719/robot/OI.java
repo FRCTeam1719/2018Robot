@@ -46,8 +46,14 @@ public class OI {
 		return driver.getRawAxis(5);
 	}
 	
+	/**
+	 * Set the rumble on the driver's controller.
+	 * 
+	 * @param rumble - Amount to rumble (0 - 1)
+	 */
 	public void setRumble(double rumble) {
 	    driver.setRumble(RumbleType.kLeftRumble, rumble);
+	    driver.setRumble(RumbleType.kRightRumble, rumble);
 	}
 
 	/**
