@@ -5,6 +5,7 @@ import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.PushCube;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -43,6 +44,10 @@ public class OI {
      */
 	public double getRightY() {
 		return driver.getRawAxis(5);
+	}
+	
+	public void setRumble(double rumble) {
+	    driver.setRumble(RumbleType.kLeftRumble, rumble);
 	}
 
 	/**
