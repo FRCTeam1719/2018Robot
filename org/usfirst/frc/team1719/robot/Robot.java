@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
-		elevator = new Elevator(RobotMap.elevatorEnc ,RobotMap.elevator, RobotMap.rangeFinder);
+		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);
 		
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
 

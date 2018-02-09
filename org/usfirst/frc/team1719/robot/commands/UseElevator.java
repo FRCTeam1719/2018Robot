@@ -49,7 +49,17 @@ public class UseElevator extends Command {
         double targetElevatorZ = (controllerZ * 5);
         elevatorPIDController = (PIDController) SmartDashboard.getData("ELEVATOR_PID");
         // setElevator(targetElevatorZ)
+        
+        if(elevator.getUpperLimit().get()){
+            targetElevatorZ = 5;
+            elevatorPIDController.reset();
+        }else if(elevator.getLowerLimit().get()) {
+            targetElevatorZ = 0;
+            elevatorPIDController.reset();
+        }
+        
         elevator.PIDUpdate(targetElevatorZ);
+        elevator.setPIDController(elevatorPIDController);
 
         
         

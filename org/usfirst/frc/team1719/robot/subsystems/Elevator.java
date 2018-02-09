@@ -4,6 +4,7 @@ import org.usfirst.frc.team1719.robot.commands.UseElevator;
 import org.usfirst.frc.team1719.robot.interfaces.IEncoder;
 import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -22,6 +23,8 @@ public class Elevator extends Subsystem {
     private IEncoder positionEncoder;
     private SpeedController elevatorController;
     private RangeFinder45LMS rangeFinder;
+    private DigitalInput upperLimit;
+    private DigitalInput lowerLimit;
     
     PIDController elevatorPIDController;
     
@@ -50,10 +53,12 @@ public class Elevator extends Subsystem {
      * @param speedController
      *            - elevator speed controller
      */
-    public Elevator(IEncoder position, SpeedController _elevatorController, RangeFinder45LMS _rangeFinder) {
-        positionEncoder = position;
+    public Elevator(SpeedController _elevatorController, RangeFinder45LMS _rangeFinder, DigitalInput _upperLimit, DigitalInput _lowerLimit) {
         elevatorController = _elevatorController;
         rangeFinder = _rangeFinder;
+        upperLimit = _upperLimit;
+        lowerLimit = _lowerLimit;
+               
         
         getRangeFinder().setPIDSourceType(PIDSourceType.kRate);
         
@@ -155,6 +160,15 @@ public class Elevator extends Subsystem {
         
         elevatorController.set(speed);
         /* System.out.println(speed / 2); */
+        
+    }
+    
+    public DigitalInput getUpperLimit() {
+        return upperLimit;
+    }
+    
+    public DigitalInput getLowerLimit() {
+        return lowerLimit;
         
     }
     
