@@ -21,6 +21,8 @@ public class UseDrive extends Command {
     
     private Drive driveSystem;
     
+    private boolean shifted;
+    
     private final double SYNC_AMOUNT = 0.15;
     private final double DEADZONE = 0.1;
     PIDController leftController;
@@ -144,6 +146,10 @@ public class UseDrive extends Command {
         } else {
             rightController.enable();
             rightController.setSetpoint(desiredRightRate);
+        }
+        
+        if (shifted = Robot.oi.driverGetShift()) {
+            driveSystem.setShift(shifted = !shifted);
         }
         
         // Apply
