@@ -28,7 +28,7 @@ public class Elevator extends Subsystem {
     
     PIDController elevatorPIDController;
     
-    private double kP = 0;
+    private double kP = 0.01;
     private double kD = 0;
     private double kF = 0;
     
