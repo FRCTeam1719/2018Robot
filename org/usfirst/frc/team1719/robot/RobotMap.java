@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.sensors.E4TOpticalEncoder;
+import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -37,13 +38,19 @@ public class RobotMap {
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
 
 	/* DIO */
-    public static final E4TOpticalEncoder elevatorEnc = new E4TOpticalEncoder(8, 9, false);
-    
 	public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(0, 1, true);
 	public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
+	
+	/* DIO Limit Switches */
+	public static final DigitalInput upperLimit = new DigitalInput(5);
+	public static final DigitalInput lowerLimit = new DigitalInput(4);
+	
 
 	/* Pneumatics */
 	public static final Solenoid shifterSolenoid = new Solenoid(4);
 	public static final Solenoid clawSolenoid = new Solenoid(5);
 	public static final Solenoid pusherSolenoid = new Solenoid(6);
+
+	/* Analog */
+	public static final RangeFinder45LMS rangeFinder = new RangeFinder45LMS(0);
 }

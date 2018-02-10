@@ -64,6 +64,9 @@ public class OI {
     public double operatorGetX() {
         return operator.getRawAxis(0);
     }
+    public double operatorGetZ() {
+        return operator.getRawAxis(2);
+    }
     
     /**
      * Get the state of the shifter. This also updates it
