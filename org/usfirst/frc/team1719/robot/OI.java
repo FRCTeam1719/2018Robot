@@ -25,6 +25,8 @@ public class OI {
     private Joystick driver = new Joystick(0);
     private Joystick operator = new Joystick(1);
     
+    private boolean shifterState = false;
+    
     /**
      * @return the horizontal position of the left thumb-joystick
      */
@@ -59,6 +61,19 @@ public class OI {
     
     public double operatorGetX() {
         return operator.getRawAxis(0);
+    }
+    
+    /**
+     * Get the state of the shifter. This also updates it
+     * if it needs to be.
+     * 
+     * @return
+     */
+    public boolean driverGetShift() {
+        if (driver.getRawButtonReleased(3)) {
+            shifterState = !shifterState;
+        }
+        return shifterState;
     }
     
     /**

@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		/* Initialize Subsystems */
-		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
+		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.shifterSolenoid);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		elevator = new Elevator(RobotMap.elevatorEnc ,RobotMap.elevator);
 		
