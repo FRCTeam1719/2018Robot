@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1719.robot.commands;
+package org.usfirst.frc.team1719.robot.auton;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -18,5 +18,9 @@ public abstract class AbstractAutonomous2018 extends CommandGroup {
      * @param scale the chirality of the scale
      * @param oppSwitch the chirality of the opposing alliance's switch
      */
+    public AbstractAutonomous2018() {
+        addSequential();
+    }
+    
     public abstract void setFieldState(boolean ownSwitch, boolean scale, boolean oppSwitch);
 }

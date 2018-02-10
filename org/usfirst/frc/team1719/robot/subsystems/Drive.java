@@ -21,7 +21,7 @@ public class Drive extends Subsystem {
     private SpeedController rightController;
     private Solenoid shifter;
     
-    private static double WHEEL_DIAMETER = 4.1721D;
+    private static double WHEEL_DIAMETER = 4D;
     /**
      * Drive controller. Two SpeedController arguments, one for left and one for
      * right.

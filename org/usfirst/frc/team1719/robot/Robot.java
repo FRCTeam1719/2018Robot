@@ -3,8 +3,8 @@ package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.auton.MPTTuneInner;
 import org.usfirst.frc.team1719.robot.auton.MPTTuneOuter;
+import org.usfirst.frc.team1719.robot.auton.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.auton.MTPTest;
-import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Climber;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
