@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);
 		
-		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
+		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
 		climber = new Climber(RobotMap.climberMotor); 
 
 		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));

@@ -20,7 +20,7 @@ public class ExtendGrabLift extends Command {
         wristSystem = new Wrist(RobotMap.wristSolenoid);
         requires(wristSystem);
         
-        clawSystem = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
+        clawSystem = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
         requires(clawSystem);
     }
 
