@@ -16,6 +16,8 @@ public class UseElevator extends Command {
     private PIDController elevatorPIDController;
     private double targetElevatorZ;
     private double actualDistance;
+    private double controllerZ;
+    private double controllerY;
     
 
     
@@ -40,7 +42,8 @@ public class UseElevator extends Command {
     @Override
     protected void execute() {
         
-        double controllerZ = -Robot.oi.operatorGetZ();
+        controllerZ = -Robot.oi.operatorGetZ();
+        controllerY = -Robot.oi.operatorGetY();
         System.out.println("Controller" + controllerZ);
         System.out.println("target " + targetElevatorZ);
         
@@ -52,7 +55,11 @@ public class UseElevator extends Command {
         
         elevatorPIDController = elevator.getPIDController();
         actualDistance = elevator.getDistance();
-        targetElevatorZ = ((controllerZ + 1) * 35);
+        //targetElevatorZ = ((controllerZ + 1) * 35); //USE LATER FOR POT ELEVATOR
+        if(targetElevatorZ + Math.sin(controllerY) < 70 && targetElevatorZ + Math.sin(controllerY) > 0) {
+            targetElevatorZ += controllerY / 10;
+            
+        }
         elevatorPIDController = (PIDController) SmartDashboard.getData("ELEVATOR_PID");
         // setElevator(targetElevatorZ)
         
