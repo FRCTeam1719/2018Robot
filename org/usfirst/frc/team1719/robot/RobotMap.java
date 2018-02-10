@@ -31,6 +31,7 @@ public class RobotMap {
 	public static final SpeedController leftDrive = new Spark(0);
 	public static final SpeedController rightDrive = new Spark(1); 
 	public static final SpeedController elevator = new Spark(2); //Not sure if this is Permanent Spark
+	public static final SpeedController climberMotor = new Spark(3);
 
 	/* MXP */
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
