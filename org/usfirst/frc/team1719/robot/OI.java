@@ -5,6 +5,7 @@ import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.PushCube;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -74,6 +75,16 @@ public class OI {
             shifterState = !shifterState;
         }
         return shifterState;
+    }
+    
+    /**
+     * Set the rumble on the driver's controller.
+     * 
+     * @param rumble - Amount to rumble (0 - 1)
+     */
+    public void setRumble(double rumble) {
+        driver.setRumble(RumbleType.kLeftRumble, rumble);
+        driver.setRumble(RumbleType.kRightRumble, rumble);
     }
     
     /**
