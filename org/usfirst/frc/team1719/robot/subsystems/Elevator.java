@@ -38,8 +38,6 @@ public class Elevator extends Subsystem {
     
     volatile double actualDistance = 0;
     
-    volatile double err = 0;
-    
     /**
      * Takes in an Encoder for the position, a motor to control it, and two switches
      * for when it reaches the top and bottom of the elevator
@@ -62,18 +60,18 @@ public class Elevator extends Subsystem {
         
         getRangeFinder().setPIDSourceType(PIDSourceType.kRate);
         
-        elevatorPIDController = new PIDController(kP, 0, kF, getRangeFinder(), elevatorController);
-        getRangeFinder().setPIDSourceType(PIDSourceType.kRate);
-        elevatorPIDController.setInputRange(0D, 70D);
+        elevatorPIDController = new PIDController(kP, 0, kF, getRangeFinder(), new ElevatorPIDOut());
+        elevatorPIDController.setInputRange(1D, 80D);
         elevatorPIDController.setOutputRange(-1, 1);
         elevatorPIDController.setContinuous(false);
         elevatorPIDController.setToleranceBuffer(20);
         elevatorPIDController.setPercentTolerance(5);
+        elevatorPIDController.setSetpoint(getRangeFinder().pidGet());
         SmartDashboard.putData("ELEVATOR_PID", elevatorPIDController);
         SmartDashboard.putNumber("Elevator Height", getRangeFinder().distance());
         
         elevatorPIDController.enable();
-        
+        SmartDashboard.putData("ELEVATOR_PID", elevatorPIDController);
     }
     
     /**
@@ -81,41 +79,21 @@ public class Elevator extends Subsystem {
      * 
      * @param targetElevatorZ
      */
-    public void PIDUpdate(double targetElevatorZ) {
-        
-        actualDistance = getDistanceVoltage();
+    public void updatePID(double targetElevatorZ) {
+        elevatorPIDController = (PIDController) SmartDashboard.getData("ELEVATOR_PID");
         elevatorPIDController.setSetpoint(targetElevatorZ);
-        err = targetElevatorZ - actualDistance;
+    }
+    
+    public class ElevatorPIDOut implements PIDOutput {
         
-    }
-    
-    /**
-     * Set the PID controller to a passed PID Controller
-     * 
-     * @param _elevatorPIDController
-     */
-    public void setPIDController(PIDController _elevatorPIDController) {
-        elevatorPIDController = _elevatorPIDController;
-    }
-    
-    /**
-     * Returns the elevatorPIDController
-     * 
-     * @return
-     */
-    public PIDController getPIDController() {
-        return elevatorPIDController;
-    }
-    
-    private class elevatorPIDOut implements PIDOutput {
-        
-        /**
-         * Write the values of the PID controller to the output variable.
-         * 
-         * @param output
-         */
+        @Override
         public void pidWrite(double output) {
-            elevatorOutput = output;
+            if(upperLimit.get() && output > 0) {
+                output = 0;
+            }else if(lowerLimit.get() && output < 0) {
+                output = 0;
+            }
+            elevatorController.set(output);
         }
     }
     
@@ -160,15 +138,6 @@ public class Elevator extends Subsystem {
         
         elevatorController.set(speed);
         /* System.out.println(speed / 2); */
-        
-    }
-    
-    public DigitalInput getUpperLimit() {
-        return upperLimit;
-    }
-    
-    public DigitalInput getLowerLimit() {
-        return lowerLimit;
         
     }
     

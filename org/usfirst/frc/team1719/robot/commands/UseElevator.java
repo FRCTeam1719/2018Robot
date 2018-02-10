@@ -19,8 +19,6 @@ public class UseElevator extends Command {
     private double controllerZ;
     private double controllerY;
     
-
-    
     /**
      * constructor that takes in an Elevator
      * 
@@ -29,8 +27,7 @@ public class UseElevator extends Command {
     public UseElevator(Elevator _elevator) {
         elevator = _elevator;
         requires(elevator);
-        SmartDashboard.putData("ELEVATOR_PID", elevator.getPIDController());
-
+        
     }
     
     @SuppressWarnings("deprecation") // once again not deprecation
@@ -42,44 +39,38 @@ public class UseElevator extends Command {
     @Override
     protected void execute() {
         
-        controllerZ = -Robot.oi.operatorGetZ();
+        // controllerZ = -Robot.oi.operatorGetZ();
         controllerY = -Robot.oi.operatorGetY();
-        System.out.println("Controller" + controllerZ);
+        // System.out.println("Controller" + controllerZ);
         System.out.println("target " + targetElevatorZ);
-        
         
         // System.out.println("In: " + controllerY);
         
-        //System.out.println("Elevator Distance: " + elevator.getDistanceVoltage());
+        // System.out.println("Elevator Distance: " + elevator.getDistanceVoltage());
         // 1 - 5 to 0 - 1
         
-        elevatorPIDController = elevator.getPIDController();
         actualDistance = elevator.getDistance();
-        //targetElevatorZ = ((controllerZ + 1) * 35); //USE LATER FOR POT ELEVATOR
-        if(targetElevatorZ + Math.sin(controllerY) < 70 && targetElevatorZ + Math.sin(controllerY) > 0) {
+        // targetElevatorZ = ((controllerZ + 1) * 35); //USE LATER FOR POT ELEVATOR
+        if (controllerY > .05) {
             targetElevatorZ += controllerY / 10;
             
         }
-        elevatorPIDController = (PIDController) SmartDashboard.getData("ELEVATOR_PID");
-        // setElevator(targetElevatorZ)
         
-        if(elevator.getUpperLimit().get()){
-            System.out.println("UPPER LIMIT");  
-            if(targetElevatorZ > actualDistance) targetElevatorZ = actualDistance;
-            //elevatorPIDController.reset();
-        }else if(elevator.getLowerLimit().get()) {
-            if(targetElevatorZ < actualDistance) targetElevatorZ = actualDistance;
-            
-            System.out.println("LOWER LIMIT");
-            //elevatorPIDController.reset();
-        }
+        /*
+         * setElevator(targetElevatorZ)
+         * 
+         * // if(elevator.getUpperLimit().get()){ // System.out.println("UPPER LIMIT");
+         * // if(targetElevatorZ > actualDistance) targetElevatorZ = actualDistance; //
+         * //elevatorPIDController.reset(); // }else if(elevator.getLowerLimit().get())
+         * { // if(targetElevatorZ < actualDistance) targetElevatorZ = actualDistance;
+         * // // System.out.println("LOWER LIMIT"); // //elevatorPIDController.reset();
+         * }
+         */
         
-        elevator.PIDUpdate(targetElevatorZ);
-        elevator.setPIDController(elevatorPIDController);
-
+        elevator.updatePID(targetElevatorZ);
+        
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
         SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());
-        
         
     }
     
@@ -91,9 +82,7 @@ public class UseElevator extends Command {
     @Override
     protected void end() {}
     
-    
     @Override
     protected void interrupted() {}
-
     
 }

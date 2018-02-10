@@ -47,7 +47,7 @@ public class UseDrive extends Command {
     double rightkI = 0.1;
     
     // PID Objects, these are used to get the current motor stuffs to those PIDs.
-    private class leftDrivePIDOutput implements PIDOutput {
+    private class LeftDrivePIDOutput implements PIDOutput {
         
         @Override
         public void pidWrite(double output) {
@@ -55,7 +55,7 @@ public class UseDrive extends Command {
         }
     }
     
-    private class rightDrivePIDOutput implements PIDOutput {
+    private class RightDrivePIDOutput implements PIDOutput {
         
         @Override
         public void pidWrite(double output) {
@@ -77,8 +77,8 @@ public class UseDrive extends Command {
         driveSystem.getEncoderL().setPIDSourceType(PIDSourceType.kRate);
         driveSystem.getEncoderR().setPIDSourceType(PIDSourceType.kRate);
         
-        leftController = new PIDController(leftkP, 0, leftkF, driveSystem.getEncoderL(), new leftDrivePIDOutput());
-        rightController = new PIDController(rightkP, 0, rightkF, driveSystem.getEncoderL(), new leftDrivePIDOutput());
+        leftController = new PIDController(leftkP, 0, leftkF, driveSystem.getEncoderL(), new LeftDrivePIDOutput());
+        rightController = new PIDController(rightkP, 0, rightkF, driveSystem.getEncoderL(), new LeftDrivePIDOutput());
         
     }
     
