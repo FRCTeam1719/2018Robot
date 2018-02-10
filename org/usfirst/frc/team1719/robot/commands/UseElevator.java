@@ -64,7 +64,7 @@ public class UseElevator extends Command {
         // setElevator(targetElevatorZ)
         
         if(elevator.getUpperLimit().get()){
-            System.out.println("UPPER LIMIT");
+            System.out.println("UPPER LIMIT");  
             if(targetElevatorZ > actualDistance) targetElevatorZ = actualDistance;
             //elevatorPIDController.reset();
         }else if(elevator.getLowerLimit().get()) {
