@@ -80,6 +80,11 @@ public class UseDrive extends Command {
         leftController = new PIDController(leftkP, 0, leftkF, driveSystem.getEncoderL(), new LeftDrivePIDOutput());
         rightController = new PIDController(rightkP, 0, rightkF, driveSystem.getEncoderL(), new LeftDrivePIDOutput());
         
+        SmartDashboard.putNumber("Right_rate", driveSystem.getEncoderR().getRate());
+        SmartDashboard.putNumber("Left_rate", driveSystem.getEncoderL().getRate());
+        SmartDashboard.putData("LEFT_PID", leftController);
+        SmartDashboard.putData("RIGHT_PID", rightController);
+        
     }
     
     // Not deprecated for bad reason.
@@ -101,10 +106,7 @@ public class UseDrive extends Command {
         leftController.setPercentTolerance(5);
         rightController.setPercentTolerance(5);
         
-        SmartDashboard.putNumber("Right_rate", driveSystem.getEncoderR().getRate());
-        SmartDashboard.putNumber("Left_rate", driveSystem.getEncoderL().getRate());
-        SmartDashboard.putData("LEFT_PID", leftController);
-        SmartDashboard.putData("RIGHT_PID", rightController);
+        
         
         leftController.enable();
         rightController.enable();
@@ -115,7 +117,8 @@ public class UseDrive extends Command {
         // Raw Datas
         double left = -Robot.oi.getLeftY();
         double right = -Robot.oi.getRightY();
-        
+        SmartDashboard.putNumber("Right_rate", driveSystem.getEncoderR().getRate());
+        SmartDashboard.putNumber("Left_rate", driveSystem.getEncoderL().getRate());
         // Smooth curving
         left = left * Math.abs(left);
         right = right * Math.abs(right);
@@ -155,8 +158,7 @@ public class UseDrive extends Command {
         // Apply
         driveSystem.tankDrive(left, right);
         
-        SmartDashboard.putNumber("Left Drive", left);
-        SmartDashboard.putNumber("Right Drive", right);
+
         System.out.println(SmartDashboard.getNumber("Test", 0.0));
         // System.out.println(SmartDashboard.getString("test", "Oh NO!"));
         //leftController = (PIDController) SmartDashboard.getData("LEFT_PID");

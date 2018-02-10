@@ -67,7 +67,6 @@ public class Elevator extends Subsystem {
         elevatorPIDController.setToleranceBuffer(20);
         elevatorPIDController.setPercentTolerance(5);
         elevatorPIDController.setSetpoint(getRangeFinder().pidGet());
-        SmartDashboard.putData("ELEVATOR_PID", elevatorPIDController);
         SmartDashboard.putNumber("Elevator Height", getRangeFinder().distance());
         
         elevatorPIDController.enable();

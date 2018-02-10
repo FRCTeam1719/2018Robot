@@ -68,8 +68,6 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
 		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
 		SmartDashboard.putData("Auto mode", chooser);
-		SmartDashboard.putBoolean("\u262D", false);
-		SmartDashboard.putNumber("Test", 0.0);
 		
 		oi.init(this);
 	}
