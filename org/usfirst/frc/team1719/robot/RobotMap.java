@@ -37,7 +37,7 @@ public class RobotMap {
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
 
 	/* DIO */
-	public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(6, 7, true);
+	public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(0, 1, true);
 	public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
 	
 	/* DIO Limit Switches */
@@ -46,8 +46,8 @@ public class RobotMap {
 	
 
 	/* Pneumatics */
-	public static final Solenoid clawSolenoid = new Solenoid(0);
-	public static final Solenoid pusherSolenoid = new Solenoid(1);
+	public static final Solenoid clawSolenoid = new Solenoid(5);
+	public static final Solenoid pusherSolenoid = new Solenoid(6);
 	
 	/* Analog */
 	public static final RangeFinder45LMS rangeFinder = new RangeFinder45LMS(0);

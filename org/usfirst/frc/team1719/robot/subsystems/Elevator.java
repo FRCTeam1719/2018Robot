@@ -64,7 +64,7 @@ public class Elevator extends Subsystem {
         
         elevatorPIDController = new PIDController(kP, 0, kF, getRangeFinder(), elevatorController);
         getRangeFinder().setPIDSourceType(PIDSourceType.kRate);
-        elevatorPIDController.setInputRange(0D, 5D);
+        elevatorPIDController.setInputRange(0D, 70D);
         elevatorPIDController.setOutputRange(-1, 1);
         elevatorPIDController.setContinuous(false);
         elevatorPIDController.setToleranceBuffer(20);

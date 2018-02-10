@@ -14,6 +14,8 @@ public class UseElevator extends Command {
     
     private Elevator elevator;
     private PIDController elevatorPIDController;
+    private double targetElevatorZ;
+    private double actualDistance;
     
 
     
@@ -39,32 +41,38 @@ public class UseElevator extends Command {
     protected void execute() {
         
         double controllerZ = -Robot.oi.operatorGetZ();
+        System.out.println("Controller" + controllerZ);
+        System.out.println("target " + targetElevatorZ);
+        
+        
         // System.out.println("In: " + controllerY);
         
-        System.out.println("Elevator Distance: " + elevator.getDistance());
+        //System.out.println("Elevator Distance: " + elevator.getDistanceVoltage());
         // 1 - 5 to 0 - 1
         
         elevatorPIDController = elevator.getPIDController();
-        
-        double targetElevatorZ = (controllerZ * 5);
+        actualDistance = elevator.getDistance();
+        targetElevatorZ = ((controllerZ + 1) * 35);
         elevatorPIDController = (PIDController) SmartDashboard.getData("ELEVATOR_PID");
         // setElevator(targetElevatorZ)
         
         if(elevator.getUpperLimit().get()){
-            targetElevatorZ = 5;
-            elevatorPIDController.reset();
+            System.out.println("UPPER LIMIT");
+            if(targetElevatorZ > actualDistance) targetElevatorZ = actualDistance;
+            //elevatorPIDController.reset();
         }else if(elevator.getLowerLimit().get()) {
-            targetElevatorZ = 0;
-            elevatorPIDController.reset();
+            if(targetElevatorZ < actualDistance) targetElevatorZ = actualDistance;
+            
+            System.out.println("LOWER LIMIT");
+            //elevatorPIDController.reset();
         }
         
         elevator.PIDUpdate(targetElevatorZ);
         elevator.setPIDController(elevatorPIDController);
 
-        
-        
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
-        SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistance());
+        SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());
+        
         
     }
     
