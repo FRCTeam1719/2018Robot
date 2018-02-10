@@ -51,7 +51,7 @@ public class UseElevator extends Command {
         
         actualDistance = elevator.getDistance();
         // targetElevatorZ = ((controllerZ + 1) * 35); //USE LATER FOR POT ELEVATOR
-        if (abs(controllerY) > .05) {
+        if (Math.abs(controllerY) > .05) {
             targetElevatorZ += controllerY / 2;
             
         }

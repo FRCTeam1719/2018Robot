@@ -10,13 +10,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Wrist extends Subsystem {
-
+    
     private Solenoid wristSolenoid;
     
+    /**
+     * 
+     * @param _wristSolenoid
+     *            - solenoid for wrist
+     */
     public Wrist(Solenoid _wristSolenoid) {
         wristSolenoid = _wristSolenoid;
     }
-
+    
     public void initDefaultCommand() {}
     
     /**
