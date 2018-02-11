@@ -142,6 +142,7 @@ public class Elevator extends Subsystem {
             System.out.println("lower limit");
             output = 0;
         }
+        
         elevatorController.set(output);
         
         System.out.println(output);

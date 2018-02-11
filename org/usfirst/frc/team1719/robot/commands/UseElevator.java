@@ -19,6 +19,9 @@ public class UseElevator extends Command {
     private double controllerZ;
     private double controllerY;
     
+    private double DEADZONE = 0.05;
+    private double UPWARDS_FORCE = 0.1373;
+    
     /**
      * constructor that takes in an Elevator
      * 
@@ -68,7 +71,11 @@ public class UseElevator extends Command {
          */
         
         //elevator.updatePID(targetElevatorZ);
-        elevator.moveElevator(controllerY);
+        if (Math.abs(controllerY) < DEADZONE) {
+            elevator.moveElevator(-UPWARDS_FORCE);
+        } else {
+            elevator.moveElevator(controllerY);
+        }
         
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
         SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());
