@@ -1,15 +1,16 @@
 
 package org.usfirst.frc.team1719.robot;
 
+import org.usfirst.frc.team1719.robot.auton.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.auton.MPTTuneInner;
 import org.usfirst.frc.team1719.robot.auton.MPTTuneOuter;
-import org.usfirst.frc.team1719.robot.auton.AbstractAutonomous2018;
 import org.usfirst.frc.team1719.robot.auton.MTPTest;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Climber;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
+import org.usfirst.frc.team1719.robot.subsystems.Wrist;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -41,6 +42,7 @@ public class Robot extends IterativeRobot {
 	Elevator elevator;
 	Claw claw;
 	Climber climber;
+	Wrist wrist;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -62,7 +64,8 @@ public class Robot extends IterativeRobot {
 		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);
 		
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
-		climber = new Climber(RobotMap.climberMotor); 
+		climber = new Climber(RobotMap.climberMotor);
+		wrist = new Wrist(RobotMap.wristSolenoid);
 
 		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
 		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
@@ -100,6 +103,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+	    wrist.putDown();
+	    
 		autonomousCommand = chooser.getSelected();
 
 		// schedule the autonomous command (example)
@@ -126,6 +131,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+	    wrist.putDown();
+	    
 		/*
 		 * This makes sure that the autonomous stops running when teleop starts running.
 		 * If you want the autonomous to continue until interrupted by another command,

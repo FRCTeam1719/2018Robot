@@ -54,14 +54,14 @@ public class Claw extends Subsystem {
 	 * Extend the pusher
 	 */
 	public void push() {
-		pusher.set(true);
+		//pusher.set(true);
 	}
 
 	/**
 	 * Bring the pusher back in
 	 */
 	public void retract() {
-		pusher.set(false);
+		//pusher.set(false);
 	}
 
 	@Override

@@ -69,7 +69,7 @@ public class Elevator extends Subsystem {
         elevatorPIDController.setSetpoint(getRangeFinder().pidGet());
         SmartDashboard.putNumber("Elevator Height", getRangeFinder().distance());
         
-        elevatorPIDController.enable();
+        //elevatorPIDController.enable();
         SmartDashboard.putData("ELEVATOR_PID", elevatorPIDController);
     }
     
@@ -133,9 +133,18 @@ public class Elevator extends Subsystem {
      * 
      * @param speed
      */
-    public void moveElevator(double speed) {
+    public void moveElevator(double output) {
         
-        elevatorController.set(speed);
+        if(upperLimit.get() && output < 0) {
+            System.out.println("upper limit");
+            output = 0;
+        }else if(lowerLimit.get() && output > 0) {
+            System.out.println("lower limit");
+            output = 0;
+        }
+        elevatorController.set(output);
+        
+        System.out.println(output);
         /* System.out.println(speed / 2); */
         
     }

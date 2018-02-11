@@ -67,7 +67,8 @@ public class UseElevator extends Command {
          * }
          */
         
-        elevator.updatePID(targetElevatorZ);
+        //elevator.updatePID(targetElevatorZ);
+        elevator.moveElevator(controllerY);
         
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
         SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());
