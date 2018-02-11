@@ -88,6 +88,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
+//		System.out.println(drive.getEncoderL().getRate());
+//		System.out.println(drive.getEncoderR().getRate());
 	}
 
 	/**
