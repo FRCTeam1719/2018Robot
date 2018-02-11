@@ -156,7 +156,7 @@ public class UseDrive extends Command {
         }
         
         // Apply
-        driveSystem.tankDrive(left, right);
+        driveSystem.tankDrive(leftMotorOutput, rightMotorOutput);
         
 
         System.out.println(SmartDashboard.getNumber("Test", 0.0));
