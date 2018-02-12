@@ -78,7 +78,7 @@ public class UseDrive extends Command {
         driveSystem.getEncoderR().setPIDSourceType(PIDSourceType.kRate);
         
         leftController = new PIDController(leftkP, 0, leftkF, driveSystem.getEncoderL(), new LeftDrivePIDOutput());
-        rightController = new PIDController(rightkP, 0, rightkF, driveSystem.getEncoderL(), new LeftDrivePIDOutput());
+        rightController = new PIDController(rightkP, 0, rightkF, driveSystem.getEncoderR(), new RightDrivePIDOutput());
         
         SmartDashboard.putNumber("Right_rate", driveSystem.getEncoderR().getRate());
         SmartDashboard.putNumber("Left_rate", driveSystem.getEncoderL().getRate());
