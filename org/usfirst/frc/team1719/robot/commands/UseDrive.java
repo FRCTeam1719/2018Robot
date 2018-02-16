@@ -28,7 +28,7 @@ public class UseDrive extends Command {
     PIDController leftController;
     PIDController rightController;
     
-    private double highMaxSpeed = 200D;
+    private double highMaxSpeed = 100D;
     private double lowMaxSpeed = 50D;
     private double maxSpeed = highMaxSpeed;
     private double MAX_SPEED_SCALING_FACTOR = 1.2;
