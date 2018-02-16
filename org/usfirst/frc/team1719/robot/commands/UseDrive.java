@@ -30,21 +30,21 @@ public class UseDrive extends Command {
     
     private double highMaxSpeed = 100D;
     private double lowMaxSpeed = 50D;
-    private double maxSpeed = highMaxSpeed;
+    private double maxSpeed = lowMaxSpeed;
     private double MAX_SPEED_SCALING_FACTOR = 1.2;
     
     volatile double leftMotorOutput = 0;
     volatile double rightMotorOutput = 0;
     
-    double leftkP = 0.1D;
+    double leftkP = 0D;
     double leftkF = 1 / maxSpeed;
-    double leftkD = 0.01D;
-    double leftkI = 0.001D;
+    double leftkD = 0D;
+    double leftkI = 0D;
     
-    double rightkP = 0.1D;
+    double rightkP = 0D;
     double rightkF = 1 / maxSpeed;
-    double rightkD = 0.01D;
-    double rightkI = 0.001D;
+    double rightkD = 0D;
+    double rightkI = 0D;
     
     // PID Objects, these are used to get the current motor stuffs to those PIDs.
     private class LeftDrivePIDOutput implements PIDOutput {
