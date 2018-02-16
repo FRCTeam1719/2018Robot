@@ -78,7 +78,7 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
             System.out.println("Running Unit test on MoveToPosition");
         }
         pidhelper = new PIDHelper();
-        desiredHeadingController = new PIDController(6, 0, 1, this, pidhelper);
+        desiredHeadingController = new PIDController(5, 0, 0 , this, pidhelper);
         rotateController = new PIDController(0.01, 0.0003, 0.001, pidhelper, this);
         desiredHeadingController.setSetpoint(0);
         desiredHeadingController.setOutputRange(-90.0D, 90.0D);
