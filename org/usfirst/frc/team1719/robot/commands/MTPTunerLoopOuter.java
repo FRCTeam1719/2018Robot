@@ -30,7 +30,6 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
         private volatile double val = 0;
         @Override
         public void pidWrite(double output) {
-            System.out.println("PID write: " + output);
             val = output % 360;
         }
 
@@ -79,8 +78,8 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
             System.out.println("Running Unit test on MoveToPosition");
         }
         pidhelper = new PIDHelper();
-        desiredHeadingController = new PIDController(0, 0, 0, this, pidhelper);
-        rotateController = new PIDController(0.008, 0.0002, 0.001, pidhelper, this);
+        desiredHeadingController = new PIDController(6, 0, 1, this, pidhelper);
+        rotateController = new PIDController(0.01, 0.0003, 0.001, pidhelper, this);
         desiredHeadingController.setSetpoint(0);
         desiredHeadingController.setOutputRange(-90.0D, 90.0D);
         rotateController.setSetpoint(0);
@@ -115,7 +114,7 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
         System.out.println("OUTPUT " + desiredHeadingController.get());
         errX = desiredX - posTracker.getX();
         errY = desiredY - posTracker.getY();
-        double offPathAngle = Math.atan2(errX, errY) - Math.toRadians(pathAngle);
+        double offPathAngle = -(Math.atan2(errX, errY) - Math.toRadians(pathAngle));
         distOffPath = Math.sin(offPathAngle) * Math.sqrt(errX * errX + errY * errY);
         //System.out.println("Following path : power " + rotSpd + "Rotator " + rotateController.get());
         drive.arcadeDrive(SPD, -rotSpd);
@@ -128,7 +127,8 @@ public class MTPTunerLoopOuter extends Command implements PIDSource, PIDOutput {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         /* Finished if the Euclidean distance from target is less than tolerance or if the driver aborts */
-        return ((errX * errX + errY * errY) < SQ_TOLERANCE);
+        //return ((errX * errX + errY * errY) < SQ_TOLERANCE);
+        return false;
    }
 
     // Called once after isFinished returns true

@@ -153,7 +153,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
         System.out.println("MTP current angle: " + position.getHeading());
-
+        SmartDashboard.putNumber("MTP current angle", position.getHeading());
 //		System.out.println("X: " + position.getX() + "\nY: " + position.getY() + "\nHeading: " + position.getHeading()
 //				+ "\nTrustworthy: " + position.getTrustworthy());
 	}
