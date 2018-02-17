@@ -60,7 +60,7 @@ public class Robot extends IterativeRobot {
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		//elevator = new Elevator(RobotMap.elevator, null, null, null);
 		Wrist wrist = new Wrist(RobotMap.wristSolenoid);
-		claw = new Claw(RobotMap.clawSolenoid,null);
+		//claw = new Claw(RobotMap.clawSolenoid,null);
 
 
 		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
