@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -33,6 +34,8 @@ public class RobotMap {
 	public static final SpeedController rightDrive = new Spark(1); 
 	public static final SpeedController elevator = new Spark(2); //Not sure if this is Permanent Spark
 	public static final SpeedController climberMotor = new Spark(3);
+	
+	public static final Servo clawHolder = new Servo(5);
 
 	/* MXP */
 	public static final AHRS navx = new AHRS(I2C.Port.kMXP);
