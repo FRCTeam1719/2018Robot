@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1719.robot.commands;
 
-import org.usfirst.frc.team1719.robot.OI;
-import org.usfirst.frc.team1719.robot.Robot;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
 
@@ -59,8 +57,6 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
     
     private Position position;
     private Drive drive;
-    private Robot robot;
-    private OI oi;
     
     private double desiredX = 0;
     private final double parX;
@@ -68,7 +64,6 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
     private final double parY;
     private double errX = 0;
     private double errY = 0;
-    private final double MINIMUM_FINISH_ERR = 0.5;
     private double pathAngle = 0;
     private double distOffPath = 0;
     private double rotSpd = 0;
@@ -80,7 +75,17 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
     private boolean turning = false;
     private final boolean absolute;
     private final boolean doHardTurns;
-    
+   
+    /**
+     * Creates a new move-to-position command.
+     * 
+     * @param _desiredX - the X-coordinate of the target position
+     * @param _desiredY - the Y-coordinate of the target position
+     * @param _position - the subsystem which tracks the current position
+     * @param _drive - the subsystem which manages the drive train
+     * @param _absolute - whether the target coordinates are absolute or relative to the position when the command is initiated
+     * @param _doHardTurns - {@code true} if the robot should turn sharply if significantly off course
+     */
     public MoveToPosition(double _desiredX, double _desiredY, Position _position, Drive _drive, boolean _absolute,
             boolean _doHardTurns) {
         absolute = _absolute;
@@ -89,7 +94,6 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
         doHardTurns = _doHardTurns;
         position = _position;
         drive = _drive;
-        oi = Robot.oi;
         
         requires((Subsystem) drive);
         
@@ -99,7 +103,7 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
         rotateControllerStill = new PIDController(0, 0, 0, pidhelper, this);
     }
     
-    // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
         initX = position.getX();
         initY = position.getY();
@@ -142,19 +146,8 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
         SmartDashboard.putData("Rotation Still", rotateControllerStill);
     }
     
-    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-        if (true) {// (oi.getResetPIDConstants()) {
-            desiredHeadingController.setPID(SmartDashboard.getNumber("MoveToPos K[0][P]", 5.0),
-                    SmartDashboard.getNumber("MoveToPos K[0][I]", 0), SmartDashboard.getNumber("MoveToPos K[0][D]", 0));
-            rotateController.setPID(SmartDashboard.getNumber("MoveToPos K[1][P]", 0.04),
-                    SmartDashboard.getNumber("MoveToPos K[1][I]", 0),
-                    SmartDashboard.getNumber("MoveToPos K[1][D]", 0.1));
-            rotateControllerStill.setPID(SmartDashboard.getNumber("TurnToHeading K[P]", 0.02),
-                    SmartDashboard.getNumber("TurnToHeading K[I]", 0.006),
-                    SmartDashboard.getNumber("TurnToHeading K[D]", 0.1));
-        }
-        
         SmartDashboard.putNumber("Right_rate", drive.getEncoderR().getRate());
         SmartDashboard.putNumber("Left_rate", drive.getEncoderL().getRate());
         
@@ -226,34 +219,28 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
         System.out.println("MTP current angle: " + position.getHeading());
     }
     
-    // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
-        return (Math.abs(errX) <= MINIMUM_FINISH_ERR && Math.abs(errY) <= MINIMUM_FINISH_ERR);
+        return (errX * errX + errY * errY) < SQ_TOLERANCE;
     }
     
-    // Called once after isFinished returns true
+    @Override
     protected void end() {}
     
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    @Override
     protected void interrupted() {}
     
     @Override
     public void pidWrite(double output) {
-        rotSpd = output;
-        
+        rotSpd = output;   
     }
     
     @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void setPIDSourceType(PIDSourceType pidSource) {}
     
     @Override
     public PIDSourceType getPIDSourceType() {
-        // TODO Auto-generated method stub
-        return null;
+        return null;    
     }
     
     @Override

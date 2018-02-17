@@ -18,15 +18,6 @@ import edu.wpi.first.wpilibj.SpeedController;
  * floating around.
  */
 public class RobotMap {
-	/*
-	 * For example to map the left and right motors, you could define the following
-	 * variables to use with your drivetrain subsystem. public static int leftMotor
-	 * = 1; public static int rightMotor = 2;
-	 * 
-	 * If you are using multiple modules, make sure to define both the port number
-	 * and the module. For example you with a rangefinder: public static int
-	 * rangefinderPort = 1; public static int rangefinderModule = 1;
-	 */
 
 	/* PWM */
 	public static final SpeedController leftDrive = new Spark(0);
@@ -40,17 +31,14 @@ public class RobotMap {
 	/* DIO */
 	public static final E4TOpticalEncoder leftDriveEnc = new E4TOpticalEncoder(0, 1, true);
 	public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
-	
-	/* DIO Limit Switches */
-	public static final DigitalInput upperLimit = new DigitalInput(5);
 	public static final DigitalInput lowerLimit = new DigitalInput(4);
-	
+	public static final DigitalInput upperLimit = new DigitalInput(5);
 
-	/* Pneumatics */
+	/* PCM */
 	public static final Solenoid shifterSolenoid = new Solenoid(4);
 	public static final Solenoid clawSolenoid = new Solenoid(5);
 	public static final Solenoid wristSolenoid = new Solenoid(6);
 
-	/* Analog */
+	/* AIN */
 	public static final RangeFinder45LMS rangeFinder = new RangeFinder45LMS(0);
 }

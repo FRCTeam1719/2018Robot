@@ -19,17 +19,6 @@ public class E4TOpticalEncoder extends edu.wpi.first.wpilibj.Encoder implements 
     private final double TICKS_PER_REV = 1440.0;
     
     /**
-     * Calculates distance per tick and passes that to the internal Encoder
-     * object. Uses TICKS_PER_REV which is supplied by documentation
-     * 
-     * @param distancePerRev (distance in ft)
-     */
-    @Override
-    public void config(double distancePerRev) {
-        this.setDistancePerPulse(distancePerRev / TICKS_PER_REV);
-    }
-    
-    /**
      * Encoder constructor. Construct a Encoder given a and b channels. 
      * 
      * The encoder will start counting immediately.
@@ -42,5 +31,15 @@ public class E4TOpticalEncoder extends edu.wpi.first.wpilibj.Encoder implements 
     public E4TOpticalEncoder(int channelA, int channelB, boolean reverseDirection) {
         super(channelA, channelB, reverseDirection, EncodingType.k2X);
     }
-    
+
+    /**
+     * Calculates distance per tick and passes that to the internal Encoder
+     * object. Uses TICKS_PER_REV which is supplied by documentation
+     * 
+     * @param distancePerRev (distance in ft)
+     */
+    @Override
+    public void config(double distancePerRev) {
+        this.setDistancePerPulse(distancePerRev / TICKS_PER_REV);
+    }
 }

@@ -54,19 +54,16 @@ public class Robot extends IterativeRobot {
 		compressor = new Compressor(0);
 		compressor.setClosedLoopControl(true);
 		compressor.start();
-
-		//chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
 		
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc, RobotMap.shifterSolenoid);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
-		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);
-		
+		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
 		climber = new Climber(RobotMap.climberMotor);
 		wrist = new Wrist(RobotMap.wristSolenoid);
 
+		/* Autonomous chooser */
 		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
 		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
 		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
@@ -81,16 +78,11 @@ public class Robot extends IterativeRobot {
 	 * robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
-
-	}
+	public void disabledInit() {}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		
-//		System.out.println(drive.getEncoderL().getRate());
-//		System.out.println(drive.getEncoderR().getRate());
 	}
 
 	/**
@@ -110,7 +102,7 @@ public class Robot extends IterativeRobot {
 	    
 		autonomousCommand = chooser.getSelected();
 
-		// schedule the autonomous command (example)
+		/* Schedule the autonomous command */
 		if (autonomousCommand != null) {
 		    /* Note from Aaron: 
 		     * Consider how this will act when not connected to the FMS, or if the message is somehow garbeled.
@@ -136,11 +128,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 	    wrist.putDown();
 	    
-		/*
-		 * This makes sure that the autonomous stops running when teleop starts running.
-		 * If you want the autonomous to continue until interrupted by another command,
-		 * remove this line or comment it out.
-		 */
+		/* End autonomous */
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
@@ -152,10 +140,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-        System.out.println("MTP current angle: " + position.getHeading());
         SmartDashboard.putNumber("MTP current angle", position.getHeading());
-//		System.out.println("X: " + position.getX() + "\nY: " + position.getY() + "\nHeading: " + position.getHeading()
-//				+ "\nTrustworthy: " + position.getTrustworthy());
 	}
 
 	/**

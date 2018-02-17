@@ -7,8 +7,10 @@ import org.usfirst.frc.team1719.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Original attempt at start-of-AUTO claw deployment.
+ * @deprecated We use a line in {@link Robot#autonomousInit()} instead.
  */
+@Deprecated
 public class ExtendGrabLift extends Command {
 
     Wrist wristSystem;

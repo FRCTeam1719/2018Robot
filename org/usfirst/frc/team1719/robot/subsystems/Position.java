@@ -87,7 +87,7 @@ public class Position extends Subsystem {
 	/**
 	 * Get X value
 	 * 
-	 * @return
+	 * @return X value
 	 */
 	public double getX() {
 		return x;
@@ -96,7 +96,7 @@ public class Position extends Subsystem {
 	/**
 	 * Get Y value
 	 * 
-	 * @return
+	 * @return Y value
 	 */
 	public double getY() {
 		return y;
@@ -104,7 +104,7 @@ public class Position extends Subsystem {
 	
 	/**
 	 * Get current yaw heading
-	 * @return
+	 * @return current yaw heading
 	 */
 	public double getHeading() {
 		return heading;
@@ -113,7 +113,7 @@ public class Position extends Subsystem {
 	/**
 	 * Get whether our current data is reliable
 	 * 
-	 * @return
+	 * @return if we still have our tolerance of around +/- 5 in
 	 */
 	public boolean getTrustworthy() {
 		return isTrustworthy;

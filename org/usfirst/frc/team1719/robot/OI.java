@@ -2,9 +2,7 @@ package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.CloseClaw;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
-import org.usfirst.frc.team1719.robot.commands.PushCube;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
-import org.usfirst.frc.team1719.robot.commands.UseClimber;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -57,14 +55,24 @@ public class OI {
     public double getRightY() {
         return driver.getRawAxis(5);
     }
-    
+
+    /**
+     * @return the vertical position of the operator joystick
+     */
     public double operatorGetY() {
         return operator.getRawAxis(1);
     }
     
+    /**
+     * @return the vertical position of the operator joystick
+     */
     public double operatorGetX() {
         return operator.getRawAxis(0);
     }
+    
+    /**
+     * @return the fader position of the operator joystick
+     */
     public double operatorGetZ() {
         return operator.getRawAxis(2);
     }
@@ -102,14 +110,14 @@ public class OI {
 		Button toggleButton = new JoystickButton(operator, 3);
 		Button dropButton = new JoystickButton(operator, 5);
 		Button pickupButton = new JoystickButton(operator, 4);
-		Button fireButton = new JoystickButton(operator, 2);
-		Button climber = new JoystickButton(operator, 1);
+//		Button fireButton = new JoystickButton(operator, 2);
+//		Button climber = new JoystickButton(operator, 1);
 		
 		toggleButton.whenReleased(new ToggleClaw(robot.claw));		
 		dropButton.whenPressed(new OpenClaw(robot.claw));
 		pickupButton.whenPressed(new CloseClaw(robot.claw));
-		fireButton.whenPressed(new PushCube(robot.claw));
-		//climber.whileHeld(new UseClimber(robot.climber)); not yet
+//		fireButton.whenPressed(new PushCube(robot.claw));
+//		climber.whileHeld(new UseClimber(robot.climber)); not yet
 	}
 
 	/*

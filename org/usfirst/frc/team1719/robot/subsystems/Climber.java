@@ -6,16 +6,17 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Skeleton of the subsystem representing the climbing device
  */
 public class Climber extends Subsystem {
-
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	private SpeedController climber;
-
 	
-	
+    private SpeedController climber;
+
+    /**
+     * Creates a new Climber subsystem
+     * 
+     * @param _climber the motor controller that spins the winch
+     */
 	public Climber(SpeedController _climber) {
 		climber = _climber;
 	}
@@ -27,10 +28,16 @@ public class Climber extends Subsystem {
     	setDefaultCommand(new UseClimber(this));
     }
 	
+	/**
+	 * Call when you want it to climb
+	 */
 	public void climb() {
 		climber.set(1.0);
 	}
 	
+	/**
+	 * Abort! Abort!
+	 */
 	public void stop () {
 		climber.set(0.0);
 	}

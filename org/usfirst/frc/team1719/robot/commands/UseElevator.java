@@ -1,19 +1,14 @@
 package org.usfirst.frc.team1719.robot.commands;
 
 import org.usfirst.frc.team1719.robot.Robot;
-import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UseElevator extends Command {
     
     private Elevator elevator;
-    private PIDController elevatorPIDController;
     private double targetElevatorZ;
     private double actualDistance;
     private double controllerZ;

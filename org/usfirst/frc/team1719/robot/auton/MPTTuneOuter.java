@@ -12,9 +12,6 @@ public class MPTTuneOuter extends AbstractAutonomous2018 {
     }
     
     @Override
-    public void setFieldState(boolean ownSwitch, boolean scale, boolean oppSwitch) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void setFieldState(boolean ownSwitch, boolean scale, boolean oppSwitch) {}
     
 }
