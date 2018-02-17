@@ -1,4 +1,5 @@
 org.usfirst.frc.team1719.robot
+org.usfirst.frc.team1719.robot.auton
 org.usfirst.frc.team1719.robot.commands
 org.usfirst.frc.team1719.robot.interfaces
 org.usfirst.frc.team1719.robot.sensors
