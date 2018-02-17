@@ -2,11 +2,11 @@ package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.CloseClaw;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
-import org.usfirst.frc.team1719.robot.commands.PushCube;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
 
 import org.usfirst.frc.team1719.robot.commands.ToggleWrist;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -23,9 +23,12 @@ public class OI {
      * which button number it is. Joystick stick = new Joystick(port); Button button
      * = new JoystickButton(stick, buttonNumber);
      * 
+     * 
      */
     private Joystick driver = new Joystick(0);
     private Joystick operator = new Joystick(1);
+    
+    private boolean shifterState = false;
     
     /**
      * @return the horizontal position of the left thumb-joystick
@@ -54,20 +57,23 @@ public class OI {
     public double getRightY() {
         return driver.getRawAxis(5);
     }
-    
+
+    /**
+     * @return the vertical position of the operator joystick
+     */
     public double operatorGetY() {
         return operator.getRawAxis(1);
     }
     
+    /**
+     * @return the vertical position of the operator joystick
+     */
     public double operatorGetX() {
         return operator.getRawAxis(0);
     }
     
     /**
-     * Setup the buttons. Requires the instance of the Robot
-     * 
-     * @param robot
-     *            - Instance of the Robot
+     * @return the fader position of the operator joystick
      */
     public void init(Robot robot) {
         Button toggleButton = new JoystickButton(operator, 3);
@@ -83,29 +89,65 @@ public class OI {
         //fireButton.whenPressed(new PushCube(robot.claw));
     }
     
-    /*
-     *** CREATING BUTTONS *** One type of button is a joystick button which is any
-     * button on a joystick. You create one by telling it which joystick it's on and
-     * which button number it is. Joystick stick = new Joystick(port); Button button
-     * = new JoystickButton(stick, buttonNumber);
+    public double operatorGetZ() {
+        return operator.getRawAxis(2);
+    }
+    
+    /**
+     * Get the state of the shifter. This also updates it
+     * if it needs to be.
      * 
-     * There are a few additional built in buttons you can use. Additionally, by
-     * subclassing Button you can create custom triggers and bind those to commands
-     * the same as any other Button.
-     *** 
-     * TRIGGERING COMMANDS WITH BUTTONS *** Once you have a button, it's trivial to
-     * bind it to a button in one of three ways:
-     * 
-     * Start the command when the button is pressed and let it run the command until
-     * it is finished as determined by it's isFinished method.
-     * button.whenPressed(new ExampleCommand());
-     * 
-     * Run the command while the button is being held down and interrupt it once the
-     * button is released. button.whileHeld(new ExampleCommand());
-     * 
-     * Start the command when the button is released and let it run the command
-     * until it is finished as determined by it's isFinished method.
-     * button.whenReleased(new ExampleCommand());
+     * @return
      */
+    public boolean driverGetShift() {
+        if (driver.getRawButtonReleased(3)) {
+            shifterState = !shifterState;
+        }
+        return shifterState;
+    }
+    
+    /**
+     * Set the rumble on the driver's controller.
+     * 
+     * @param rumble - Amount to rumble (0 - 1)
+     */
+    public void setRumble(double rumble) {
+        driver.setRumble(RumbleType.kLeftRumble, rumble);
+        driver.setRumble(RumbleType.kRightRumble, rumble);
+    }
+    
+    /**
+     * Setup the buttons. Requires the instance of the Robot
+     * 
+     * @param robot
+     *            - Instance of the Robot
+     */
+
+
+
+	/*
+	 *** CREATING BUTTONS *** One type of button is a joystick button which is any
+	 * button on a joystick. You create one by telling it which joystick it's on and
+	 * which button number it is. Joystick stick = new Joystick(port); Button button
+	 * = new JoystickButton(stick, buttonNumber);
+	 * 
+	 * There are a few additional built in buttons you can use. Additionally, by
+	 * subclassing Button you can create custom triggers and bind those to commands
+	 * the same as any other Button.
+	 *** 
+	 * TRIGGERING COMMANDS WITH BUTTONS *** Once you have a button, it's trivial to
+	 * bind it to a button in one of three ways:
+	 * 
+	 * Start the command when the button is pressed and let it run the command until
+	 * it is finished as determined by it's isFinished method.
+	 * button.whenPressed(new ExampleCommand());
+	 * 
+	 * Run the command while the button is being held down and interrupt it once the
+	 * button is released. button.whileHeld(new ExampleCommand());
+	 * 
+	 * Start the command when the button is released and let it run the command
+	 * until it is finished as determined by it's isFinished method.
+	 * button.whenReleased(new ExampleCommand());
+	 */
 
 }

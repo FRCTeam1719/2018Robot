@@ -1,8 +1,12 @@
 
 package org.usfirst.frc.team1719.robot;
 
-import org.usfirst.frc.team1719.robot.commands.AbstractAutonomous2018;
+import org.usfirst.frc.team1719.robot.auton.AbstractAutonomous2018;
+import org.usfirst.frc.team1719.robot.auton.MPTTuneInner;
+import org.usfirst.frc.team1719.robot.auton.MPTTuneOuter;
+import org.usfirst.frc.team1719.robot.auton.MTPTest;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
+import org.usfirst.frc.team1719.robot.subsystems.Climber;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
@@ -37,6 +41,7 @@ public class Robot extends IterativeRobot {
 	Position position;
 	Elevator elevator;
 	Claw claw;
+	Climber climber;
 	Wrist wrist;
 
 	/**
@@ -49,15 +54,26 @@ public class Robot extends IterativeRobot {
 		compressor = new Compressor(0);
 		compressor.setClosedLoopControl(true);
 		compressor.start();
-		//chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
 		
 		/* Initialize Subsystems */
-		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
+		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc, RobotMap.shifterSolenoid);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
-		elevator = new Elevator(RobotMap.elevatorEnc ,RobotMap.elevator);
+		//elevator = new Elevator(RobotMap.elevator, null, null, null);
 		Wrist wrist = new Wrist(RobotMap.wristSolenoid);
-		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
+		claw = new Claw(RobotMap.clawSolenoid,null);
+
+
+		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
+		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
+		climber = new Climber(RobotMap.climberMotor);
+		wrist = new Wrist(RobotMap.wristSolenoid);
+
+		/* Autonomous chooser */
+		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
+		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
+		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
+		SmartDashboard.putData("Auto mode", chooser);
+		
 
 		oi.init(this);
 	}
@@ -68,9 +84,7 @@ public class Robot extends IterativeRobot {
 	 * robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
-
-	}
+	public void disabledInit() {}
 
 	@Override
 	public void disabledPeriodic() {
@@ -90,9 +104,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+	    wrist.putDown();
+	    
 		autonomousCommand = chooser.getSelected();
 
-		// schedule the autonomous command (example)
+		/* Schedule the autonomous command */
 		if (autonomousCommand != null) {
 		    /* Note from Aaron: 
 		     * Consider how this will act when not connected to the FMS, or if the message is somehow garbeled.
@@ -116,11 +132,9 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		/*
-		 * This makes sure that the autonomous stops running when teleop starts running.
-		 * If you want the autonomous to continue until interrupted by another command,
-		 * remove this line or comment it out.
-		 */
+	    wrist.putDown();
+	    
+		/* End autonomous */
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
@@ -132,9 +146,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-
-//		System.out.println("X: " + position.getX() + "\nY: " + position.getY() + "\nHeading: " + position.getHeading()
-//				+ "\nTrustworthy: " + position.getTrustworthy());
+        SmartDashboard.putNumber("MTP current angle", position.getHeading());
 	}
 
 	/**

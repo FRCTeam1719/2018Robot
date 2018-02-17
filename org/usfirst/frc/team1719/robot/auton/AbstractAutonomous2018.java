@@ -1,6 +1,6 @@
-package org.usfirst.frc.team1719.robot.commands;
+package org.usfirst.frc.team1719.robot.auton;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * The parent class for all autonomous modes in the 2018 competition season. Needed in order to
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * @author Duncan
  */
-public abstract class AbstractAutonomous2018 extends Command {
+public abstract class AbstractAutonomous2018 extends CommandGroup {
     /**
      * Called by {@code Robot.autonomousInit()} in order to communicate the field's state 
      * (the chirality of the switches and scale). A {@code true} value represents the friendly

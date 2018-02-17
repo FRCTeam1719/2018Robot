@@ -36,7 +36,6 @@ public class Wrist extends Subsystem {
      * Put the wrist down.
      * 
      */
-    
     public void putDown() {
         wristSolenoid.set(true);
     }
@@ -57,4 +56,5 @@ public class Wrist extends Subsystem {
     public void toggle() {
         wristSolenoid.set(!(wristSolenoid.get()));
     }
+
 }

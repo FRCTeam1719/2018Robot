@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * @author gusg21
  *
+ * @deprecated we no longer have a pneumatic pusher
  */
+@Deprecated
 public class PushCube extends Command {
 
 	Claw claw;
@@ -46,7 +48,7 @@ public class PushCube extends Command {
     	}
     	
     	if (timer.get() <= OUTTIME) {
-    		claw.push();
+//    		claw.push();
     	} else {
     		done = true;
     	}
@@ -65,7 +67,7 @@ public class PushCube extends Command {
     
     @Override
     protected void end() {
-    	claw.retract();
+//    	claw.retract();
     	timer.stop();
     	timer.reset();
     	done = false;
