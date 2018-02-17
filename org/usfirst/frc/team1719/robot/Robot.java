@@ -6,6 +6,7 @@ import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
+import org.usfirst.frc.team1719.robot.subsystems.Wrist;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
 	Position position;
 	Elevator elevator;
 	Claw claw;
+	Wrist wrist;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -54,7 +56,7 @@ public class Robot extends IterativeRobot {
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		elevator = new Elevator(RobotMap.elevatorEnc ,RobotMap.elevator);
-		
+		Wrist wrist = new Wrist(RobotMap.wristSolenoid);
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.pusherSolenoid);
 
 		oi.init(this);
