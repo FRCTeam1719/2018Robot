@@ -18,6 +18,7 @@ public class ToggleWrist extends Command{
      */
     public ToggleWrist(Wrist _wrist) {
         wrist = _wrist;
+        requires(wrist);
     }
 
     protected void initialize() {
