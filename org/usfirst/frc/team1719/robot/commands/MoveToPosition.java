@@ -94,7 +94,7 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
         requires((Subsystem) drive);
         
         pidhelper = new PIDHelper();
-        desiredHeadingController = new PIDController(0, 0, 0, this, pidhelper);
+        desiredHeadingController = new PIDController(5, 0, 0, this, pidhelper);
         rotateController = new PIDController(0.008, 0.0002, 0.001, pidhelper, this);
         rotateControllerStill = new PIDController(0, 0, 0, pidhelper, this);
     }
