@@ -8,7 +8,7 @@ import org.usfirst.frc.team1719.robot.subsystems.Position;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LeftAutonomous extends AbstractAutonomous2018 {
+public class RightAutonomous extends AbstractAutonomous2018 {
     
     private boolean ownSwitch;
     private boolean scale;
@@ -17,7 +17,7 @@ public class LeftAutonomous extends AbstractAutonomous2018 {
     private Drive drive;
     private Position position;
     
-    public LeftAutonomous(Drive _drive, Position _position) {
+    public RightAutonomous(Drive _drive, Position _position) {
         drive = _drive;
         position = _position;
     }
@@ -29,7 +29,7 @@ public class LeftAutonomous extends AbstractAutonomous2018 {
         oppSwitch = _oppSwitch;
         
         /* true: right */
-        if (ownSwitch) {
+        if (!ownSwitch) {
             addSequential(new Command() {
                 
                 @Override

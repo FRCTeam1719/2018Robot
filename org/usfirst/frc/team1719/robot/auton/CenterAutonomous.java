@@ -8,7 +8,7 @@ import org.usfirst.frc.team1719.robot.subsystems.Position;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LeftAutonomous extends AbstractAutonomous2018 {
+public class CenterAutonomous extends AbstractAutonomous2018 {
     
     private boolean ownSwitch;
     private boolean scale;
@@ -17,7 +17,7 @@ public class LeftAutonomous extends AbstractAutonomous2018 {
     private Drive drive;
     private Position position;
     
-    public LeftAutonomous(Drive _drive, Position _position) {
+    public CenterAutonomous(Drive _drive, Position _position) {
         drive = _drive;
         position = _position;
     }
@@ -30,20 +30,11 @@ public class LeftAutonomous extends AbstractAutonomous2018 {
         
         /* true: right */
         if (ownSwitch) {
-            addSequential(new Command() {
-                
-                @Override
-                public void execute() {
-                    drive.tankDrive(0.5, 0.5);
-                }
-
-                @Override
-                protected boolean isFinished() {
-                    return false;
-                }
-            });
+            addSequential(new MoveToPosition(55, 100, position, drive, true, true));
+            addSequential(new TurnToAngle(0, position, drive));
+            addSequential(new TimedDriveForward(drive, 0.3, 500));
         } else {
-            addSequential(new MoveToPosition(0, 100, position, drive, true, true));
+            addSequential(new MoveToPosition(-55, 100, position, drive, true, true));
             addSequential(new TurnToAngle(0, position, drive));
             addSequential(new TimedDriveForward(drive, 0.3, 500));
         }
