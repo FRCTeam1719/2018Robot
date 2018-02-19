@@ -5,7 +5,11 @@ import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/**
+ * Runs the elevator using the operator console fader
+ * @author bennyrubin, Quintin
+ *
+ */
 public class UseElevator extends Command {
     
     private Elevator elevator;
