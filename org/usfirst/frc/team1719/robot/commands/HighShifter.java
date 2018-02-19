@@ -1,39 +1,28 @@
 package org.usfirst.frc.team1719.robot.commands;
 
-import org.usfirst.frc.team1719.robot.subsystems.Wrist;
+import org.usfirst.frc.team1719.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
-<<<<<<< HEAD
- * command for toggling the wrist
- * @author bennyrubin
  *
  */
-public class ToggleWrist extends Command{
-    Wrist wrist;
-    boolean state;
-    /**
-     * takes a wrist and sets it to the wrist
-     * @param _wrist
-     */
+public class HighShifter extends Command {
+
+    Drive drive;
     
-    public ToggleWrist(Wrist _wrist) {
-        wrist = _wrist;
-        requires(wrist);
+    public HighShifter(Drive _drive) {
+        drive = _drive;
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
     }
-    
-    /**
-     * toggles the wrist
-     */
+
+    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-       wrist.toggle();
+        drive.setShift(false);
     }
-    
-    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

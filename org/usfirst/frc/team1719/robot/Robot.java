@@ -6,6 +6,7 @@ import org.usfirst.frc.team1719.robot.auton.MPTTuneInner;
 import org.usfirst.frc.team1719.robot.auton.MPTTuneOuter;
 import org.usfirst.frc.team1719.robot.auton.MTPTest;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
+import org.usfirst.frc.team1719.robot.subsystems.ClawHolder;
 import org.usfirst.frc.team1719.robot.subsystems.Climber;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Elevator;
@@ -37,10 +38,13 @@ public class Robot extends IterativeRobot {
 	private AbstractAutonomous2018 autonomousCommand;
 	private SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
 	
+	private String compressorInfo = "Loading, please wait...";
+	
     Drive drive;
 	Position position;
 	Elevator elevator;
 	Claw claw;
+	ClawHolder clawHolder;
 	Climber climber;
 	Wrist wrist;
 
@@ -64,6 +68,7 @@ public class Robot extends IterativeRobot {
 
 		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
+		//clawHolder = new ClawHolder(RobotMap.clawHolder);
 		climber = new Climber(RobotMap.climberMotor);
 		wrist = new Wrist(RobotMap.wristSolenoid);
 
@@ -103,6 +108,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+	    //clawHolder.release();
 	    wrist.putDown();
 	    
 		autonomousCommand = chooser.getSelected();
@@ -131,6 +137,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+	    //clawHolder.release();
 	    wrist.putDown();
 	    
 		/* End autonomous */
@@ -146,6 +153,14 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
         SmartDashboard.putNumber("MTP current angle", position.getHeading());
+
+        if (compressor.enabled()) {
+            compressorInfo = "COMPRESSING, DON'T USE DEVICES W/ PNUEMATICS";
+        } else {
+            compressorInfo = "GOOD TO GO. MAKE THOSE TEAMS GET DUNK'D ON";
+        }  
+        SmartDashboard.putString("compressoring", compressorInfo);
+        System.out.println("RIGHT Y:" + oi.getRightY());
 	}
 
 	/**

@@ -94,4 +94,20 @@ public class Drive extends Subsystem {
     public void setShift(boolean shifted) {
         shifter.set(shifted);
     }
+    
+    /**
+     * Toggle the shifter.
+     */
+    public void toggleShift() {
+        shifter.set(!shifter.get());
+    }
+    
+    /**
+     * Get whether the shifter is currently shifted or not.
+     * 
+     * @return shifted - Whether it's shifted.
+     */
+    public boolean getShifted() {
+        return shifter.get();
+    }
 }

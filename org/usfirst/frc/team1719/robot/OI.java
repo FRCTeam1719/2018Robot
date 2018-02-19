@@ -1,9 +1,10 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.CloseClaw;
+import org.usfirst.frc.team1719.robot.commands.HighShifter;
+import org.usfirst.frc.team1719.robot.commands.LowShifter;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
-
 import org.usfirst.frc.team1719.robot.commands.ToggleWrist;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -48,14 +49,14 @@ public class OI {
      * @return the horizontal position of the right thumb-joystick
      */
     public double getRightX() {
-        return driver.getRawAxis(4);
+        return driver.getRawAxis(2);
     }
     
     /**
      * @return the vertical position of the right thumb-joystick
      */
     public double getRightY() {
-        return driver.getRawAxis(5);
+        return driver.getRawAxis(3);
     }
 
     /**
@@ -70,23 +71,6 @@ public class OI {
      */
     public double operatorGetX() {
         return operator.getRawAxis(0);
-    }
-    
-    /**
-     * @return the fader position of the operator joystick
-     */
-    public void init(Robot robot) {
-        Button toggleButton = new JoystickButton(operator, 3);
-        Button dropButton = new JoystickButton(operator, 5);
-        Button pickupButton = new JoystickButton(operator, 4);
-        //Button fireButton = new JoystickButton(operator, 2);
-        Button wristButton = new JoystickButton(operator, 2);
-        
-        wristButton.whenReleased(new ToggleWrist(robot.wrist));
-        //toggleButton.whenReleased(new ToggleClaw(robot.claw));
-        //dropButton.whenPressed(new OpenClaw(robot.claw));
-        //pickupButton.whenPressed(new CloseClaw(robot.claw));
-        //fireButton.whenPressed(new PushCube(robot.claw));
     }
     
     public double operatorGetZ() {
@@ -123,7 +107,25 @@ public class OI {
      *            - Instance of the Robot
      */
 
-
+	public void init(Robot robot) {
+		Button toggleButton = new JoystickButton(operator, 3);
+		Button dropButton = new JoystickButton(operator, 5);
+		Button pickupButton = new JoystickButton(operator, 4);
+		Button shiftLowButton = new JoystickButton(driver, 5);
+		Button shiftHighButton = new JoystickButton(driver, 6);
+		Button wristButton = new JoystickButton(operator, 2);
+//		Button fireButton = new JoystickButton(operator, 2);
+//		Button climber = new JoystickButton(operator, 1);
+		
+		toggleButton.whenReleased(new ToggleClaw(robot.claw));		
+		dropButton.whenPressed(new OpenClaw(robot.claw));
+		pickupButton.whenPressed(new CloseClaw(robot.claw));
+		shiftLowButton.whenPressed(new LowShifter(robot.drive));
+		shiftHighButton.whenPressed(new HighShifter(robot.drive));
+		wristButton.whenPressed(new ToggleWrist(robot.wrist));
+//		fireButton.whenPressed(new PushCube(robot.claw));
+//		climber.whileHeld(new UseClimber(robot.climber)); not yet
+	}
 
 	/*
 	 *** CREATING BUTTONS *** One type of button is a joystick button which is any
