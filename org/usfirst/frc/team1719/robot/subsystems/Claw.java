@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Claw extends Subsystem {
 	private Solenoid claw;
-	private Solenoid pusher;
 
 	/**
 	 * A solenoid for the claw pistons, one for the pusher
@@ -24,7 +23,6 @@ public class Claw extends Subsystem {
 	 */
 	public Claw(Solenoid claw, Solenoid pusher) {
 		this.claw = claw;
-		this.pusher = pusher;
 	}
 
 	/**
@@ -48,20 +46,6 @@ public class Claw extends Subsystem {
 	 */
 	public boolean isOpen() {
 		return !claw.get();
-	}
-
-	/**
-	 * Extend the pusher
-	 */
-	public void push() {
-		//pusher.set(true);
-	}
-
-	/**
-	 * Bring the pusher back in
-	 */
-	public void retract() {
-		//pusher.set(false);
 	}
 
 	@Override

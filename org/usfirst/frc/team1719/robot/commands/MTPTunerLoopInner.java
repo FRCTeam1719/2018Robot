@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1719.robot.commands;
 
-import org.usfirst.frc.team1719.robot.OI;
 import org.usfirst.frc.team1719.robot.Robot;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
@@ -14,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Helper class to tune the inner PID loop of {@link MoveToPosition}
  */
 public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
     
@@ -22,21 +21,21 @@ public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
     
     private Position posTracker;
     private Drive drive;
-    private Robot robot;
-    private OI oi;
     private PIDController rotateController;
-    private PIDController dummyController;
     
     private double targetAngle;
     private double rotSpd;
     
+    /**
+     * Initializes the command.
+     * 
+     * @param _posTracker - the subsystem to track the robot's position
+     * @param _drive - the subsystem controlling the drive train
+     * @param _robot - the robot class
+     */
     public MTPTunerLoopInner(Position _posTracker, Drive _drive, Robot _robot) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         posTracker = _posTracker;
-        robot = _robot;
         drive = _drive;
-        oi = robot.oi;
         requires((Subsystem) drive);
         SmartDashboard.putNumber("MTPLT1 target angle", targetAngle = 0.0D);
         rotateController = new PIDController(0.01, 0.0003, 0.001, this, this);
@@ -48,12 +47,12 @@ public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
         SmartDashboard.putData("ROTATION_PID_IN", rotateController);
     }
     
-    // Called just before this Command runs the first time
+    @Override 
     protected void initialize() {
         
     }
     
-    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
         rotateController.enable();
         rotateController = (PIDController) SmartDashboard.getData("ROTATION_PID_IN");
@@ -66,18 +65,17 @@ public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
         SmartDashboard.putNumber("MTP current angle", posTracker.getHeading());
     }
     
-    // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
         return false;
     }
     
-    // Called once after isFinished returns true
+    @Override
     protected void end() {
         rotateController.disable();
     }
     
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    @Override
     protected void interrupted() {
         rotateController.disable();
         

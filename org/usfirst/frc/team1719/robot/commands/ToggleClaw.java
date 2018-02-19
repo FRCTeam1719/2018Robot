@@ -5,6 +5,9 @@ import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * A simple command to toggle the state of the claw.
+ */
 public class ToggleClaw extends Command {
 
 	private enum states {
@@ -13,9 +16,9 @@ public class ToggleClaw extends Command {
 
 	private Claw claw;
 	private states curState;
-	boolean done;
-	Timer timer = new Timer();
-	final double WAIT_TIME = 0.2;
+	private boolean done;
+	private Timer timer = new Timer();
+	private final double WAIT_TIME = 0.2;
 
 	public ToggleClaw(Claw claw) {
 		this.claw = claw;
@@ -40,7 +43,7 @@ public class ToggleClaw extends Command {
 
 			} else {
 				claw.open();
-				claw.push();
+//				claw.push();
 				timer.start();
 				curState = states.WAIT_FOR_TIMER;
 
@@ -58,7 +61,7 @@ public class ToggleClaw extends Command {
 			break;
 		case CLEANUP:
 			timer.stop();
-			claw.retract();
+//			claw.retract();
 			done = true;
 		}
 

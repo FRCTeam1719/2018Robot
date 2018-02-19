@@ -5,42 +5,37 @@ import org.usfirst.frc.team1719.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Skeleton of a command to climb at the end
  */
 public class UseClimber extends Command {
 	
-	
-	Climber climber;
+	private Climber climber;
 	
     public UseClimber(Climber _climber) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	climber = _climber;
     	
         requires(climber);
     }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+    @Override
+    protected void initialize() {}
 
-    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
     	climber.climb();
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
+    @Override
     protected void end() {
     	climber.stop();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    @Override
     protected void interrupted() {
     	end();
     }

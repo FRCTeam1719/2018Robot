@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1719.robot.subsystems;
 
 import org.usfirst.frc.team1719.robot.commands.UseElevator;
-import org.usfirst.frc.team1719.robot.interfaces.IEncoder;
 import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -20,7 +19,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Elevator extends Subsystem {
-    private IEncoder positionEncoder;
     private SpeedController elevatorController;
     private RangeFinder45LMS rangeFinder;
     private DigitalInput upperLimit;
@@ -51,6 +49,7 @@ public class Elevator extends Subsystem {
      * @param speedController
      *            - elevator speed controller
      */
+    @SuppressWarnings("deprecation")
     public Elevator(SpeedController _elevatorController, RangeFinder45LMS _rangeFinder, DigitalInput _upperLimit, DigitalInput _lowerLimit) {
         elevatorController = _elevatorController;
         rangeFinder = _rangeFinder;
@@ -102,36 +101,30 @@ public class Elevator extends Subsystem {
     }
     
     /**
-     * returns the distance of the rangefinder
-     * 
-     * @return
+     * @return the distance of the rangefinder
      */
     public double getDistance() {
         return rangeFinder.distance();
     }
     
     /**
-     * returns the voltage of the rangefinder
-     * 
-     * @return
+     * @return the voltage of the rangefinder
      */
     public double getDistanceVoltage() {
         return rangeFinder.getVoltage();
     }
     
     /**
-     * returns the rangefinder
-     * 
-     * @return
+     * @return the rangefinder
      */
     public RangeFinder45LMS getRangeFinder() {
         return rangeFinder;
     }
     
     /**
-     * moves the elevator a disired speed.
+     * moves the elevator a desired speed.
      * 
-     * @param speed
+     * @param speed - the power to the motor, on the range [-1, 1]
      */
     public void moveElevator(double output) {
         
@@ -146,8 +139,6 @@ public class Elevator extends Subsystem {
         elevatorController.set(output);
         
         System.out.println(output);
-        /* System.out.println(speed / 2); */
-        
     }
     
     /**
