@@ -11,6 +11,7 @@ public class UseElevator extends Command {
     private Elevator elevator;
     private double targetElevatorZ;
     private double actualDistance;
+    private double actualVoltage;
     private double controllerZ;
     private double controllerY;
     
@@ -37,8 +38,8 @@ public class UseElevator extends Command {
     @Override
     protected void execute() {
         
-        // controllerZ = -Robot.oi.operatorGetZ();
-        controllerY = -Robot.oi.operatorGetY();
+        controllerZ = -Robot.oi.operatorGetZ();
+        //controllerY = -Robot.oi.operatorGetY();
         // System.out.println("Controller" + controllerZ);
         System.out.println("target " + targetElevatorZ);
         
@@ -47,12 +48,14 @@ public class UseElevator extends Command {
         // System.out.println("Elevator Distance: " + elevator.getDistanceVoltage());
         // 1 - 5 to 0 - 1
         
-        actualDistance = elevator.getDistance();
-        // targetElevatorZ = ((controllerZ + 1) * 35); //USE LATER FOR POT ELEVATOR
-        if (Math.abs(controllerY) > .05) {
-            targetElevatorZ += controllerY / 2;
-            
-        }
+        // actualDistance = elevator.getDistance();
+        actualVoltage = elevator.getDistanceVoltage();
+        targetElevatorZ = ((controllerZ + 1) * 2.5); // USE LATER FOR POT ELEVATOR
+        /*
+         * if (Math.abs(controllerY) > .05) { targetElevatorZ += controllerY / 2;
+         * 
+         * }
+         */
         
         /*
          * setElevator(targetElevatorZ)
@@ -64,14 +67,18 @@ public class UseElevator extends Command {
          * // // System.out.println("LOWER LIMIT"); // //elevatorPIDController.reset();
          * }
          */
-        
-        //elevator.updatePID(targetElevatorZ);
-        if (Math.abs(controllerY) < DEADZONE) {
+        if (actualVoltage < targetElevatorZ + DEADZONE) {
+            elevator.moveElevator(.8);
+        }else if(actualVoltage > targetElevatorZ - DEADZONE){
+            elevator.moveElevator(-.8 + UPWARDS_FORCE);
+        }
+        // elevator.updatePID(targetElevatorZ);
+        /*if (Math.abs(controllerY) < DEADZONE) {
             elevator.moveElevator(-UPWARDS_FORCE);
         } else {
             elevator.moveElevator(controllerY);
         }
-        
+        */
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
         SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());
         
