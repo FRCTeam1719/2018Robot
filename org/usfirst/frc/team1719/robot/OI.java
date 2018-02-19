@@ -108,12 +108,12 @@ public class OI {
      */
 
 	public void init(Robot robot) {
-		Button toggleButton = new JoystickButton(operator, 0);
-		Button dropButton = new JoystickButton(operator, 4);
-		Button pickupButton = new JoystickButton(operator, 1);
+		Button toggleButton = new JoystickButton(operator, 1);
+		Button dropButton = new JoystickButton(operator, 5);
+		Button pickupButton = new JoystickButton(operator, 2);
 		Button shiftLowButton = new JoystickButton(driver, 5);
 		Button shiftHighButton = new JoystickButton(driver, 6);
-		Button wristButton = new JoystickButton(operator, 3);
+		Button wristButton = new JoystickButton(operator, 4);
 //		Button climber = new JoystickButton(operator, null);
 		
 		toggleButton.whenReleased(new ToggleClaw(robot.claw));		

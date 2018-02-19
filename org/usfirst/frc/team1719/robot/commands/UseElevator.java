@@ -18,8 +18,8 @@ public class UseElevator extends Command {
     private double actualVoltage;
     private double controllerZ;
     private double controllerY;
-    
-    private double DEADZONE = 0.05;
+    private double proportional;
+    private double DEADZONE = 0.2;
     private double UPWARDS_FORCE = 0.1373;
     
     /**
@@ -42,7 +42,7 @@ public class UseElevator extends Command {
     @Override
     protected void execute() {
         
-        controllerZ = -Robot.oi.operatorGetZ();
+        controllerZ = Robot.oi.operatorGetZ();
         //controllerY = -Robot.oi.operatorGetY();
         // System.out.println("Controller" + controllerZ);
         System.out.println("target " + targetElevatorZ);
@@ -71,10 +71,16 @@ public class UseElevator extends Command {
          * // // System.out.println("LOWER LIMIT"); // //elevatorPIDController.reset();
          * }
          */
+        
+        // divide by 5 to get on same unit as motor value, and then add constant to make sure the elevator isnt too slow
+        proportional = (1/((Math.abs(actualVoltage - targetElevatorZ)/5))) + .15;
+
         if (actualVoltage < targetElevatorZ + DEADZONE) {
-            elevator.moveElevator(.8);
+            elevator.moveElevator(-.3);
         }else if(actualVoltage > targetElevatorZ - DEADZONE){
-            elevator.moveElevator(-.8 + UPWARDS_FORCE);
+            elevator.moveElevator(.3 + UPWARDS_FORCE);
+        } else {
+            elevator.stop();
         }
         // elevator.updatePID(targetElevatorZ);
         /*if (Math.abs(controllerY) < DEADZONE) {
