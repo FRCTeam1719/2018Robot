@@ -75,12 +75,12 @@ public class UseElevator extends Command {
         // divide by 5 to get on same unit as motor value, and then add constant to make sure the elevator isnt too slow
         proportional = (1/((Math.abs(actualVoltage - targetElevatorZ)/5))) + .15;
 
-        if (actualVoltage < targetElevatorZ + DEADZONE) {
+        if (actualVoltage < targetElevatorZ - DEADZONE) {
             elevator.moveElevator(-.3);
-        }else if(actualVoltage > targetElevatorZ - DEADZONE){
+        }else if(actualVoltage > targetElevatorZ + DEADZONE){
             elevator.moveElevator(.3 + UPWARDS_FORCE);
         } else {
-            elevator.stop();
+            elevator.moveElevator(-UPWARDS_FORCE);
         }
         // elevator.updatePID(targetElevatorZ);
         /*if (Math.abs(controllerY) < DEADZONE) {
