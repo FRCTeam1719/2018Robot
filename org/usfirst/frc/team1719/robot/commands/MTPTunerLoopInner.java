@@ -48,9 +48,7 @@ public class MTPTunerLoopInner extends Command implements PIDSource, PIDOutput {
     }
     
     @Override 
-    protected void initialize() {
-        
-    }
+    protected void initialize() {}
     
     @Override
     protected void execute() {
