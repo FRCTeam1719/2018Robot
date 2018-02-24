@@ -118,12 +118,19 @@ public class OI {
 		Button climberClimb = new JoystickButton(operator, 6);
 		
 		
+
+		
+//		Button fireButton = new JoystickButton(operator, 2);
+//		Button climber = new JoystickButton(operator, 1);
+		
 		toggleButton.whenReleased(new ToggleClaw(robot.claw));		
 		dropButton.whenPressed(new OpenClaw(robot.claw));
 		pickupButton.whenPressed(new CloseClaw(robot.claw));
 		shiftLowButton.whenPressed(new LowShifter(robot.drive));
 		shiftHighButton.whenPressed(new HighShifter(robot.drive));
 		wristButton.whenPressed(new ToggleWrist(robot.wrist));
+
+		
 //		fireButton.whenPressed(new PushCube(robot.claw));
 //		climber.whileHeld(new UseClimber(robot.climber)); not yet
 	}

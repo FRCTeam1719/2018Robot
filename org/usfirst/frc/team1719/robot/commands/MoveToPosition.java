@@ -47,7 +47,7 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
         }
     }
     
-    private static final double SQ_TOLERANCE = 8.0D;
+    private static final double SQ_TOLERANCE = 82.0D;
     private static final double SPD = 0.5D;
     private static final double MAX_ANGLE_TOLERANCE = 45.0D;
     private static final double MIN_ANGLE_TOLERANCE = 18.0D;
@@ -71,6 +71,7 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
     private PIDController desiredHeadingController;
     private PIDController rotateController;
     private PIDController rotateControllerStill;
+    
     private boolean init = false;
     private boolean turning = false;
     private final boolean absolute;
@@ -105,9 +106,10 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
     
     @Override
     protected void initialize() {
+        SmartDashboard.putBoolean("MTP Running", true);
         initX = position.getX();
         initY = position.getY();
-        
+
         if (!absolute) {
             desiredX = parX + initX;
             desiredY = parY + initY;
@@ -225,7 +227,9 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
     }
     
     @Override
-    protected void end() {}
+    protected void end() {
+        SmartDashboard.putBoolean("MTP Running", false);
+    }
     
     @Override
     protected void interrupted() {}
