@@ -228,7 +228,6 @@ public class MoveToPosition extends Command implements PIDSource, PIDOutput {
     
     @Override
     protected void end() {
-
         SmartDashboard.putBoolean("MTP Running", false);
     }
     

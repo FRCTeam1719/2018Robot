@@ -154,12 +154,11 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
         SmartDashboard.putNumber("MTP current angle", position.getHeading());
         if (compressor.enabled()) {
-            compressorInfo = "COMPRESSING, DON'T USE DEVICES W/ PNUEMATICS";
+            compressorInfo = "PNEUMATICS CHARGING";
         } else {
-            compressorInfo = "GOOD TO GO. MAKE THOSE TEAMS GET DUNK'D ON";
+            compressorInfo = "GOOD TO GO";
         }  
-        SmartDashboard.putString("compressoring", compressorInfo);
-        System.out.println("RIGHT Y:" + oi.getRightY());
+        SmartDashboard.putString("compressor", compressorInfo);
 	}
 
 	/**
