@@ -76,9 +76,9 @@ public class UseElevator extends Command {
         proportional = (1/((Math.abs(actualVoltage - targetElevatorZ)/5))) + .15;
 
         if (actualVoltage < targetElevatorZ - DEADZONE) {
-            elevator.moveElevator(-.3);
+            elevator.moveElevator(-.6); //move up
         }else if(actualVoltage > targetElevatorZ + DEADZONE){
-            elevator.moveElevator(.3 + UPWARDS_FORCE);
+            elevator.moveElevator(.4 + UPWARDS_FORCE); //move down
         } else {
             elevator.moveElevator(-UPWARDS_FORCE);
         }

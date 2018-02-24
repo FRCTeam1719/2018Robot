@@ -114,7 +114,9 @@ public class OI {
 		Button shiftLowButton = new JoystickButton(driver, 5);
 		Button shiftHighButton = new JoystickButton(driver, 6);
 		Button wristButton = new JoystickButton(operator, 4);
-//		Button climber = new JoystickButton(operator, null);
+		Button climberDeploy = new JoystickButton(operator, 3);
+		Button climberClimb = new JoystickButton(operator, 6);
+		
 		
 		toggleButton.whenReleased(new ToggleClaw(robot.claw));		
 		dropButton.whenPressed(new OpenClaw(robot.claw));
