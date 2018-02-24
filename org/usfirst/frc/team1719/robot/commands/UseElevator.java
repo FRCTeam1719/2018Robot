@@ -19,7 +19,7 @@ public class UseElevator extends Command {
     private double controllerZ;
     private double controllerY;
     private double proportional;
-    private double DEADZONE = 0.2;
+    private double DEADZONE = 0.15;
     private double UPWARDS_FORCE = 0.1373;
     
     /**
@@ -41,7 +41,7 @@ public class UseElevator extends Command {
     
     @Override
     protected void execute() {
-        
+        System.out.println("Raw voltage(Elevator): " + elevator.getRangeFinder().getVoltage());
         controllerZ = Robot.oi.operatorGetZ();
         //controllerY = -Robot.oi.operatorGetY();
         // System.out.println("Controller" + controllerZ);
