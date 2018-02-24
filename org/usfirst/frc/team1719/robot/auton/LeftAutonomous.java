@@ -6,8 +6,6 @@ import org.usfirst.frc.team1719.robot.commands.TurnToAngle;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Position;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 public class LeftAutonomous extends AbstractAutonomous2018 {
     
     private boolean ownSwitch;
@@ -30,22 +28,11 @@ public class LeftAutonomous extends AbstractAutonomous2018 {
         
         /* true: right */
         if (ownSwitch) {
-            addSequential(new Command() {
-                
-                @Override
-                public void execute() {
-                    drive.tankDrive(0.5, 0.5);
-                }
-
-                @Override
-                protected boolean isFinished() {
-                    return false;
-                }
-            });
+            addSequential(new TimedDriveForward(drive, 0.5, 7.0));
         } else {
-            addSequential(new MoveToPosition(0, 100, position, drive, true, true));
+            addSequential(new MoveToPosition(0, 50, position, drive, true, true));
             addSequential(new TurnToAngle(0, position, drive));
-            addSequential(new TimedDriveForward(drive, 0.3, 0.5));
+            addSequential(new TimedDriveForward(drive, 0.5, 1.5));
         }
     }
     
