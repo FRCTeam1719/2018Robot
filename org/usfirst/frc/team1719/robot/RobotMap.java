@@ -37,6 +37,7 @@ public class RobotMap {
 	public static final DigitalInput lowerLimit = new DigitalInput(4);
 	public static final DigitalInput upperLimit = new DigitalInput(5);
 
+
 	/* PCM */
 	public static final Solenoid shifterSolenoid = new Solenoid(4);
 	public static final Solenoid clawSolenoid = new Solenoid(5);

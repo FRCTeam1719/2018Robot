@@ -50,6 +50,13 @@ public class Wrist extends Subsystem {
     }
     
     /**
+     * toggles the wrist solenoid
+     * @author Benny Rubin
+     */
+    public void toggle() {
+        wristSolenoid.set(!(wristSolenoid.get()));
+    }
+    /**
      * Get the state of the wrist
      * 
      * @return boolean - wrist state

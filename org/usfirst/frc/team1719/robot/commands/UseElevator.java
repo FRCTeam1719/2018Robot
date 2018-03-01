@@ -5,16 +5,21 @@ import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/**
+ * Runs the elevator using the operator console fader
+ * @author bennyrubin, Quintin
+ *
+ */
 public class UseElevator extends Command {
     
     private Elevator elevator;
     private double targetElevatorZ;
     private double actualDistance;
+    private double actualVoltage;
     private double controllerZ;
     private double controllerY;
-    
-    private double DEADZONE = 0.05;
+    private double proportional;
+    private double DEADZONE = 0.15;
     private double UPWARDS_FORCE = 0.1373;
     
     /**
@@ -36,9 +41,9 @@ public class UseElevator extends Command {
     
     @Override
     protected void execute() {
-        
-        // controllerZ = -Robot.oi.operatorGetZ();
-        controllerY = -Robot.oi.operatorGetY();
+        System.out.println("Raw voltage(Elevator): " + elevator.getRangeFinder().getVoltage());
+        controllerZ = Robot.oi.operatorGetZ();
+        //controllerY = -Robot.oi.operatorGetY();
         // System.out.println("Controller" + controllerZ);
         System.out.println("target " + targetElevatorZ);
         
@@ -47,12 +52,14 @@ public class UseElevator extends Command {
         // System.out.println("Elevator Distance: " + elevator.getDistanceVoltage());
         // 1 - 5 to 0 - 1
         
-        actualDistance = elevator.getDistance();
-        // targetElevatorZ = ((controllerZ + 1) * 35); //USE LATER FOR POT ELEVATOR
-        if (Math.abs(controllerY) > .05) {
-            targetElevatorZ += controllerY / 2;
-            
-        }
+        // actualDistance = elevator.getDistance();
+        actualVoltage = elevator.getDistanceVoltage();
+        targetElevatorZ = ((controllerZ + 1) * 2.5); // USE LATER FOR POT ELEVATOR
+        /*
+         * if (Math.abs(controllerY) > .05) { targetElevatorZ += controllerY / 2;
+         * 
+         * }
+         */
         
         /*
          * setElevator(targetElevatorZ)
@@ -65,13 +72,23 @@ public class UseElevator extends Command {
          * }
          */
         
-        //elevator.updatePID(targetElevatorZ);
-        if (Math.abs(controllerY) < DEADZONE) {
+        // divide by 5 to get on same unit as motor value, and then add constant to make sure the elevator isnt too slow
+        proportional = (1/((Math.abs(actualVoltage - targetElevatorZ)/5))) + .15;
+
+        if (actualVoltage < targetElevatorZ - DEADZONE) {
+            elevator.moveElevator(-.6); //move up
+        }else if(actualVoltage > targetElevatorZ + DEADZONE){
+            elevator.moveElevator(.4 + UPWARDS_FORCE); //move down
+        } else {
+            elevator.moveElevator(-UPWARDS_FORCE);
+        }
+        // elevator.updatePID(targetElevatorZ);
+        /*if (Math.abs(controllerY) < DEADZONE) {
             elevator.moveElevator(-UPWARDS_FORCE);
         } else {
             elevator.moveElevator(controllerY);
         }
-        
+        */
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
         SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());
         

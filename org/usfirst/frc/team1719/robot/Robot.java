@@ -2,9 +2,10 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.auton.AbstractAutonomous2018;
-import org.usfirst.frc.team1719.robot.auton.MPTTuneInner;
-import org.usfirst.frc.team1719.robot.auton.MPTTuneOuter;
-import org.usfirst.frc.team1719.robot.auton.MTPTest;
+import org.usfirst.frc.team1719.robot.auton.CenterAutonomous;
+import org.usfirst.frc.team1719.robot.auton.LeftAutonomous;
+import org.usfirst.frc.team1719.robot.auton.RightAutonomous;
+import org.usfirst.frc.team1719.robot.auton.TTATune;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.ClawHolder;
 import org.usfirst.frc.team1719.robot.subsystems.Climber;
@@ -62,6 +63,10 @@ public class Robot extends IterativeRobot {
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc, RobotMap.shifterSolenoid);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
+		//elevator = new Elevator(RobotMap.elevator, null, null, null);
+		//claw = new Claw(RobotMap.clawSolenoid,null);
+
+
 		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
 		//clawHolder = new ClawHolder(RobotMap.clawHolder);
@@ -69,11 +74,16 @@ public class Robot extends IterativeRobot {
 		wrist = new Wrist(RobotMap.wristSolenoid);
 
 		/* Autonomous chooser */
-		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
-		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
-		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
+//		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
+//		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
+//		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
+		chooser.addObject("Left Position", new LeftAutonomous(drive, position));
+		chooser.addObject("Center Position", new CenterAutonomous(drive, position));
+		chooser.addObject("Right Position", new RightAutonomous(drive, position));
+		chooser.addObject("Tune TTA", new TTATune(position, drive));
 		SmartDashboard.putData("Auto mode", chooser);
 		
+
 		oi.init(this);
 	}
 
@@ -148,6 +158,17 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
         SmartDashboard.putNumber("MTP current angle", position.getHeading());
+<<<<<<< HEAD
+=======
+
+        if (compressor.enabled()) {
+            compressorInfo = "PNEUMATICS CHARGING";
+        } else {
+            compressorInfo = "GOOD TO GO";
+        }  
+
+        SmartDashboard.putString("compressor", compressorInfo);
+>>>>>>> origin/operatorConsole
 	}
 
 	/**

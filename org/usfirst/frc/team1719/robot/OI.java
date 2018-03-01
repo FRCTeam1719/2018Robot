@@ -26,7 +26,7 @@ public class OI {
      * 
      */
     private Joystick driver = new Joystick(0);
-    private Joystick operator = new Joystick(1);
+    private Joystick operator = new Joystick(1); //Now operator console
     
     private boolean shifterState = false;
     
@@ -72,11 +72,8 @@ public class OI {
         return operator.getRawAxis(0);
     }
     
-    /**
-     * @return the fader position of the operator joystick
-     */
     public double operatorGetZ() {
-        return operator.getRawAxis(2);
+        return operator.getRawAxis(0);
     }
     
     /**
@@ -108,13 +105,22 @@ public class OI {
      * @param robot
      *            - Instance of the Robot
      */
+
 	public void init(Robot robot) {
-		Button toggleButton = new JoystickButton(operator, 3);
+		Button toggleButton = new JoystickButton(operator, 1);
 		Button dropButton = new JoystickButton(operator, 5);
-		Button pickupButton = new JoystickButton(operator, 4);
+
+		Button pickupButton = new JoystickButton(operator, 2);
 		Button shiftLowButton = new JoystickButton(driver, 5);
 		Button shiftHighButton = new JoystickButton(driver, 6);
-		Button wristButton = new JoystickButton(operator, 2);
+		Button wristButton = new JoystickButton(operator, 4);
+		Button climberDeploy = new JoystickButton(operator, 3);
+		Button climberClimb = new JoystickButton(operator, 6);
+		
+		
+
+		
+
 //		Button fireButton = new JoystickButton(operator, 2);
 //		Button climber = new JoystickButton(operator, 1);
 		
@@ -124,6 +130,9 @@ public class OI {
 		shiftLowButton.whenPressed(new LowShifter(robot.drive));
 		shiftHighButton.whenPressed(new HighShifter(robot.drive));
 		wristButton.whenPressed(new ToggleWrist(robot.wrist));
+
+
+		
 //		fireButton.whenPressed(new PushCube(robot.claw));
 //		climber.whileHeld(new UseClimber(robot.climber)); not yet
 	}
@@ -152,4 +161,5 @@ public class OI {
 	 * until it is finished as determined by it's isFinished method.
 	 * button.whenReleased(new ExampleCommand());
 	 */
+
 }
