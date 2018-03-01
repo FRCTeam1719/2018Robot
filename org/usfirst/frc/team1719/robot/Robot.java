@@ -148,13 +148,6 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
         SmartDashboard.putNumber("MTP current angle", position.getHeading());
-        if (compressor.enabled()) {
-            compressorInfo = "COMPRESSING, DON'T USE DEVICES W/ PNUEMATICS";
-        } else {
-            compressorInfo = "GOOD TO GO. MAKE THOSE TEAMS GET DUNK'D ON";
-        }  
-        SmartDashboard.putString("compressoring", compressorInfo);
-        System.out.println("RIGHT Y:" + oi.getRightY());
 	}
 
 	/**

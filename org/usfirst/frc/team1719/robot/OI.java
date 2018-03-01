@@ -6,7 +6,6 @@ import org.usfirst.frc.team1719.robot.commands.LowShifter;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
 import org.usfirst.frc.team1719.robot.commands.ToggleWrist;
-
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -49,14 +48,14 @@ public class OI {
      * @return the horizontal position of the right thumb-joystick
      */
     public double getRightX() {
-        return driver.getRawAxis(2);
+        return driver.getRawAxis(4);
     }
     
     /**
      * @return the vertical position of the right thumb-joystick
      */
     public double getRightY() {
-        return driver.getRawAxis(3);
+        return driver.getRawAxis(5);
     }
 
     /**
