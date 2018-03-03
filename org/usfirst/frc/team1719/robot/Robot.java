@@ -77,9 +77,9 @@ public class Robot extends IterativeRobot {
 //		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
 //		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
 //		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
-		chooser.addObject("Left Position", new LeftAutonomous(drive, position));
-		chooser.addObject("Center Position", new CenterAutonomous(drive, position));
-		chooser.addObject("Right Position", new RightAutonomous(drive, position));
+		chooser.addObject("Left Position", new LeftAutonomous(drive, position, elevator, claw));
+		chooser.addObject("Center Position", new CenterAutonomous(drive, position, elevator, claw));
+		chooser.addObject("Right Position", new RightAutonomous(drive, position, elevator, claw));
 		chooser.addObject("Tune TTA", new TTATune(position, drive));
 		SmartDashboard.putData("Auto mode", chooser);
 		
