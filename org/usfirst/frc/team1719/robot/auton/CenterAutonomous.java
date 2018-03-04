@@ -29,11 +29,11 @@ public class CenterAutonomous extends AbstractAutonomous2018 {
         
         /* true: right */
         if (ownSwitch) {
-            addSequential(new MoveToPosition(28, 60, position, drive, true, true));
+            addSequential(new MoveToPosition(28, 65, position, drive, true, true));
             addSequential(new TurnToAngle(0, position, drive));
             addSequential(new TimedDriveForward(drive, 0.5, 1.5));
         } else {
-            addSequential(new MoveToPosition(-45, 60, position, drive, true, true));
+            addSequential(new MoveToPosition(-45, 65, position, drive, true, true));
             addSequential(new TurnToAngle(0, position, drive));
             addSequential(new TimedDriveForward(drive, 0.5, 1.5));
         }

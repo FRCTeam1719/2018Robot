@@ -6,6 +6,8 @@ import org.usfirst.frc.team1719.robot.commands.LowShifter;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
 import org.usfirst.frc.team1719.robot.commands.ToggleWrist;
+import org.usfirst.frc.team1719.robot.commands.UseClimber;
+
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -135,7 +137,7 @@ public class OI {
         wristButton.whenPressed(new ToggleWrist(robot.wrist));
         
         // fireButton.whenPressed(new PushCube(robot.claw));
-        // climber.whileHeld(new UseClimber(robot.climber)); not yet
+        climberClimb.whileHeld(new UseClimber(robot.climber));
     }
     
     /*
