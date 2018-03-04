@@ -124,7 +124,7 @@ public class UseDrive extends Command {
         if (Math.abs(right - left) < SYNC_AMOUNT) {
             left = right = (left + right) / 2;
         }
-        
+        System.out.println("RRate: " + driveSystem.getEncoderR().getRate());
         double desiredLeftRate = left * maxSpeed;
         double desiredRightRate = right * maxSpeed;
         

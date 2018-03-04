@@ -6,6 +6,7 @@ import org.usfirst.frc.team1719.robot.auton.CenterAutonomous;
 import org.usfirst.frc.team1719.robot.auton.LeftAutonomous;
 import org.usfirst.frc.team1719.robot.auton.RightAutonomous;
 import org.usfirst.frc.team1719.robot.auton.TTATune;
+import org.usfirst.frc.team1719.robot.commands.TimedDriveForward;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.ClawHolder;
 import org.usfirst.frc.team1719.robot.subsystems.Climber;
@@ -37,7 +38,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	private Compressor compressor;
 	private AbstractAutonomous2018 autonomousCommand;
-	private SendableChooser<AbstractAutonomous2018> chooser = new SendableChooser<>();
+	private AbstractAutonomous2018[] autoList = new AbstractAutonomous2018[4];
 	
 	private String compressorInfo = "Loading, please wait...";
 	
@@ -77,12 +78,18 @@ public class Robot extends IterativeRobot {
 //		chooser.addDefault("Goto 0,0", new MTPTest(this, drive, position));
 //		chooser.addObject("Tune Inner", new MPTTuneInner(this, drive, position));
 //		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
-		chooser.addObject("Left Position", new LeftAutonomous(drive, position, elevator, claw));
-		chooser.addObject("Center Position", new CenterAutonomous(drive, position, elevator, claw));
-		chooser.addObject("Right Position", new RightAutonomous(drive, position, elevator, claw));
-		chooser.addObject("Tune TTA", new TTATune(position, drive));
-		SmartDashboard.putData("Auto mode", chooser);
+	
 		
+		autoList[2] = new LeftAutonomous(drive, position, elevator, claw);
+		autoList[0] = new CenterAutonomous(drive, position, elevator, claw);
+		autoList[1] = new RightAutonomous(drive, position, elevator, claw);
+		autoList[3] = new AbstractAutonomous2018() {
+            
+            @Override
+            public void setFieldState(boolean ownSwitch, boolean scale, boolean oppSwitch) {
+                addSequential(new TimedDriveForward(drive, 0.5, 10.0));
+            }
+        };
 
 		oi.init(this);
 	}
@@ -116,7 +123,7 @@ public class Robot extends IterativeRobot {
 	    //clawHolder.release();
 	    wrist.putDown();
 	    
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = autoList[(RobotMap.autoSel[0].get() ? 0 : 2) + (RobotMap.autoSel[1].get() ? 0 : 1)];
 
 		/* Schedule the autonomous command */
 		if (autonomousCommand != null) {
@@ -158,9 +165,6 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
         SmartDashboard.putNumber("MTP current angle", position.getHeading());
-<<<<<<< HEAD
-=======
-
         if (compressor.enabled()) {
             compressorInfo = "PNEUMATICS CHARGING";
         } else {
@@ -168,7 +172,6 @@ public class Robot extends IterativeRobot {
         }  
 
         SmartDashboard.putString("compressor", compressorInfo);
->>>>>>> origin/operatorConsole
 	}
 
 	/**

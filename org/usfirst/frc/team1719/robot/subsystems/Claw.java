@@ -29,14 +29,14 @@ public class Claw extends Subsystem {
 	 * Open the claw
 	 */
 	public void open() {
-		claw.set(false);
+		claw.set(true);
 	}
 
 	/**
 	 * Close the claw
 	 */
 	public void close() {
-		claw.set(true);
+		claw.set(false);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Claw extends Subsystem {
 	 * @return is it
 	 */
 	public boolean isOpen() {
-		return !claw.get();
+		return claw.get();
 	}
 
 	@Override

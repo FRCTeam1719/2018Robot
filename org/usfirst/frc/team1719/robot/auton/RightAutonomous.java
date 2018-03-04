@@ -31,7 +31,7 @@ public class RightAutonomous extends AbstractAutonomous2018 {
         if (!ownSwitch) {
             addSequential(new TimedDriveForward(drive, 0.5, 7.0));
         } else {
-            addSequential(new MoveToPosition(0, 100, position, drive, true, true));
+            addSequential(new MoveToPosition(0, 60, position, drive, true, true));
             addSequential(new TurnToAngle(0, position, drive));
             addSequential(new TimedDriveForward(drive, 0.5, 1.5));
             

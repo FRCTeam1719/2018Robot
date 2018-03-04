@@ -36,6 +36,7 @@ public class RobotMap {
 	public static final E4TOpticalEncoder rightDriveEnc = new E4TOpticalEncoder(2, 3, false);
 	public static final DigitalInput lowerLimit = new DigitalInput(4);
 	public static final DigitalInput upperLimit = new DigitalInput(5);
+	public static final DigitalInput[] autoSel = new DigitalInput[] {new DigitalInput(8), new DigitalInput(9)};
 
 
 	/* PCM */
