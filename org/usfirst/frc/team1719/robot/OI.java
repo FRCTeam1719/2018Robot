@@ -109,38 +109,21 @@ public class OI {
      */
     
     public void init(Robot robot) {
-        /*
-        Button toggleButton = new JoystickButton(operator, 1);
-        Button dropButton = new JoystickButton(operator, 5);
-        Button wristButton = new JoystickButton(operator, 4);
-        Button climberDeploy = new JoystickButton(operator, 3);
-        Button climberClimb = new JoystickButton(operator, 6);
-        */
-        
-        Button toggleButton = new JoystickButton(operator, 3);
-        Button dropButton = new JoystickButton(operator, 4);
         Button wristButton = new JoystickButton(operator, 2);
         Button climberDeploy = new JoystickButton(operator, 3);
         Button climberClimb = new JoystickButton(operator, 6);
-        Button pickupButton = new JoystickButton(operator, 5);
         Button shiftLowButton = new JoystickButton(driver, 5);
         Button shiftHighButton = new JoystickButton(driver, 6);
         
-        // Button fireButton = new JoystickButton(operator, 2);
-        // Button climber = new JoystickButton(operator, 1);
-	    Button rollerIn = new JoystickButton(operator, 2);
-	    Button rollerOut = new JoystickButton(operator, 3);
+	    Button rollerIn = new JoystickButton(operator, 5);
+	    Button rollerOut = new JoystickButton(operator, 4);
 	    rollerIn.whenPressed(new UseIntake(robot.intake,1.00));
 	    rollerOut.whenPressed(new UseIntake(robot.intake,-1.00));
         
-        toggleButton.whenReleased(new ToggleClaw(robot.claw));
-        dropButton.whenPressed(new OpenClaw(robot.claw));
-        pickupButton.whenPressed(new CloseClaw(robot.claw));
         shiftLowButton.whenPressed(new LowShifter(robot.drive));
         shiftHighButton.whenPressed(new HighShifter(robot.drive));
         wristButton.whenPressed(new ToggleWrist(robot.wrist));
         
-        // fireButton.whenPressed(new PushCube(robot.claw));
         climberClimb.whileHeld(new UseClimber(robot.climber));
     }
 }

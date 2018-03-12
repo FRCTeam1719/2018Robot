@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 
 		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
-        intake = new RollerIntake(RobotMap.leftIntake, RobotMap.rightIntake);
+        intake = new RollerIntake(RobotMap.intakeMotor);
 		//clawHolder = new ClawHolder(RobotMap.clawHolder);
 		climber = new Climber(RobotMap.climberMotor);
 		wrist = new Wrist(RobotMap.wristSolenoid);

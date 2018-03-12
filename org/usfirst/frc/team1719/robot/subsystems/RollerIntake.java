@@ -10,21 +10,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class RollerIntake extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    
-    private SpeedController leftIntake;
-    private SpeedController rightIntake;
+    private SpeedController motor;
     
     /**
      * Receive the controllers that control the intakes.
      * 
-     * @param _leftIntake - Speed controller for left intake
+     * @param _motor - Speed controller for left intake
      * @param _rightIntake - Speed controller for right intake
      */
-    public RollerIntake(SpeedController _leftIntake, SpeedController _rightIntake) {
-        leftIntake = _leftIntake;
-        rightIntake = _rightIntake;
+    public RollerIntake(SpeedController _motor) {
+        motor = _motor;
     }
     
     /**
@@ -33,20 +28,14 @@ public class RollerIntake extends Subsystem {
      * @param speed - speed to spin the intake
      */
     public void set(double speed) {
-        leftIntake.set(speed);
-        rightIntake.set(speed);
-        
+        motor.set(speed);
     }
     /**
      * Reset the intake speed to 0
      */
     public void reset() {
-        leftIntake.set(0);
-        rightIntake.set(0);
+        motor.set(0);
     }
     
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
-    }
+    public void initDefaultCommand() {}
 }
