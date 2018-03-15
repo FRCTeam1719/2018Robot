@@ -43,7 +43,7 @@ public class RobotMap {
 	public static final Solenoid shifterSolenoid = new Solenoid(4);
 	public static final Solenoid clawSolenoid = new Solenoid(5);
 	public static final Solenoid wristSolenoid = new Solenoid(6);
-	public static final DoubleSolenoid climberDeploy = new DoubleSolenoid(7, 8);
+	public static final DoubleSolenoid climberDeploy = new DoubleSolenoid(0, 1);
 
 	/* AIN */
 	public static final RangeFinder45LMS rangeFinder = new RangeFinder45LMS(0);
