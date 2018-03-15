@@ -41,8 +41,8 @@ public class RobotMap {
 
 	/* PCM */
 	public static final Solenoid shifterSolenoid = new Solenoid(4);
-	public static final Solenoid clawSolenoid = new Solenoid(5);
-	public static final Solenoid wristSolenoid = new Solenoid(6);
+	public static final Solenoid clawSolenoid = new Solenoid(6);
+	public static final Solenoid wristSolenoid = new Solenoid(5);
 
 	/* AIN */
 	public static final RangeFinder45LMS rangeFinder = new RangeFinder45LMS(0);

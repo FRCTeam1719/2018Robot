@@ -44,6 +44,7 @@ public class UseIntake extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
+        
         return false;
     }
     
@@ -54,5 +55,7 @@ public class UseIntake extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
-    protected void interrupted() {}
+    protected void interrupted() {
+        intake.set(0);
+    }
 }

@@ -115,11 +115,11 @@ public class OI {
         Button shiftLowButton = new JoystickButton(driver, 5);
         Button shiftHighButton = new JoystickButton(driver, 6);
         
-	    Button rollerIn = new JoystickButton(operator, 5);
-	    Button rollerOut = new JoystickButton(operator, 4);
-	    rollerIn.whenPressed(new UseIntake(robot.intake,1.00));
-	    rollerOut.whenPressed(new UseIntake(robot.intake,-1.00));
-        
+	    Button rollerIn = new JoystickButton(operator, 4);
+	    Button rollerOut = new JoystickButton(operator, 5);
+	    rollerIn.whileHeld(new UseIntake(robot.intake,1.00));
+	    rollerOut.whileHeld(new UseIntake(robot.intake,-1.00));
+
         shiftLowButton.whenPressed(new LowShifter(robot.drive));
         shiftHighButton.whenPressed(new HighShifter(robot.drive));
         wristButton.whenPressed(new ToggleWrist(robot.wrist));
