@@ -6,8 +6,8 @@ import org.usfirst.frc.team1719.robot.sensors.RangeFinder45LMS;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -43,6 +43,7 @@ public class RobotMap {
 	public static final Solenoid shifterSolenoid = new Solenoid(4);
 	public static final Solenoid clawSolenoid = new Solenoid(5);
 	public static final Solenoid wristSolenoid = new Solenoid(6);
+	public static final DoubleSolenoid climberDeploy = new DoubleSolenoid(7, 8);
 
 	/* AIN */
 	public static final RangeFinder45LMS rangeFinder = new RangeFinder45LMS(0);
