@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.CloseClaw;
+import org.usfirst.frc.team1719.robot.commands.DeployClimber;
 import org.usfirst.frc.team1719.robot.commands.HighShifter;
 import org.usfirst.frc.team1719.robot.commands.LowShifter;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
@@ -59,7 +60,6 @@ public class OI {
 	public double getRightY() {
 		return driver.getRawAxis(5);
 	}
-	
     /**
      * @return the vertical position of the operator joystick
      */
@@ -114,7 +114,7 @@ public class OI {
         Button climberClimb = new JoystickButton(operator, 6);
         Button shiftLowButton = new JoystickButton(driver, 5);
         Button shiftHighButton = new JoystickButton(driver, 6);
-        
+  
 	    Button rollerIn = new JoystickButton(operator, 4);
 	    Button rollerOut = new JoystickButton(operator, 5);
 	    rollerIn.whileHeld(new UseIntake(robot.intake,1.00));
@@ -125,5 +125,6 @@ public class OI {
         wristButton.whenPressed(new ToggleWrist(robot.wrist));
         
         climberClimb.whileHeld(new UseClimber(robot.climber));
+        climberDeploy.whileHeld(new DeployClimber(robot.climber));
     }
 }

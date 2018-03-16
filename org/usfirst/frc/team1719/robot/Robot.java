@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
         intake = new RollerIntake(RobotMap.intakeMotor);
 		//clawHolder = new ClawHolder(RobotMap.clawHolder);
-		climber = new Climber(RobotMap.climberMotor);
+		climber = new Climber(RobotMap.climberMotor, RobotMap.climberDeploy);
 		wrist = new Wrist(RobotMap.wristSolenoid);
 
 		/* Autonomous chooser */
