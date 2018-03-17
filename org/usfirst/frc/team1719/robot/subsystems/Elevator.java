@@ -23,6 +23,8 @@ public class Elevator extends Subsystem {
     private RangeFinder45LMS rangeFinder;
     private DigitalInput upperLimit;
     private DigitalInput lowerLimit;
+    public boolean elevatorOverride;
+    
     
     PIDController elevatorPIDController;
     

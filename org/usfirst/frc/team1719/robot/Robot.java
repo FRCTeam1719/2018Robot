@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
 	private Compressor compressor;
 	private AbstractAutonomous2018 autonomousCommand;
 	private AbstractAutonomous2018[] autoList = new AbstractAutonomous2018[4];
-	
+	public boolean elevatorOverride = false;
 	private String compressorInfo = "Loading, please wait...";
 	
     Drive drive;
@@ -81,14 +81,14 @@ public class Robot extends IterativeRobot {
 //		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
 	
 		
-		autoList[2] = new LeftAutonomous(drive, position, elevator, claw);
-		autoList[0] = new CenterAutonomous(drive, position, elevator, claw);
-		autoList[1] = new RightAutonomous(drive, position, elevator, claw);
+		autoList[2] = new LeftAutonomous(drive, position, elevator, claw, intake);
+		autoList[0] = new CenterAutonomous(drive, position, elevator, claw, intake);
+		autoList[1] = new RightAutonomous(drive, position, elevator, claw, intake);
 		autoList[3] = new AbstractAutonomous2018() {
             
             @Override
             public void setFieldState(boolean ownSwitch, boolean scale, boolean oppSwitch) {
-                addSequential(new TimedDriveForward(drive, 0.5, 10.0));
+                addSequential(new TimedDriveForward(drive, 0.5, 5.5D));
             }
         };
 
@@ -171,7 +171,6 @@ public class Robot extends IterativeRobot {
         } else {
             compressorInfo = "GOOD TO GO";
         }  
-
         SmartDashboard.putString("compressor", compressorInfo);
 	}
 

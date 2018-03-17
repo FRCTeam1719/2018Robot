@@ -5,8 +5,10 @@ import org.usfirst.frc.team1719.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Runs the elevator using the operator console fader
+ * 
  * @author bennyrubin, Quintin
  *
  */
@@ -16,6 +18,7 @@ public class UseElevator extends Command {
     private double targetElevatorZ;
     private double actualDistance;
     private double actualVoltage;
+    private boolean lastOverride;
     private double controllerZ;
     private double controllerY;
     private double proportional;
@@ -30,7 +33,6 @@ public class UseElevator extends Command {
     public UseElevator(Elevator _elevator) {
         elevator = _elevator;
         requires(elevator);
-        
     }
     
     @SuppressWarnings("deprecation") // once again not deprecation
@@ -41,11 +43,12 @@ public class UseElevator extends Command {
     
     @Override
     protected void execute() {
-        //System.out.println("Raw voltage(Elevator): " + elevator.getRangeFinder().getVoltage());
+        // System.out.println("Raw voltage(Elevator): " +
+        // elevator.getRangeFinder().getVoltage());
         controllerZ = Robot.oi.operatorGetZ();
         controllerY = -Robot.oi.operatorGetY();
         // System.out.println("Controller" + controllerZ);
-        //System.out.println("target " + targetElevatorZ);
+        // System.out.println("target " + targetElevatorZ);
         
         // System.out.println("In: " + controllerY);
         
@@ -54,41 +57,49 @@ public class UseElevator extends Command {
         
         // actualDistance = elevator.getDistance();
         actualVoltage = elevator.getDistanceVoltage();
-        //targetElevatorZ = ((controllerZ + 1) * 2.5); // USE LATER FOR POT ELEVATOR
-       
-          if (Math.abs(controllerY) > .02) { targetElevatorZ -= controllerY / 20;}
-        
-        /*
-         * setElevator(targetElevatorZ)
-         * 
-         * // if(elevator.getUpperLimit().get()){ // System.out.println("UPPER LIMIT");
-         * // if(targetElevatorZ > actualDistance) targetElevatorZ = actualDistance; //
-         * //elevatorPIDController.reset(); // }else if(elevator.getLowerLimit().get())
-         * { // if(targetElevatorZ < actualDistance) targetElevatorZ = actualDistance;
-         * // // System.out.println("LOWER LIMIT"); // //elevatorPIDController.reset();
-         * }
-         */
-        
-        // divide by 5 to get on same unit as motor value, and then add constant to make sure the elevator isnt too slow
-        //proportional = (1/((Math.abs(actualVoltage - targetElevatorZ)/5))) + .15;
-          //elevator.moveElevator(targetElevatorZ);
-        if (actualVoltage < targetElevatorZ - DEADZONE) {
-            elevator.moveElevator(-.75); //move up
-        }else if(actualVoltage > targetElevatorZ + DEADZONE){
-            elevator.moveElevator(.5 + UPWARDS_FORCE); //move down
-        } else {
-            elevator.moveElevator(-UPWARDS_FORCE);
+        // targetElevatorZ = ((controllerZ + 1) * 2.5); // USE LATER FOR POT ELEVATOR
+        if (!elevator.elevatorOverride) {
+            if(lastOverride != elevator.elevatorOverride) targetElevatorZ = elevator.getDistanceVoltage();
+            if (Math.abs(controllerY) > .02) {
+                targetElevatorZ -= controllerY / 20;
+            }
+            
+            /*
+             * setElevator(targetElevatorZ)
+             * 
+             * // if(elevator.getUpperLimit().get()){ // System.out.println("UPPER LIMIT");
+             * // if(targetElevatorZ > actualDistance) targetElevatorZ = actualDistance; //
+             * //elevatorPIDController.reset(); // }else if(elevator.getLowerLimit().get())
+             * { // if(targetElevatorZ < actualDistance) targetElevatorZ = actualDistance;
+             * // // System.out.println("LOWER LIMIT"); // //elevatorPIDController.reset();
+             * }
+             */
+            
+            // divide by 5 to get on same unit as motor value, and then add constant to make
+            // sure the elevator isnt too slow
+            // proportional = (1/((Math.abs(actualVoltage - targetElevatorZ)/5))) + .15;
+            // elevator.moveElevator(targetElevatorZ);
+            if (actualVoltage < targetElevatorZ - DEADZONE) {
+                elevator.moveElevator(-.75); // move up
+            } else if (actualVoltage > targetElevatorZ + DEADZONE) {
+                elevator.moveElevator(.5 + UPWARDS_FORCE); // move down
+            } else {
+                elevator.moveElevator(-UPWARDS_FORCE);
+            }
+            // elevator.updatePID(targetElevatorZ);
+            /*
+             * if (Math.abs(controllerY) < DEADZONE) {;
+             * elevator.moveElevator(-UPWARDS_FORCE); } else {
+             * elevator.moveElevator(controllerY); }
+             */
+            targetElevatorZ = Math.max(Math.min(targetElevatorZ, 5), 0);
+        }else if(elevator.elevatorOverride == true){
+            //if(lastOverride != elevator.elevatorOverride) targetElevatorZ = 0;
+            elevator.moveElevator(Math.max(Math.min(((controllerY + 1) * 2.5) + UPWARDS_FORCE, 1), -1));
         }
-        // elevator.updatePID(targetElevatorZ);
-        /*if (Math.abs(controllerY) < DEADZONE) {;
-            elevator.moveElevator(-UPWARDS_FORCE);
-        } else {
-            elevator.moveElevator(controllerY);
-        }*/
-        targetElevatorZ = Math.max(Math.min(targetElevatorZ, 5), 0);
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
         SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());
-        
+        lastOverride = elevator.elevatorOverride;
     }
     
     @Override

@@ -24,7 +24,7 @@ public class RobotMap {
 	public static final SpeedController leftDrive = new Spark(0);
 	public static final SpeedController rightDrive = new Spark(1); 
 	public static final SpeedController elevator = new Spark(2); //Not sure if this is Permanent Spark
-	public static final SpeedController climberMotor = new Spark(3);
+	public static final SpeedController climberMotor = new Spark(5);
 	public static final SpeedController intakeMotor = new Spark(4);
 	
 	//public static final Servo clawHolder = new Servo(5);
