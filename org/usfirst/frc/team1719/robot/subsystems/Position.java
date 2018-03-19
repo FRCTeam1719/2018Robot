@@ -20,7 +20,6 @@ public class Position extends Subsystem {
 	private final AHRS navX;
 	private final Encoder left;
 	private final Encoder right;
-	
     private final double collisionThreshold = 0.5f;
     private boolean isTrustworthy;
     private double lastAccelX;

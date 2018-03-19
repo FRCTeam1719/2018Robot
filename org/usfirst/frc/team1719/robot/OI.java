@@ -5,6 +5,7 @@ import org.usfirst.frc.team1719.robot.commands.DeployClimber;
 import org.usfirst.frc.team1719.robot.commands.HighShifter;
 import org.usfirst.frc.team1719.robot.commands.LowShifter;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
+import org.usfirst.frc.team1719.robot.commands.TimedUseIntake;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
 import org.usfirst.frc.team1719.robot.commands.ToggleElevatorMode;
 import org.usfirst.frc.team1719.robot.commands.ToggleWrist;
@@ -111,18 +112,20 @@ public class OI {
     
     public void init(Robot robot) {
         Button wristButton = new JoystickButton(operator, 2);
-        Button climberDeploy = new JoystickButton(operator, 8);
-        Button climberClimb = new JoystickButton(operator, 9);
+        //Button climberDeploy = new JoystickButton(operator, 8);
+        //Button climberClimb = new JoystickButton(operator, 9);
         Button shiftLowButton = new JoystickButton(driver, 5);
         Button shiftHighButton = new JoystickButton(driver, 6);
         Button elevatorToggleButton = new JoystickButton(operator, 10);
 	    Button rollerIn = new JoystickButton(operator, 4);
 	    Button rollerOut = new JoystickButton(operator, 5);
+	    Button testAutonFire = new JoystickButton(operator, 8);
 	    //Button openClaw = new JoystickButton(operator, 4);
 	    //Button closeClaw = new JoystickButton(operator, 5);
 	    
 	    rollerIn.whileHeld(new UseIntake(robot.intake,1.00));
 	    rollerOut.whileHeld(new UseIntake(robot.intake,-1.00));
+	    testAutonFire.whenPressed(new TimedUseIntake(robot.intake, -1.0D, 1.0));
 	    
 	    //openClaw.whenPressed(new OpenClaw(robot.claw));
 	    //closeClaw.whenPressed(new CloseClaw(robot.claw));
@@ -130,11 +133,13 @@ public class OI {
 	    elevatorToggleButton.whenPressed(new ToggleElevatorMode(robot.elevator));
 	    
 	    
+	    
+	    
         shiftLowButton.whenPressed(new LowShifter(robot.drive));
         shiftHighButton.whenPressed(new HighShifter(robot.drive));
         wristButton.whenPressed(new ToggleWrist(robot.wrist));
         
-        climberClimb.whileHeld(new UseClimber(robot.climber));
-        climberDeploy.whileHeld(new DeployClimber(robot.climber));
+        //climberClimb.whileHeld(new UseClimber(robot.climber));
+        //climberDeploy.whileHeld(new DeployClimber(robot.climber));
     }
 }

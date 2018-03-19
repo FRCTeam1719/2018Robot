@@ -27,7 +27,7 @@ public class CenterAutonomous extends AbstractAutonomous2018 {
         
         
         addParallel(new SetElevatorPosition(elevator, 2.0));
-        addParallel(new UseIntake(intake, 0.33D));
+        //addParallel(new UseIntake(intake, 0.33D));
     }
     
     @Override

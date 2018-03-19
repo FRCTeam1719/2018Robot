@@ -38,7 +38,7 @@ public class UseElevator extends Command {
     @SuppressWarnings("deprecation") // once again not deprecation
     @Override
     protected void initialize() {
-        
+        targetElevatorZ = elevator.getDistanceVoltage();
     }
     
     @Override
@@ -59,7 +59,7 @@ public class UseElevator extends Command {
         actualVoltage = elevator.getDistanceVoltage();
         // targetElevatorZ = ((controllerZ + 1) * 2.5); // USE LATER FOR POT ELEVATOR
         if (!elevator.elevatorOverride) {
-            if(lastOverride != elevator.elevatorOverride) targetElevatorZ = elevator.getDistanceVoltage();
+            if (lastOverride != elevator.elevatorOverride) targetElevatorZ = elevator.getDistanceVoltage();
             if (Math.abs(controllerY) > .02) {
                 targetElevatorZ -= controllerY / 20;
             }
@@ -93,9 +93,13 @@ public class UseElevator extends Command {
              * elevator.moveElevator(controllerY); }
              */
             targetElevatorZ = Math.max(Math.min(targetElevatorZ, 5), 0);
-        }else if(elevator.elevatorOverride == true){
-            //if(lastOverride != elevator.elevatorOverride) targetElevatorZ = 0;
-            elevator.moveElevator(Math.max(Math.min(((controllerY + 1) * 2.5) + UPWARDS_FORCE, 1), -1));
+        } else if (elevator.elevatorOverride == true) {
+            // if(lastOverride != elevator.elevatorOverride) targetElevatorZ = 0;
+            if (controllerY >= 0.1D) {
+                elevator.moveElevator(Math.max(Math.min(((controllerY)) + UPWARDS_FORCE, 1), -1));
+            }else {
+                elevator.moveElevator(UPWARDS_FORCE);
+            }
         }
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
         SmartDashboard.putNumber("ELEVATOR_DISTANCE", elevator.getDistanceVoltage());

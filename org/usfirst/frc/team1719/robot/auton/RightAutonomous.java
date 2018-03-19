@@ -26,7 +26,7 @@ public class RightAutonomous extends AbstractAutonomous2018 {
         intake = _intake;
         
         addParallel(new SetElevatorPosition(elevator, 2.0));
-        addParallel(new UseIntake(intake, 0.33D));
+        //addParallel(new UseIntake(intake, 0.33D));
     }
     
     @Override
@@ -39,6 +39,7 @@ public class RightAutonomous extends AbstractAutonomous2018 {
             addSequential(new MoveToPosition(0, 60, position, drive, true, true));
             addSequential(new TurnToAngle(0, position, drive));
             addSequential(new TimedDriveForward(drive, 0.5, 1.5));
+            
             
             //addSequential(new OpenClaw(claw));
             addSequential(new TimedUseIntake(intake, -1.0D, 1.0D));
