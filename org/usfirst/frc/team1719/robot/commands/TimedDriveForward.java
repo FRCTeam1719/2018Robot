@@ -11,7 +11,12 @@ public class TimedDriveForward extends TimedCommand {
     
     private Drive drive;
     private double speed;
-    
+    /**
+     * Drive forward on a timer.
+     * @param _drive
+     * @param _speed
+     * @param time
+     */
     public TimedDriveForward(Drive _drive, double _speed, double time) {
         super(time);
         speed = _speed;

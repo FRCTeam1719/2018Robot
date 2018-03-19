@@ -18,7 +18,14 @@ public class RightAutonomous extends AbstractAutonomous2018 {
     private Position position;
     private Claw claw;
     private RollerIntake intake;
-    
+    /**
+     * Right auto mode
+     * @param _drive
+     * @param _position
+     * @param elevator
+     * @param _claw
+     * @param _intake
+     */
     public RightAutonomous(Drive _drive, Position _position, Elevator elevator, Claw _claw, RollerIntake _intake) {
         drive = _drive;
         position = _position;

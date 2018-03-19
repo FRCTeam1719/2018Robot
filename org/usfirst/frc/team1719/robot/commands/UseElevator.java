@@ -43,42 +43,14 @@ public class UseElevator extends Command {
     
     @Override
     protected void execute() {
-        // System.out.println("Raw voltage(Elevator): " +
-        // elevator.getRangeFinder().getVoltage());
         controllerZ = Robot.oi.operatorGetZ();
         controllerY = -Robot.oi.operatorGetY();
-        // System.out.println("Controller" + controllerZ);
-        // System.out.println("target " + targetElevatorZ);
-        
-        // System.out.println("In: " + controllerY);
-        
-        // System.out.println("Elevator Distance: " + elevator.getDistanceVoltage());
-        // 1 - 5 to 0 - 1
-        
-        // actualDistance = elevator.getDistance();
         actualVoltage = elevator.getDistanceVoltage();
-        // targetElevatorZ = ((controllerZ + 1) * 2.5); // USE LATER FOR POT ELEVATOR
         if (!elevator.elevatorOverride) {
             if (lastOverride != elevator.elevatorOverride) targetElevatorZ = elevator.getDistanceVoltage();
             if (Math.abs(controllerY) > .02) {
                 targetElevatorZ -= controllerY / 20;
             }
-            
-            /*
-             * setElevator(targetElevatorZ)
-             * 
-             * // if(elevator.getUpperLimit().get()){ // System.out.println("UPPER LIMIT");
-             * // if(targetElevatorZ > actualDistance) targetElevatorZ = actualDistance; //
-             * //elevatorPIDController.reset(); // }else if(elevator.getLowerLimit().get())
-             * { // if(targetElevatorZ < actualDistance) targetElevatorZ = actualDistance;
-             * // // System.out.println("LOWER LIMIT"); // //elevatorPIDController.reset();
-             * }
-             */
-            
-            // divide by 5 to get on same unit as motor value, and then add constant to make
-            // sure the elevator isnt too slow
-            // proportional = (1/((Math.abs(actualVoltage - targetElevatorZ)/5))) + .15;
-            // elevator.moveElevator(targetElevatorZ);
             if (actualVoltage < targetElevatorZ - DEADZONE) {
                 elevator.moveElevator(-.75); // move up
             } else if (actualVoltage > targetElevatorZ + DEADZONE) {
@@ -86,19 +58,12 @@ public class UseElevator extends Command {
             } else {
                 elevator.moveElevator(-UPWARDS_FORCE);
             }
-            // elevator.updatePID(targetElevatorZ);
-            /*
-             * if (Math.abs(controllerY) < DEADZONE) {;
-             * elevator.moveElevator(-UPWARDS_FORCE); } else {
-             * elevator.moveElevator(controllerY); }
-             */
             targetElevatorZ = Math.max(Math.min(targetElevatorZ, 5), 0);
-        } else if (elevator.elevatorOverride == true) {
-            // if(lastOverride != elevator.elevatorOverride) targetElevatorZ = 0;
+        } else if (elevator.elevatorOverride == true) { // If we override use manual control
             if (controllerY >= 0.1D) {
                 elevator.moveElevator(Math.max(Math.min(((controllerY)) + UPWARDS_FORCE, 1), -1));
             }else {
-                elevator.moveElevator(UPWARDS_FORCE);
+                elevator.moveElevator(UPWARDS_FORCE); // Try to keep steady.
             }
         }
         SmartDashboard.putNumber("ELEVATOR_TARGET", targetElevatorZ);
