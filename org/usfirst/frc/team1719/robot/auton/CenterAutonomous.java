@@ -1,11 +1,10 @@
 package org.usfirst.frc.team1719.robot.auton;
 
 import org.usfirst.frc.team1719.robot.commands.MoveToPosition;
+import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.SetElevatorPosition;
 import org.usfirst.frc.team1719.robot.commands.TimedDriveForward;
-import org.usfirst.frc.team1719.robot.commands.TimedUseIntake;
 import org.usfirst.frc.team1719.robot.commands.TurnToAngle;
-import org.usfirst.frc.team1719.robot.commands.UseIntake;
 import org.usfirst.frc.team1719.robot.subsystems.Claw;
 import org.usfirst.frc.team1719.robot.subsystems.Drive;
 import org.usfirst.frc.team1719.robot.subsystems.Elevator;
@@ -52,7 +51,8 @@ public class CenterAutonomous extends AbstractAutonomous2018 {
             addSequential(new TimedDriveForward(drive, 0.5, 1.5));
         }
         
-        addSequential(new TimedUseIntake(intake, -1.00D, 1));
+        //addSequential(new TimedUseIntake(intake, -1.00D, 1));
+        addSequential(new OpenClaw(claw));
     }
     
 }

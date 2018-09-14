@@ -117,18 +117,18 @@ public class OI {
         Button shiftLowButton = new JoystickButton(driver, 5);
         Button shiftHighButton = new JoystickButton(driver, 6);
         Button elevatorToggleButton = new JoystickButton(operator, 10);
-	    Button rollerIn = new JoystickButton(operator, 4);
-	    Button rollerOut = new JoystickButton(operator, 5);
+	    //Button rollerIn = new JoystickButton(operator, 4);
+	    //Button rollerOut = new JoystickButton(operator, 5);
 	    Button testAutonFire = new JoystickButton(operator, 8);
-	    //Button openClaw = new JoystickButton(operator, 4);
-	    //Button closeClaw = new JoystickButton(operator, 5);
+	    Button openClaw = new JoystickButton(operator, 4);
+	    Button closeClaw = new JoystickButton(operator, 5);
 	    
-	    rollerIn.whileHeld(new UseIntake(robot.intake,1.00));
-	    rollerOut.whileHeld(new UseIntake(robot.intake,-1.00));
-	    testAutonFire.whenPressed(new TimedUseIntake(robot.intake, -1.0D, 1.0));
+	    //rollerIn.whileHeld(new UseIntake(robot.intake,1.00));
+	    //rollerOut.whileHeld(new UseIntake(robot.intake,-1.00));
+	    //testAutonFire.whenPressed(new TimedUseIntake(robot.intake, -1.0D, 1.0));
 	    
-	    //openClaw.whenPressed(new OpenClaw(robot.claw));
-	    //closeClaw.whenPressed(new CloseClaw(robot.claw));
+	    openClaw.whenPressed(new OpenClaw(robot.claw));
+	    closeClaw.whenPressed(new CloseClaw(robot.claw));
 	    
 	    elevatorToggleButton.whenPressed(new ToggleElevatorMode(robot.elevator));
 	    

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1719.robot.auton;
 
 import org.usfirst.frc.team1719.robot.commands.MoveToPosition;
+import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.SetElevatorPosition;
 import org.usfirst.frc.team1719.robot.commands.TimedDriveForward;
 import org.usfirst.frc.team1719.robot.commands.TimedUseIntake;
@@ -48,8 +49,8 @@ public class RightAutonomous extends AbstractAutonomous2018 {
             addSequential(new TimedDriveForward(drive, 0.5, 1.5));
             
             
-            //addSequential(new OpenClaw(claw));
-            addSequential(new TimedUseIntake(intake, -1.0D, 1.0D));
+            addSequential(new OpenClaw(claw));
+            //addSequential(new TimedUseIntake(intake, -1.0D, 1.0D));
         }
     }
     

@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 	Position position;
 	Elevator elevator;
 	Claw claw;
-    RollerIntake intake;
+    //RollerIntake intake;
 	ClawHolder clawHolder;
 	Climber climber;
 	Wrist wrist;
@@ -64,13 +64,13 @@ public class Robot extends IterativeRobot {
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc, RobotMap.shifterSolenoid);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
-		//elevator = new Elevator(RobotMap.elevator, null, null, null);
-		//claw = new Claw(RobotMap.clawSolenoid,null);
+		elevator = new Elevator(RobotMap.elevator, null, null, null);
+		claw = new Claw(RobotMap.clawSolenoid,null);
 
 
 		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
 		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
-        intake = new RollerIntake(RobotMap.intakeMotor);
+        //intake = new RollerIntake(RobotMap.intakeMotor);
 		//clawHolder = new ClawHolder(RobotMap.clawHolder);
 		climber = new Climber(RobotMap.climberMotor, RobotMap.climberDeploy);
 		wrist = new Wrist(RobotMap.wristSolenoid);
@@ -81,9 +81,9 @@ public class Robot extends IterativeRobot {
 //		chooser.addObject("Tune Outer", new MPTTuneOuter(this, drive, position, 0D, 10D));
 	
 		
-		autoList[2] = new LeftAutonomous(drive, position, elevator, claw, intake);
-		autoList[0] = new CenterAutonomous(drive, position, elevator, claw, intake);
-		autoList[1] = new RightAutonomous(drive, position, elevator, claw, intake);
+		//autoList[2] = new LeftAutonomous(drive, position, elevator, claw, intake);
+		//autoList[0] = new CenterAutonomous(drive, position, elevator, claw, intake);
+		//autoList[1] = new RightAutonomous(drive, position, elevator, claw, intake);
 		autoList[3] = new AbstractAutonomous2018() {
             
             @Override
