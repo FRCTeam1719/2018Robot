@@ -19,9 +19,8 @@ public class Claw extends Subsystem {
 	 * A solenoid for the claw pistons, one for the pusher
 	 * 
 	 * @param claw - Solenoid for the claw
-	 * @param pusher - Solenoid for the pusher
 	 */
-	public Claw(Solenoid claw, Solenoid pusher) {
+	public Claw(Solenoid claw) {
 		this.claw = claw;
 	}
 

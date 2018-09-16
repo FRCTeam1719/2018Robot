@@ -38,12 +38,12 @@ public class Robot extends IterativeRobot {
 	private Compressor compressor;
 	private AbstractAutonomous2018 autonomousCommand;
 	private AbstractAutonomous2018[] autoList = new AbstractAutonomous2018[4];
-	public boolean elevatorOverride = false;
+	public boolean elevatorOverride = true;
 	private String compressorInfo = "Loading, please wait...";
 	
     Drive drive;
 	Position position;
-	Elevator elevator;
+	//Elevator elevator;
 	Claw claw;
     //RollerIntake intake;
 	ClawHolder clawHolder;
@@ -64,15 +64,10 @@ public class Robot extends IterativeRobot {
 		/* Initialize Subsystems */
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc, RobotMap.shifterSolenoid);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
-		elevator = new Elevator(RobotMap.elevator, null, null, null);
-		claw = new Claw(RobotMap.clawSolenoid,null);
-
-
-		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
-		claw = new Claw(RobotMap.clawSolenoid, RobotMap.wristSolenoid);
+		//elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);
+		//elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
+		claw = new Claw(RobotMap.clawSolenoid);
         //intake = new RollerIntake(RobotMap.intakeMotor);
-		//clawHolder = new ClawHolder(RobotMap.clawHolder);
-		climber = new Climber(RobotMap.climberMotor, RobotMap.climberDeploy);
 		wrist = new Wrist(RobotMap.wristSolenoid);
 
 		/* Autonomous chooser */

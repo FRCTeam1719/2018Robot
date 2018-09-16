@@ -1,16 +1,13 @@
 package org.usfirst.frc.team1719.robot;
 
 import org.usfirst.frc.team1719.robot.commands.CloseClaw;
-import org.usfirst.frc.team1719.robot.commands.DeployClimber;
 import org.usfirst.frc.team1719.robot.commands.HighShifter;
 import org.usfirst.frc.team1719.robot.commands.LowShifter;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
-import org.usfirst.frc.team1719.robot.commands.TimedUseIntake;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
-import org.usfirst.frc.team1719.robot.commands.ToggleElevatorMode;
 import org.usfirst.frc.team1719.robot.commands.ToggleWrist;
-import org.usfirst.frc.team1719.robot.commands.UseClimber;
-import org.usfirst.frc.team1719.robot.commands.UseIntake;
+import org.usfirst.frc.team1719.robot.controllers.Attack3Joystick;
+import org.usfirst.frc.team1719.robot.controllers.RedController;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -33,51 +30,54 @@ public class OI {
     private Joystick driver = new Joystick(0);
     private Joystick operator = new Joystick(1); // Now operator console
     
+    private RedController driverControl;
+    private Attack3Joystick operatorControl;
+    
     private boolean shifterState = false;
     
     /**
      * @return the horizontal position of the left thumb-joystick
      */
     public double getLeftX() {
-        return driver.getRawAxis(0);
+        return driver.getRawAxis(driverControl.leftX);
     }
     
     /**
      * @return the vertical position of the left thumb-joystick
      */
     public double getLeftY() {
-        return driver.getRawAxis(1);
+        return driver.getRawAxis(driverControl.leftY);
     }
     
     /**
      * @return the horizontal position of the right thumb-joystick
      */
     public double getRightX() {
-        return driver.getRawAxis(4);
+        return driver.getRawAxis(driverControl.rightX);
     }
     
     /**
      * @return the vertical position of the right thumb-joystick
      */
 	public double getRightY() {
-		return driver.getRawAxis(5);
+		return driver.getRawAxis(driverControl.rightY);
 	}
     /**
      * @return the vertical position of the operator joystick
      */
     public double operatorGetY() {
-        return operator.getRawAxis(1);
+        return operator.getRawAxis(operatorControl.yAxis);
     }
     
     /**
      * @return the vertical position of the operator joystick
      */
     public double operatorGetX() {
-        return operator.getRawAxis(0);
+        return operator.getRawAxis(operatorControl.xAxis);
     }
     
     public double operatorGetZ() {
-        return operator.getRawAxis(0);
+        return operator.getRawAxis(operatorControl.zAxis);
     }
     
     /**
@@ -111,17 +111,19 @@ public class OI {
      */
     
     public void init(Robot robot) {
-        Button wristButton = new JoystickButton(operator, 2);
-        //Button climberDeploy = new JoystickButton(operator, 8);
-        //Button climberClimb = new JoystickButton(operator, 9);
-        Button shiftLowButton = new JoystickButton(driver, 5);
-        Button shiftHighButton = new JoystickButton(driver, 6);
-        Button elevatorToggleButton = new JoystickButton(operator, 10);
-	    //Button rollerIn = new JoystickButton(operator, 4);
-	    //Button rollerOut = new JoystickButton(operator, 5);
-	    Button testAutonFire = new JoystickButton(operator, 8);
-	    Button openClaw = new JoystickButton(operator, 4);
-	    Button closeClaw = new JoystickButton(operator, 5);
+        Button wristButton = new JoystickButton(operator, operatorControl.wristButton);
+        //Button climberDeploy = new JoystickButton(operator, operatorControl.climberDeploy);
+        //Button climberClimb = new JoystickButton(operator, operatorControl.climberClimb);
+        Button shiftLowButton = new JoystickButton(driver, driverControl.shiftLowButton);
+        Button shiftHighButton = new JoystickButton(driver, driverControl.shiftHighButton);
+        Button elevatorToggleButton = new JoystickButton(operator, operatorControl.elevatorToggleButton);
+	    //Button rollerIn = new JoystickButton(operator, operatorControl.rollerIn);
+	    //Button rollerOut = new JoystickButton(operator, operatorControl.rollerOut);
+	    Button testAutonFire = new JoystickButton(operator, operatorControl.testAutonFire);
+	    Button openClaw = new JoystickButton(operator, operatorControl.openClaw);
+	    Button closeClaw = new JoystickButton(operator, operatorControl.closeClaw);
+	    Button toggleClaw = new JoystickButton(operator, operatorControl.toggleClaw);
+
 	    
 	    //rollerIn.whileHeld(new UseIntake(robot.intake,1.00));
 	    //rollerOut.whileHeld(new UseIntake(robot.intake,-1.00));
@@ -129,8 +131,9 @@ public class OI {
 	    
 	    openClaw.whenPressed(new OpenClaw(robot.claw));
 	    closeClaw.whenPressed(new CloseClaw(robot.claw));
+	    toggleClaw.whenPressed(new ToggleClaw(robot.claw));
 	    
-	    elevatorToggleButton.whenPressed(new ToggleElevatorMode(robot.elevator));
+	    //elevatorToggleButton.whenPressed(new ToggleElevatorMode(robot.elevator));
 	    
 	    
 	    
