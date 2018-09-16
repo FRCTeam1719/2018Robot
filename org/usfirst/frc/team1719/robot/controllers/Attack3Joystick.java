@@ -2,7 +2,11 @@ package org.usfirst.frc.team1719.robot.controllers;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
+/**
+ * Button maps for the Logitech Attack 3 Joystick
+ * @author quint
+ *
+ */
 public class Attack3Joystick extends GenericOperator{
     
     public Attack3Joystick() {

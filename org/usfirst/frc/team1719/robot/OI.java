@@ -30,6 +30,13 @@ public class OI {
     private Joystick driver = new Joystick(0);
     private Joystick operator = new Joystick(1); // Now operator console
     
+    
+    /*
+     ***USING CONTROLLER OBJECTS*** To make swapping controllers, control tweaks easier the controller
+     *has been separated into a generic controller for the driver and operator, where the buttons are
+     *defined, a separate controller implementation where the buttons are actually mapped to the
+     *individual controller
+     */
     private RedController driverControl;
     private Attack3Joystick operatorControl;
     
@@ -128,6 +135,10 @@ public class OI {
 	    //rollerIn.whileHeld(new UseIntake(robot.intake,1.00));
 	    //rollerOut.whileHeld(new UseIntake(robot.intake,-1.00));
 	    //testAutonFire.whenPressed(new TimedUseIntake(robot.intake, -1.0D, 1.0));
+	    
+	    /*
+	     * Bind actions to the buttons
+	     */
 	    
 	    openClaw.whenPressed(new OpenClaw(robot.claw));
 	    closeClaw.whenPressed(new CloseClaw(robot.claw));
