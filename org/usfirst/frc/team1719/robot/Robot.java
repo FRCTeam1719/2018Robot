@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 	
     Drive drive;
 	Position position;
-	//Elevator elevator;
+	Elevator elevator;
 	Claw claw;
     //RollerIntake intake;
 	ClawHolder clawHolder;
@@ -65,7 +65,7 @@ public class Robot extends IterativeRobot {
 		drive = new Drive(RobotMap.leftDrive, RobotMap.rightDrive, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc, RobotMap.shifterSolenoid);
 		position = new Position(RobotMap.navx, RobotMap.leftDriveEnc, RobotMap.rightDriveEnc);
 		//elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);
-		//elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
+		elevator = new Elevator(RobotMap.elevator, RobotMap.rangeFinder, RobotMap.upperLimit, RobotMap.lowerLimit);	
 		claw = new Claw(RobotMap.clawSolenoid);
         //intake = new RollerIntake(RobotMap.intakeMotor);
 		wrist = new Wrist(RobotMap.wristSolenoid);

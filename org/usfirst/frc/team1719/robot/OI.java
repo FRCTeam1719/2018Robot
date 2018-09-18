@@ -5,6 +5,7 @@ import org.usfirst.frc.team1719.robot.commands.HighShifter;
 import org.usfirst.frc.team1719.robot.commands.LowShifter;
 import org.usfirst.frc.team1719.robot.commands.OpenClaw;
 import org.usfirst.frc.team1719.robot.commands.ToggleClaw;
+import org.usfirst.frc.team1719.robot.commands.ToggleElevatorMode;
 import org.usfirst.frc.team1719.robot.commands.ToggleWrist;
 import org.usfirst.frc.team1719.robot.controllers.Attack3Joystick;
 import org.usfirst.frc.team1719.robot.controllers.RedController;
@@ -144,7 +145,7 @@ public class OI {
 	    closeClaw.whenPressed(new CloseClaw(robot.claw));
 	    toggleClaw.whenPressed(new ToggleClaw(robot.claw));
 	    
-	    //elevatorToggleButton.whenPressed(new ToggleElevatorMode(robot.elevator));
+	    elevatorToggleButton.whenPressed(new ToggleElevatorMode(robot.elevator));
 	    
 	    
 	    
