@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot {
             
             @Override
             public void setFieldState(boolean ownSwitch, boolean scale, boolean oppSwitch) {
-                addSequential(new TimedDriveForward(drive, 0.5, 5.5D));
+                addSequential(new TimedDriveForward(drive, 0.5, 4.0D));
             }
         };
 
